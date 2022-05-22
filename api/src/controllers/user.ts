@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 
 import User from '../models/User'
-import UserService from '../services/user'
+import userService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -16,7 +16,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
       isAdmin,
     })
 
-    await UserService.create(user)
+    await userService.create(user)
     res.json(user)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -31,7 +31,7 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const update = req.body
     const userId = req.params.userId
-    const updatedUser = await UserService.update(userId, update)
+    const updatedUser = await userService.update(userId, update)
     res.json(updatedUser)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -44,7 +44,7 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await UserService._delete(req.params.userId)
+    await userService._delete(req.params.userId)
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -57,7 +57,7 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
 
 const findById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.json(await UserService.findById(req.params.userId))
+    res.json(await userService.findById(req.params.userId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -74,7 +74,7 @@ const findByEmailAndPassword = async (
 ) => {
   try {
     const { email, password } = req.body
-    res.json(await UserService.findByEmailAndPassword(email, password))
+    res.json(await userService.findByEmailAndPassword(email, password))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -90,7 +90,7 @@ export const findAll = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await UserService.findAll())
+    res.json(await userService.findAll())
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

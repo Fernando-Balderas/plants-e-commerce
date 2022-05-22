@@ -1,15 +1,15 @@
 import express from 'express'
 
-import UserController from '../controllers/user'
+import userController from '../controllers/user'
 
 const router = express.Router()
 
 // Every path we define here will get /api/v1/users prefix
-router.get('/', UserController.findAll)
-router.get('/:userId', UserController.findById)
-router.put('/:userId', UserController.updateUser)
-router.delete('/:userId', UserController.deleteUser)
-router.post('/signup', UserController.createUser)
-router.post('/login', UserController.findByEmailAndPassword)
+router.get('/', userController.findAll)
+router.get('/:userId', userController.findById)
+router.put('/:userId', userController.updateUser)
+router.delete('/:userId', userController.deleteUser)
+router.post('/signup', userController.createUser)
+router.post('/login', userController.findByEmailAndPassword)
 
 export default router
