@@ -4,7 +4,7 @@ import User from '../models/User'
 import userService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
+const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, lastname, email, password, isAdmin } = req.body
 
@@ -27,7 +27,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const update = req.body
     const userId = req.params.userId
@@ -42,7 +42,7 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+const _delete = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await userService._delete(req.params.userId)
     res.status(204).end()
@@ -101,9 +101,9 @@ export const findAll = async (
 }
 
 export default {
-  createUser,
-  updateUser,
-  deleteUser,
+  create,
+  update,
+  _delete,
   findById,
   findByEmailAndPassword,
   findAll,

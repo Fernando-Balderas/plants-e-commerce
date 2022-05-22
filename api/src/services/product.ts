@@ -5,11 +5,11 @@ const create = async (product: ProductDocument): Promise<ProductDocument> => {
   return product.save()
 }
 
-const findById = async (movieId: string): Promise<ProductDocument> => {
-  const foundProduct = await Product.findById(movieId)
+const findById = async (productId: string): Promise<ProductDocument> => {
+  const foundProduct = await Product.findById(productId)
 
   if (!foundProduct) {
-    throw new NotFoundError(`Product ${movieId} not found`)
+    throw new NotFoundError(`Product ${productId} not found`)
   }
 
   return foundProduct
@@ -20,25 +20,25 @@ const findAll = async (): Promise<ProductDocument[]> => {
 }
 
 const update = async (
-  movieId: string,
+  productId: string,
   update: Partial<ProductDocument>
 ): Promise<ProductDocument | null> => {
-  const foundProduct = await Product.findByIdAndUpdate(movieId, update, {
+  const foundProduct = await Product.findByIdAndUpdate(productId, update, {
     new: true,
   })
 
   if (!foundProduct) {
-    throw new NotFoundError(`Product ${movieId} not found`)
+    throw new NotFoundError(`Product ${productId} not found`)
   }
 
   return foundProduct
 }
 
-const _delete = async (movieId: string): Promise<ProductDocument | null> => {
-  const foundProduct = Product.findByIdAndDelete(movieId)
+const _delete = async (productId: string): Promise<ProductDocument | null> => {
+  const foundProduct = Product.findByIdAndDelete(productId)
 
   if (!foundProduct) {
-    throw new NotFoundError(`Product ${movieId} not found`)
+    throw new NotFoundError(`Product ${productId} not found`)
   }
 
   return foundProduct
