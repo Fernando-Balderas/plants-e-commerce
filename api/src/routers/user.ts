@@ -9,7 +9,7 @@ router.get('/', UserController.findAll)
 router.get('/:userId', UserController.findById)
 router.put('/:userId', UserController.updateUser)
 router.delete('/:userId', UserController.deleteUser)
-router.post('/', UserController.createUser)
+router.post('/signup', UserController.createUser)
 router.post('/login', UserController.findByEmailAndPassword)
 
 export default router

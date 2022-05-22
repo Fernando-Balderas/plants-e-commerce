@@ -33,7 +33,7 @@ const findByEmailAndPassword = async (
 }
 
 const findAll = async (): Promise<UserDocument[]> => {
-  return User.find().sort({ name: 1, publishedYear: -1 })
+  return User.find().sort({ email: 1 })
 }
 
 const update = async (

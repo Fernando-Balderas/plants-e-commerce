@@ -30,9 +30,9 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const update = req.body
-    const movieId = req.params.movieId
-    const updatedMovie = await UserService.update(movieId, update)
-    res.json(updatedMovie)
+    const userId = req.params.userId
+    const updatedUser = await UserService.update(userId, update)
+    res.json(updatedUser)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -44,7 +44,7 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await UserService._delete(req.params.movieId)
+    await UserService._delete(req.params.userId)
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -57,7 +57,7 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
 
 const findById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.json(await UserService.findById(req.params.movieId))
+    res.json(await UserService.findById(req.params.userId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
