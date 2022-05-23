@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/no-var-requires: "off" */
 import express from 'express'
 // import lusca from 'lusca' will be used later
 import dotenv from 'dotenv'
@@ -9,7 +8,7 @@ import productRouter from './routers/product'
 import orderRouter from './routers/order'
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
-const swaggerDocument = require('./docs/swagger-spec.json') // not using import due to an error
+import swaggerDocument from './docs/swagger-spec.json'
 // import swaggerSpec from './config/swagger'
 
 dotenv.config({ path: '.env' })

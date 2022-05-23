@@ -8,8 +8,11 @@
   },
   "author": "Bowden Kelly",
   "license": "MIT",
+  "engines": {
+    "node": ">=16.15.0"
+  },
   "scripts": {
-    "start:prod": "node dist/server.js",
+    "start:prod": "node --no-experimental-fetch dist/server.js",
     "start:dev": "nodemon src/server.ts",
     "build": "tsc",
     "watch-ts": "tsc -w",
