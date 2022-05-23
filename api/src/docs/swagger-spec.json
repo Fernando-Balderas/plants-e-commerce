@@ -130,7 +130,7 @@
     },
     "/v1/users/:userId": {
       "get": {
-        "description": "Returns single user",
+        "description": "Returns a single user",
         "tags": ["Users"],
         "produces": ["application/json"],
         "parameters": [
@@ -223,6 +223,40 @@
             }
           }
         }
+      },
+      "delete": {
+        "description": "Deletes a single user",
+        "tags": ["Users"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Single user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/Response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/Error404"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -259,6 +293,13 @@
       }
     },
     "Error404": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Response": {
       "properties": {
         "message": {
           "type": "string"
