@@ -1,0 +1,329 @@
+{
+  "info": {
+    "title": "E-commerce",
+    "version": "1.0.0",
+    "description": "API documentation for full-stack project"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/users/": {
+      "get": {
+        "description": "Return users",
+        "tags": ["Users"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Array of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/User"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/Error404"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/signup": {
+      "post": {
+        "description": "Sign up to the application",
+        "tags": ["Users"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/name"
+          },
+          {
+            "$ref": "#/parameters/lastname"
+          },
+          {
+            "$ref": "#/parameters/email"
+          },
+          {
+            "$ref": "#/parameters/password"
+          },
+          {
+            "$ref": "#/parameters/isAdmin"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User not created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/Error404"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/login": {
+      "post": {
+        "description": "Login to the application",
+        "tags": ["Users"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/email"
+          },
+          {
+            "$ref": "#/parameters/password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User logged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/Error404"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/:userId": {
+      "get": {
+        "description": "Returns single user",
+        "tags": ["Users"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Single user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/Error404"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an user",
+        "tags": ["Users"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userId"
+          },
+          {
+            "name": "name",
+            "description": "User's name.",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/lastname"
+          },
+          {
+            "name": "email",
+            "description": "User's email.",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "User's password.",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/isAdmin"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/Error404"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": ["name", "email", "password"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "isAdmin": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Login": {
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Error404": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "responses": {},
+  "parameters": {
+    "userId": {
+      "name": "userId",
+      "description": "User's id.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "name": {
+      "name": "name",
+      "description": "User's name.",
+      "in": "formData",
+      "required": true,
+      "type": "string"
+    },
+    "lastname": {
+      "name": "lastname",
+      "description": "User's lastname.",
+      "in": "formData",
+      "required": false,
+      "type": "string"
+    },
+    "email": {
+      "name": "email",
+      "description": "User's email.",
+      "in": "formData",
+      "required": true,
+      "type": "string"
+    },
+    "password": {
+      "name": "password",
+      "description": "User's password.",
+      "in": "formData",
+      "required": true,
+      "type": "string"
+    },
+    "isAdmin": {
+      "name": "isAdmin",
+      "description": "User's admin rights.",
+      "in": "formData",
+      "required": false,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {},
+  "tags": [
+    {
+      "name": "Users",
+      "description": "User management and login"
+    },
+    {
+      "name": "Products",
+      "description": "Products management"
+    },
+    {
+      "name": "Orders",
+      "description": "Orders management"
+    }
+  ]
+}
