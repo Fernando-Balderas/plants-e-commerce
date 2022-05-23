@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/member-delimiter-style */
-import mongoose, { Document } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 
 export type OrderDocument = Document & {
   total: number
   paymentStatus: string
-  userId: string
-  products: string[] // Product[]
+  userId: Schema.Types.ObjectId
+  products: Schema.Types.ObjectId[]
 }
 
 const orderSchema = new mongoose.Schema({
@@ -17,10 +17,8 @@ const orderSchema = new mongoose.Schema({
   paymentStatus: {
     type: String,
   },
-  userId: {
-    type: String,
-  },
-  products: [String],
+  userId: { type: Schema.Types.ObjectId, ref: 'User' },
+  products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
 })
 
 export default mongoose.model<OrderDocument>('Order', orderSchema)

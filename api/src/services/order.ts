@@ -6,42 +6,45 @@ const create = async (order: OrderDocument): Promise<OrderDocument> => {
 }
 
 const findById = async (orderId: string): Promise<OrderDocument> => {
-  const foundProduct = await Order.findById(orderId)
+  const foundOrder = await Order.findById(orderId)
+    .populate('userId')
+    .populate('products')
+    .exec()
 
-  if (!foundProduct) {
+  if (!foundOrder) {
     throw new NotFoundError(`Order ${orderId} not found`)
   }
 
-  return foundProduct
+  return foundOrder
 }
 
 const findAll = async (): Promise<OrderDocument[]> => {
-  return Order.find().sort({ name: 1, publishedYear: -1 })
+  return Order.find().sort({ total: -1 })
 }
 
 const update = async (
   orderId: string,
   update: Partial<OrderDocument>
 ): Promise<OrderDocument | null> => {
-  const foundProduct = await Order.findByIdAndUpdate(orderId, update, {
+  const foundOrder = await Order.findByIdAndUpdate(orderId, update, {
     new: true,
   })
 
-  if (!foundProduct) {
+  if (!foundOrder) {
     throw new NotFoundError(`Order ${orderId} not found`)
   }
 
-  return foundProduct
+  return foundOrder
 }
 
 const _delete = async (orderId: string): Promise<OrderDocument | null> => {
-  const foundProduct = Order.findByIdAndDelete(orderId)
+  const foundOrder = Order.findByIdAndDelete(orderId)
 
-  if (!foundProduct) {
+  if (!foundOrder) {
     throw new NotFoundError(`Order ${orderId} not found`)
   }
 
-  return foundProduct
+  return foundOrder
 }
 
 export default {

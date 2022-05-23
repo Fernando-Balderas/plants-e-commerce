@@ -43,8 +43,9 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
 
 const _delete = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await orderService._delete(req.params.orderId)
-    res.status(204).end()
+    const { orderId } = req.params
+    await orderService._delete(orderId)
+    res.status(204).json({ message: `Order ${orderId} deleted` })
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -68,7 +69,8 @@ const findById = async (req: Request, res: Response, next: NextFunction) => {
 
 const findAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.json(await orderService.findAll())
+    const results = await orderService.findAll()
+    res.json(results)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

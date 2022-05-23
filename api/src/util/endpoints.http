@@ -1,0 +1,28 @@
+@host = localhost:5000
+@api = api/v1
+
+GET http://{{host}}/{{api}}/users HTTP/1.1
+
+###
+
+GET http://{{host}}/{{api}}/products HTTP/1.1
+
+###
+
+GET http://{{host}}/{{api}}/orders HTTP/1.1
+
+###
+
+DELETE http://{{host}}/{{api}}/orders/628bc0b7b18bcd1f0a2a5201 HTTP/1.1
+
+###
+
+POST http://{{host}}/{{api}}/orders HTTP/1.1
+content-type: application/json
+
+{
+  "total": "500",
+  "paymentStatus": "pending",
+  "userId": "6287dba664e931cb46c9d0a0",
+  "products": ["628a8020ef535926d3cb4786"]
+}
