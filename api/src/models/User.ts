@@ -5,7 +5,7 @@ export type UserDocument = Document & {
   lastname: string
   email: string
   password: string
-  isAdmin: boolean
+  role: string
 }
 
 const userSchema = new mongoose.Schema({
@@ -23,9 +23,9 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
+  role: {
+    type: String,
+    default: 'USER',
   },
 })
 

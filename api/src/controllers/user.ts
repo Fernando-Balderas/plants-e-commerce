@@ -6,14 +6,14 @@ import { BadRequestError } from '../helpers/apiError'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { name, lastname, email, password, isAdmin } = req.body
+    const { name, lastname, email, password, role } = req.body
 
     const user = new User({
       name,
       lastname,
       email,
       password,
-      isAdmin,
+      role,
     })
 
     await userService.create(user)

@@ -17,6 +17,19 @@ DELETE http://{{host}}/{{api}}/orders/628bc0b7b18bcd1f0a2a5201 HTTP/1.1
 
 ###
 
+POST http://{{host}}/{{api}}/users/signup HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Alex",
+  "lastname": "Doe",
+  "email": "alex.doe@mail.com",
+  "password": "6287dba664e931cb46c9d0a0",
+  "role": "ADMIN"
+}
+
+###
+
 POST http://{{host}}/{{api}}/orders HTTP/1.1
 content-type: application/json
 
