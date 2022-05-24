@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import Product from '../models/Product'
 import productService from '../services/product'
 import { BadRequestError } from '../helpers/apiError'
+import { ProductsFindAllFilter } from 'product'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -70,7 +71,14 @@ const findById = async (req: Request, res: Response, next: NextFunction) => {
 
 const findAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.json(await productService.findAll())
+    const { name, categories, variants, limit, offset } = req.query
+    const filter: ProductsFindAllFilter = {}
+    if (name) filter.name = { $regex: name }
+    if (categories) filter.categories = categories as string
+    if (variants) filter.variants = variants as string
+    const _limit: number = limit ? parseInt(limit as string) : 0
+    const _offset: number = offset ? parseInt(limit as string) : 0
+    res.json(await productService.findAll(filter, _limit, _offset))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

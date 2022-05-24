@@ -9,6 +9,14 @@ GET http://{{host}}/{{api}}/products HTTP/1.1
 
 ###
 
+GET http://{{host}}/{{api}}/products?name=name&categories=categories&variants=variants HTTP/1.1
+
+###
+
+GET http://{{host}}/{{api}}/products?limit=0&offset=0 HTTP/1.1
+
+###
+
 GET http://{{host}}/{{api}}/orders HTTP/1.1
 
 ###
