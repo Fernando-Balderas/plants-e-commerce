@@ -1,11 +1,12 @@
 import mongoose, { Document } from 'mongoose'
+import { Role } from 'user'
 
 export type UserDocument = Document & {
   name: string
   lastname: string
   email: string
   password: string
-  role: string
+  role: Role
 }
 
 const userSchema = new mongoose.Schema({
@@ -25,7 +26,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: 'USER',
+    enum: Role,
+    default: Role.USER,
   },
 })
 
