@@ -3,3 +3,7 @@ export type ProductsFindAllFilter = {
   categories?: string
   variants?: string
 }
+
+export type ProductsSortOrder = {
+  [key: string]: number
+}

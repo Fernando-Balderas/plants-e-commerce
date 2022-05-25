@@ -17,6 +17,10 @@ GET http://{{host}}/{{api}}/products?limit=0&offset=0 HTTP/1.1
 
 ###
 
+GET http://{{host}}/{{api}}/products?sort=name&ascDesc=asc HTTP/1.1
+
+###
+
 GET http://{{host}}/{{api}}/orders HTTP/1.1
 
 ###

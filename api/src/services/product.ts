@@ -1,6 +1,6 @@
 import Product, { ProductDocument } from '../models/Product'
 import { NotFoundError } from '../helpers/apiError'
-import { ProductsFindAllFilter } from 'product'
+import { ProductsFindAllFilter, ProductsSortOrder } from 'product'
 
 const create = async (product: ProductDocument): Promise<ProductDocument> => {
   return product.save()
@@ -18,10 +18,11 @@ const findById = async (productId: string): Promise<ProductDocument> => {
 
 const findAll = async (
   filter: ProductsFindAllFilter,
+  sort: ProductsSortOrder,
   limit: number,
   offset: number
 ): Promise<ProductDocument[]> => {
-  return Product.find(filter).skip(offset).limit(limit).sort({ name: 1 })
+  return Product.find(filter).sort(sort).skip(offset).limit(limit)
 }
 
 const update = async (

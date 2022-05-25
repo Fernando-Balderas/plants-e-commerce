@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import Product from '../models/Product'
 import productService from '../services/product'
 import { BadRequestError } from '../helpers/apiError'
-import { ProductsFindAllFilter } from 'product'
+import { ProductsFindAllFilter, ProductsSortOrder } from 'product'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -71,14 +71,21 @@ const findById = async (req: Request, res: Response, next: NextFunction) => {
 
 const findAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { name, categories, variants, limit, offset } = req.query
+    const { name, categories, variants } = req.query
     const filter: ProductsFindAllFilter = {}
     if (name) filter.name = { $regex: name }
     if (categories) filter.categories = categories as string
     if (variants) filter.variants = variants as string
+    const { sort, ascDesc } = req.query
+    const _sort: ProductsSortOrder = {}
+    if (sort) {
+      const _ascDesc: number = ascDesc && ascDesc === 'desc' ? -1 : 1
+      _sort[sort as string] = _ascDesc
+    }
+    const { limit, offset } = req.query
     const _limit: number = limit ? parseInt(limit as string) : 0
-    const _offset: number = offset ? parseInt(limit as string) : 0
-    res.json(await productService.findAll(filter, _limit, _offset))
+    const _offset: number = offset && limit ? parseInt(limit as string) : 0
+    res.json(await productService.findAll(filter, _sort, _limit, _offset))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
