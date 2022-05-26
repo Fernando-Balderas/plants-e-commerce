@@ -1,4 +1,5 @@
 import mongoose, { Document } from 'mongoose'
+import validEmail from '../util/validEmail'
 import { Role } from '../types/user'
 
 export type UserDocument = Document & {
@@ -20,6 +21,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     index: true,
     unique: true,
+    validate: validEmail,
   },
   password: {
     type: String,

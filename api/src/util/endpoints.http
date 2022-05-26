@@ -23,6 +23,11 @@ GET http://{{host}}/{{api}}/products?sort=name&ascDesc=asc HTTP/1.1
 
 GET http://{{host}}/{{api}}/orders HTTP/1.1
 
+
+###
+
+DELETE http://{{host}}/{{api}}/users/628fb22732c84c42115c474c HTTP/1.1
+
 ###
 
 DELETE http://{{host}}/{{api}}/orders/628bc0b7b18bcd1f0a2a5201 HTTP/1.1

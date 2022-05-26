@@ -1,8 +1,11 @@
 import User, { UserDocument } from '../models/User'
-import { NotFoundError } from '../helpers/apiError'
+import { BadRequestError, NotFoundError } from '../helpers/apiError'
 
 const create = async (user: UserDocument): Promise<UserDocument> => {
-  console.log('int user service')
+  const userExists = await User.findOne({ email: user.email })
+  if (userExists) {
+    throw new BadRequestError(`User ${user.email} already exist`)
+  }
   return user.save()
 }
 

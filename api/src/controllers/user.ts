@@ -70,7 +70,7 @@ const updatePassword = async (
 const _delete = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await userService._delete(req.params.userId)
-    res.status(204).end()
+    res.status(204).json({ message: `Product ${req.params.userId} deleted` })
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
