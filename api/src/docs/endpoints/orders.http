@@ -1,0 +1,32 @@
+###
+
+GET http://localhost:5000/api/v1/orders HTTP/1.1
+
+###
+
+GET http://localhost:5000/api/v1/orders/628bc689b18bcd1f0a2a520b HTTP/1.1
+
+###
+
+PUT http://localhost:5000/api/v1/orders HTTP/1.1
+content-type: application/json
+
+{
+  "products": ["628a8020ef535926d3cb4786", "628a8020ef535926d3cb4786"]
+}
+
+###
+
+POST http://localhost:5000/api/v1/orders HTTP/1.1
+content-type: application/json
+
+{
+  "total": "500",
+  "status": "PENDING",
+  "userId": "6287dba664e931cb46c9d0a0",
+  "products": ["628a8020ef535926d3cb4786"]
+}
+
+###
+
+DELETE http://localhost:5000/api/v1/orders/628bc0b7b18bcd1f0a2a5201 HTTP/1.1

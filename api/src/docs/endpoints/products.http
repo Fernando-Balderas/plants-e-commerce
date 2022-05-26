@@ -1,0 +1,30 @@
+### Get all
+
+GET http://localhost:5000/api/v1/products HTTP/1.1
+
+### Get all matching with one or more query params
+
+GET http://localhost:5000/api/v1/products?name=name&categories=categories&variants=variants HTTP/1.1
+
+### Get with pagination
+
+GET http://localhost:5000/api/v1/products?limit=0&offset=0 HTTP/1.1
+
+### Get with sort
+
+GET http://localhost:5000/api/v1/products?sort=name&ascDesc=asc HTTP/1.1
+
+### Update one
+
+PUT http://localhost:5000/api/v1/products/628a8020ef535926d3cb4786 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "newName",
+  "description": "detailed description",
+  "price": "13.50"
+}
+
+### Delete one 
+
+DELETE http://localhost:5000/api/v1/products/628a8020ef535926d3cb4786 HTTP/1.1

@@ -13,16 +13,26 @@ export type ProductDocument = Document & {
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
+    required: true,
     index: true,
+  },
+  description: {
+    type: String,
   },
   price: {
     type: Number,
     required: true,
     min: 0,
   },
-  categories: [String],
-  variants: [String],
-  sizes: [String],
+  categories: {
+    type: [String],
+  },
+  variants: {
+    type: [String],
+  },
+  sizes: {
+    type: [String],
+  },
 })
 
 export default mongoose.model<ProductDocument>('Product', productSchema)
