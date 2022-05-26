@@ -27,11 +27,36 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const update = async (req: Request, res: Response, next: NextFunction) => {
+const updateProfile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    const update = req.body
+    const { name, lastname, email } = req.body
+    const update = { name, lastname, email }
     const userId = req.params.userId
     const updatedUser = await userService.update(userId, update)
+    res.json(updatedUser)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
+const updatePassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email, password, newPassword } = req.body
+    const update = { password: newPassword }
+    const user = await userService.findByEmailAndPassword(email, password)
+    const updatedUser = await userService.update(user._id, update)
     res.json(updatedUser)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -102,7 +127,8 @@ export const findAll = async (
 
 export default {
   create,
-  update,
+  updateProfile,
+  updatePassword,
   _delete,
   findById,
   findByEmailAndPassword,

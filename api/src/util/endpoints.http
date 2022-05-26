@@ -51,3 +51,12 @@ content-type: application/json
   "userId": "6287dba664e931cb46c9d0a0",
   "products": ["628a8020ef535926d3cb4786"]
 }
+
+###
+
+PUT http://{{host}}/{{api}}/products/628a8020ef535926d3cb4786 HTTP/1.1
+content-type: application/json
+
+{
+  "price": "13.50"
+}
