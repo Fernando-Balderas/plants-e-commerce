@@ -1,5 +1,6 @@
 import mongoose, { Document } from 'mongoose'
-import { Role } from 'user'
+import validEmail from '../util/validEmail'
+import { Role } from '../types/user'
 
 export type UserDocument = Document & {
   name: string
@@ -20,13 +21,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     index: true,
     unique: true,
+    validate: validEmail,
   },
   password: {
     type: String,
   },
   role: {
     type: String,
-    enum: Role,
+    enum: Object.values(Role),
     default: Role.USER,
   },
 })
