@@ -17,6 +17,15 @@ content-type: application/json
   "email": "alex.doe@mail.com"
 }
 
+### Ban/Unban user
+
+PUT http://localhost:5000/api/v1/users/6287dba664e931cb46c9d0a0/ban HTTP/1.1
+content-type: application/json
+
+{
+  "status": "BANNED"
+}
+
 ### Update password
 
 PUT http://localhost:5000/api/v1/users/reset-password HTTP/1.1

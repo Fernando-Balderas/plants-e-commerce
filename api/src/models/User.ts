@@ -1,6 +1,6 @@
 import mongoose, { Document } from 'mongoose'
 import validEmail from '../util/validEmail'
-import { Role } from '../types/user'
+import { Role, UserStatus } from '../types/user'
 
 export type UserDocument = Document & {
   name: string
@@ -8,6 +8,7 @@ export type UserDocument = Document & {
   email: string
   password: string
   role: Role
+  status: UserStatus
 }
 
 const userSchema = new mongoose.Schema({
@@ -33,6 +34,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     enum: Object.values(Role),
     default: Role.USER,
+  },
+  status: {
+    type: String,
+    required: true,
+    enum: Object.values(UserStatus),
+    default: UserStatus.ACTIVE,
   },
 })
 

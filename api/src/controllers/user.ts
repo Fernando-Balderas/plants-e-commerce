@@ -47,6 +47,26 @@ const updateProfile = async (
   }
 }
 
+const updateStatus = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { status } = req.body
+    const update = { status }
+    const userId = req.params.userId
+    const updatedUser = await userService.update(userId, update)
+    res.json(updatedUser)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
 const updatePassword = async (
   req: Request,
   res: Response,
@@ -128,6 +148,7 @@ export const findAll = async (
 export default {
   create,
   updateProfile,
+  updateStatus,
   updatePassword,
   _delete,
   findById,
