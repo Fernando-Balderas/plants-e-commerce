@@ -1,0 +1,73 @@
+### Get all
+
+GET http://localhost:5000/api/v1/users HTTP/1.1
+
+###
+
+GET http://localhost:5000/api/v1/users/628fb22732c84c42115c474c HTTP/1.1
+
+### Update profile
+
+PUT http://localhost:5000/api/v1/users/628fb22732c84c42115c474c/profile HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Alex",
+  "lastname": "Doe",
+  "email": "alex.doe@mail.com"
+}
+
+### Ban/Unban user
+
+PUT http://localhost:5000/api/v1/users/6287dba664e931cb46c9d0a0/status HTTP/1.1
+content-type: application/json
+
+{
+  "status": "BANNED"
+}
+
+### Update password
+
+PUT http://localhost:5000/api/v1/users/6287dba664e931cb46c9d0a0/password HTTP/1.1
+content-type: application/json
+
+{
+  "oldPassword": "pass",
+  "newPassword": "newPass"
+}
+
+### Forgot password
+
+PUT http://localhost:5000/api/v1/users/password-reset HTTP/1.1
+content-type: application/json
+
+{
+  "email": "alex.doe@mail.com"
+}
+
+###
+
+POST http://localhost:5000/api/v1/users/signup HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Alex",
+  "lastname": "Doe",
+  "email": "alex.doe@mail.com",
+  "password": "6287dba664e931cb46c9d0a0",
+  "role": "ADMIN"
+}
+
+###
+
+POST http://localhost:5000/api/v1/users/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "alex.doe@mail.com",
+  "password": "6287dba664e931cb46c9d0a0"
+}
+
+### Delete one
+
+DELETE http://localhost:5000/api/v1/users/628ca93d15e5da4157847c5a HTTP/1.1

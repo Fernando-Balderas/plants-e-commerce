@@ -19,6 +19,16 @@ const findById = async (userId: string): Promise<UserDocument> => {
   return userFound
 }
 
+const findByEmail = async (email: string): Promise<UserDocument> => {
+  const userFound = await User.findOne({ email })
+
+  if (!userFound) {
+    throw new NotFoundError(`User ${email} not found`)
+  }
+
+  return userFound
+}
+
 const findByEmailAndPassword = async (
   email: string,
   password: string
@@ -67,6 +77,7 @@ const _delete = async (userId: string): Promise<UserDocument | null> => {
 export default {
   create,
   findById,
+  findByEmail,
   findByEmailAndPassword,
   findAll,
   update,
