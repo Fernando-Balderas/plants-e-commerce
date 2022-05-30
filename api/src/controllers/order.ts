@@ -45,7 +45,7 @@ const _delete = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { orderId } = req.params
     await orderService._delete(orderId)
-    res.status(204).json({ message: `Order ${orderId} deleted` })
+    res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

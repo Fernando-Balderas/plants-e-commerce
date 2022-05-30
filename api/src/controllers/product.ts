@@ -47,7 +47,7 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
 const _delete = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await productService._delete(req.params.productId)
-    res.status(204).json({ message: `Product ${req.params.productId} deleted` })
+    res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

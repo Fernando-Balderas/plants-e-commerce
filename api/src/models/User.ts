@@ -9,6 +9,7 @@ export type UserDocument = Document & {
   password: string
   role: Role
   status: UserStatus
+  resetPasswordToken: string
 }
 
 const userSchema = new mongoose.Schema({
@@ -40,6 +41,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     enum: Object.values(UserStatus),
     default: UserStatus.ACTIVE,
+  },
+  resetPasswordToken: {
+    type: String,
   },
 })
 

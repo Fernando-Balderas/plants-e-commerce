@@ -28,13 +28,21 @@ content-type: application/json
 
 ### Update password
 
-PUT http://localhost:5000/api/v1/users/reset-password HTTP/1.1
+PUT http://localhost:5000/api/v1/users/6287dba664e931cb46c9d0a0/password HTTP/1.1
 content-type: application/json
 
 {
-  "email": "alex.doe@mail.com",
-  "password": "pass",
+  "oldPassword": "pass",
   "newPassword": "newPass"
+}
+
+### Forgot password
+
+PUT http://localhost:5000/api/v1/users/password-reset HTTP/1.1
+content-type: application/json
+
+{
+  "email": "alex.doe@mail.com"
 }
 
 ###
@@ -62,4 +70,4 @@ content-type: application/json
 
 ### Delete one
 
-DELETE http://localhost:5000/api/v1/users/628fb22732c84c42115c474c HTTP/1.1
+DELETE http://localhost:5000/api/v1/users/628ca93d15e5da4157847c5a HTTP/1.1

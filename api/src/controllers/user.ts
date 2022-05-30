@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
+import mongoose from 'mongoose'
 
 import User from '../models/User'
 import userService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
+import timeConstantCompare from '../util/timeConstantCompare'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -73,11 +75,39 @@ const updatePassword = async (
   next: NextFunction
 ) => {
   try {
-    const { email, password, newPassword } = req.body
+    const { oldPassword, newPassword } = req.body
     const update = { password: newPassword }
-    const user = await userService.findByEmailAndPassword(email, password)
-    const updatedUser = await userService.update(user._id, update)
-    res.json(updatedUser)
+    const userId = req.params.userId
+    const user = await userService.findById(userId)
+    if (oldPassword === newPassword) throw new BadRequestError('Invalid inputs')
+    if (!(await timeConstantCompare(oldPassword, user.password)))
+      throw new BadRequestError('Invalid inputs')
+    await userService.update(userId, update)
+    res.status(204).end()
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
+const resetPassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email } = req.body
+    const token = new mongoose.Types.ObjectId().toHexString()
+    const update = { resetPasswordToken: token }
+    const user = await userService.findByEmail(email)
+    const subject = 'Reset password'
+    const text = `To set a new password please follow the link. ${process.env.SERVER_PASS_URL}?id=${user._id}&token=${token}`
+    // sendCustomEmail(email, subject, text)
+    await userService.update(user._id, update)
+    res.status(202).json({ message: 'Recovery email sent', token })
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -90,7 +120,7 @@ const updatePassword = async (
 const _delete = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await userService._delete(req.params.userId)
-    res.status(204).json({ message: `Product ${req.params.userId} deleted` })
+    res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -150,6 +180,7 @@ export default {
   updateProfile,
   updateStatus,
   updatePassword,
+  resetPassword,
   _delete,
   findById,
   findByEmailAndPassword,
