@@ -1,8 +1,11 @@
 import express from 'express'
-// import lusca from 'lusca' will be used later
 import dotenv from 'dotenv'
+import cors from 'cors'
+import passport from 'passport'
 import swaggerUi from 'swagger-ui-express'
+// import lusca from 'lusca' will be used later
 
+import googleLoginStrategy from './config/passportGoogle'
 import userRouter from './routers/user'
 import productRouter from './routers/product'
 import orderRouter from './routers/order'
@@ -20,6 +23,9 @@ app.set('port', process.env.PORT || 3000)
 // Global middleware
 app.use(apiContentType)
 app.use(express.json())
+app.use(cors())
+app.use(passport.initialize())
+passport.use(googleLoginStrategy())
 
 // Set up routers
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))

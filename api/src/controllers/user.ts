@@ -1,11 +1,13 @@
 import { Request, Response, NextFunction } from 'express'
 import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
 
-import User from '../models/User'
+import User, { UserDocument } from '../models/User'
 import userService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 import timeConstantCompare from '../util/timeConstantCompare'
 import sendCustomEmail from '../util/sendCustomEmail'
+import { JWT_SECRET } from '../util/secrets'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -131,6 +133,22 @@ const _delete = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
+const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user as UserDocument
+    const token = jwt.sign({ email: user.email, role: user.role }, JWT_SECRET, {
+      expiresIn: '1h',
+    })
+    res.json({ token })
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
 const findById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     res.json(await userService.findById(req.params.userId))
@@ -183,6 +201,7 @@ export default {
   updatePassword,
   resetPassword,
   _delete,
+  googleLogin,
   findById,
   findByEmailAndPassword,
   findAll,

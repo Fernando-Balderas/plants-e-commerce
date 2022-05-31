@@ -13,6 +13,7 @@ router.put('/:userId/password', userController.updatePassword)
 // router.put('/password-reset', userController.resetPassword)
 router.delete('/:userId', userController._delete)
 router.post('/signup', userController.create)
+router.post('/google-login', userController.googleLogin)
 router.post('/login', userController.findByEmailAndPassword)
 
 export default router
