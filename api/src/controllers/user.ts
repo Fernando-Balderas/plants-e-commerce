@@ -5,6 +5,7 @@ import User from '../models/User'
 import userService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 import timeConstantCompare from '../util/timeConstantCompare'
+import sendCustomEmail from '../util/sendCustomEmail'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -105,7 +106,7 @@ const resetPassword = async (
     const user = await userService.findByEmail(email)
     const subject = 'Reset password'
     const text = `To set a new password please follow the link. ${process.env.SERVER_PASS_URL}?id=${user._id}&token=${token}`
-    // sendCustomEmail(email, subject, text)
+    sendCustomEmail(email, subject, text)
     await userService.update(user._id, update)
     res.status(202).json({ message: 'Recovery email sent', token })
   } catch (error) {

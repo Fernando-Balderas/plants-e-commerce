@@ -6,17 +6,22 @@ export default function sendCustomEmail(
   text: string
 ) {
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT) || 0,
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      type: 'OAuth2',
+      user: process.env.SUPPORT_EMAIL,
+      clientId: process.env.GMAIL_CLIENT_ID,
+      clientSecret: process.env.GMAIL_CLIENT_SECRET,
+      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+      accessToken: process.env.GMAIL_ACCESS_TOKEN,
     },
   })
   transporter.sendMail(
     {
       from: process.env.SUPPORT_EMAIL,
-      to: email || process.env.SUPPORT_EMAIL,
+      to: email,
       subject: subject,
       text: text,
     },
