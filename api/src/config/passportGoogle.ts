@@ -1,36 +1,60 @@
 // @ts-ignore
-import GoogleStrategy from 'passport-google-id-token'
+import GoogleTokenStrategy from 'passport-google-id-token'
 
 import User, { UserDocument } from '../models/User'
 import UserService from '../services/user'
 
+type Payload = {
+  iss: string
+  azp: string
+  aud: string
+  sub: string
+  at_hash: string
+  hd: string
+  email: string
+  email_verified: string
+  iat: number
+  exp: number
+  nonce: string
+  family_name: string
+  given_name: string
+  locale: string
+  name: string
+  picture: string
+  profile: string
+}
+
 // dummy way to check if admin.
 // you might have a whitelist of admins
-const isAdmin = (domain: string) => {
+function isAdmin(domain: string) {
   if (domain !== 'integrify.io') return false
   return true
 }
 
-const googleLoginStrategy = () => {
-  return new GoogleStrategy(
-    // {
-    //   the clientId is optional in this case
-    //   cliendID: process.env.GOOGLE_CLIENT_ID,
-    // },
+function googleLoginStrategy() {
+  return new GoogleTokenStrategy(
+    {
+      // the clientId is optional in this case
+      cliendID: process.env.GOOGLE_CLIENT_ID,
+    },
     async (
       parsedToken: {
-        payload: { given_name: string; email: string; hd: string }
+        payload: Payload
       },
       googleID: string,
       done: Function
     ) => {
+      console.log('parsedToken ', parsedToken)
       try {
-        let user = await UserService.findByEmail(parsedToken.payload.email)
+        let user = await UserService.findByEmailOrNull(
+          parsedToken.payload.email
+        )
         console.log('isUserExists:', !!user)
 
         if (!user) {
           user = {
             name: parsedToken.payload.given_name,
+            lastname: parsedToken.payload.family_name,
             email: parsedToken.payload.email,
             role: isAdmin(parsedToken.payload.hd) ? 'ADMIN' : 'USER',
           } as UserDocument

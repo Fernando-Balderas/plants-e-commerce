@@ -29,6 +29,12 @@ const findByEmail = async (email: string): Promise<UserDocument> => {
   return userFound
 }
 
+const findByEmailOrNull = async (
+  email: string
+): Promise<UserDocument | null> => {
+  return await User.findOne({ email })
+}
+
 const findByEmailAndPassword = async (
   email: string,
   password: string
@@ -78,6 +84,7 @@ export default {
   create,
   findById,
   findByEmail,
+  findByEmailOrNull,
   findByEmailAndPassword,
   findAll,
   update,
