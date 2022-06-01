@@ -1,11 +1,12 @@
 import express from 'express'
 
 import productController from '../controllers/product'
+import verifyAuth from '../middlewares/verifyAuth'
 
 const router = express.Router()
 
 // Every path we define here will get /api/v1/products prefix
-router.get('/', productController.findAll)
+router.get('/', verifyAuth, productController.findAll)
 router.get('/:productId', productController.findById)
 
 // TODO: Add autentication for the next endpoints
