@@ -7,24 +7,31 @@ import { GOOGLE_CLIENT_ID } from '../util/secrets'
 function Home() {
   const [token, setToken] = useState('')
   console.log('token:', token)
+
+  // TODO: isLogged redux
+  // if (!isLogged) {
+  //   const navigate = useNavigate()
+  //   navigate('/login')
+  // }
+
   const handleSucess = async (googleResponse: any) => {
-    const tokenId = googleResponse.credential
-    console.log('tokenId:', tokenId)
+    const googleToken = googleResponse.credential
+    console.log('googleToken:', googleToken)
 
     const res = await axios.post(
       'http://localhost:5000/api/v1/users/google-login',
       {},
       {
         headers: {
-          Authorization: `Bearer ${tokenId}`,
+          Authorization: `Bearer ${googleToken}`,
         },
       }
     )
-    const token = res.data.token
-    setToken(token)
+    const apiToken: string = res.data.token
+    setToken(apiToken)
   }
 
-  const handleGetMovies = async () => {
+  const handleGetProducts = async () => {
     try {
       const response = await axios.get(
         'http://localhost:5000/api/v1/products',
@@ -47,9 +54,9 @@ function Home() {
       </GoogleOAuthProvider>
       <button
         style={{ width: '200px', height: '80px', marginTop: '1rem' }}
-        onClick={handleGetMovies}
+        onClick={handleGetProducts}
       >
-        GET MOVIES
+        GET PRODUCTS
       </button>
     </>
   )
