@@ -6,7 +6,7 @@ export type UserDocument = Document & {
   name: string
   lastname: string
   email: string
-  password: string
+  password?: string
   role: Role
   status: UserStatus
   resetPasswordToken: string
@@ -43,6 +43,7 @@ const userSchema = new mongoose.Schema({
   },
   resetPasswordToken: {
     type: String,
+    default: '',
   },
 })
 

@@ -1,6 +1,7 @@
 ### Get all
 
 GET http://localhost:5000/api/v1/products HTTP/1.1
+Authorization: Barer xxx
 
 ### Get all matching with one or more query params
 
@@ -17,7 +18,7 @@ GET http://localhost:5000/api/v1/products?sort=name&ascDesc=asc HTTP/1.1
 ### Update one
 
 PUT http://localhost:5000/api/v1/products/628a8020ef535926d3cb4786 HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "name": "newName",

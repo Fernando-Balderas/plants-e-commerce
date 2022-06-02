@@ -9,7 +9,7 @@ GET http://localhost:5000/api/v1/orders/628bc689b18bcd1f0a2a520b HTTP/1.1
 ###
 
 PUT http://localhost:5000/api/v1/orders HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "products": ["628a8020ef535926d3cb4786", "628a8020ef535926d3cb4786"]
@@ -18,7 +18,7 @@ content-type: application/json
 ###
 
 POST http://localhost:5000/api/v1/orders HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "total": "500",

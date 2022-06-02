@@ -12,7 +12,6 @@ import { JWT_SECRET } from '../util/secrets'
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, lastname, email, password, role } = req.body
-
     const user = new User({
       name,
       lastname,
@@ -20,8 +19,8 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
       password,
       role,
     })
-
     await userService.create(user)
+    delete user.password
     res.json(user)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -78,13 +77,21 @@ const updatePassword = async (
   next: NextFunction
 ) => {
   try {
-    const { oldPassword, newPassword } = req.body
+    const { oldPassword, newPassword, resetToken } = req.body
     const update = { password: newPassword }
     const userId = req.params.userId
     const user = await userService.findById(userId)
-    if (oldPassword === newPassword) throw new BadRequestError('Invalid inputs')
-    if (!(await timeConstantCompare(oldPassword, user.password)))
-      throw new BadRequestError('Invalid inputs')
+
+    if (resetToken) {
+      if (!(await timeConstantCompare(resetToken, user.resetPasswordToken)))
+        throw new BadRequestError('Invalid token')
+    } else if (user.password) {
+      if (oldPassword === newPassword)
+        throw new BadRequestError('Invalid inputs')
+      if (!(await timeConstantCompare(oldPassword, user.password)))
+        throw new BadRequestError('Invalid inputs')
+    }
+
     await userService.update(userId, update)
     res.status(204).end()
   } catch (error) {

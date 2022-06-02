@@ -9,7 +9,7 @@ GET http://localhost:5000/api/v1/users/628fb22732c84c42115c474c HTTP/1.1
 ### Update profile
 
 PUT http://localhost:5000/api/v1/users/628fb22732c84c42115c474c/profile HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "name": "Alex",
@@ -20,7 +20,7 @@ content-type: application/json
 ### Ban/Unban user
 
 PUT http://localhost:5000/api/v1/users/6287dba664e931cb46c9d0a0/status HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "status": "BANNED"
@@ -29,26 +29,36 @@ content-type: application/json
 ### Update password
 
 PUT http://localhost:5000/api/v1/users/6287dba664e931cb46c9d0a0/password HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
-  "oldPassword": "pass",
-  "newPassword": "newPass"
+  "oldPassword": "password",
+  "newPassword": "password-changed"
 }
 
-### Forgot password
+### Forgot password request
 
 PUT http://localhost:5000/api/v1/users/password-reset HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "email": "alex.doe@mail.com"
 }
 
+### Update password with token
+
+PUT http://localhost:5000/api/v1/users/6294f9c3e116f67786ea47fc/password HTTP/1.1
+Content-Type: application/json
+
+{
+  "resetToken": "62961bea4204a44c66351859",
+  "newPassword": "password-reseted"
+}
+
 ###
 
 POST http://localhost:5000/api/v1/users/signup HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "name": "Alex",
@@ -61,7 +71,7 @@ content-type: application/json
 ###
 
 POST http://localhost:5000/api/v1/users/login HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "email": "alex.doe@mail.com",
