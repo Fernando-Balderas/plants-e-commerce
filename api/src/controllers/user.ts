@@ -37,8 +37,8 @@ const updateProfile = async (
   next: NextFunction
 ) => {
   try {
-    const { name, lastname, email } = req.body
-    const update = { name, lastname, email }
+    const { name, lastname } = req.body
+    const update = { name, lastname }
     const userId = req.params.userId
     const updatedUser = await userService.update(userId, update)
     res.json(updatedUser)

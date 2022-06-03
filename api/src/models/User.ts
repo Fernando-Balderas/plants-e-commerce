@@ -31,13 +31,11 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    required: true,
     enum: Object.values(Role),
     default: Role.USER,
   },
   status: {
     type: String,
-    required: true,
     enum: Object.values(UserStatus),
     default: UserStatus.ACTIVE,
   },

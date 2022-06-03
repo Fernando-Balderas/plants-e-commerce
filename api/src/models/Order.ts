@@ -5,8 +5,8 @@ import { PaymentStatus } from '../types/order'
 export type OrderDocument = Document & {
   total: number
   status: PaymentStatus
-  userId: Schema.Types.ObjectId
-  products: Schema.Types.ObjectId[]
+  userId: string
+  products: string[]
 }
 
 const orderSchema = new mongoose.Schema({
@@ -17,12 +17,19 @@ const orderSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    required: true,
     enum: Object.values(PaymentStatus),
     default: PaymentStatus.PENDING,
   },
-  userId: { type: Schema.Types.ObjectId, ref: 'User' },
-  products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  products: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Product',
+    },
+  ],
 })
 
 export default mongoose.model<OrderDocument>('Order', orderSchema)
