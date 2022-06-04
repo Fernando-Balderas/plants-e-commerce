@@ -6,7 +6,6 @@ import User, { UserDocument } from '../models/User'
 import userService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 import timeConstantCompare from '../util/timeConstantCompare'
-import sendCustomEmail from '../util/sendCustomEmail'
 import { JWT_SECRET } from '../util/secrets'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
@@ -113,11 +112,11 @@ const resetPassword = async (
     const token = new mongoose.Types.ObjectId().toHexString()
     const update = { resetPasswordToken: token }
     const user = await userService.findByEmail(email)
-    const subject = 'Reset password'
-    const text = `To set a new password please follow the link. ${process.env.SERVER_PASS_URL}?id=${user._id}&token=${token}`
-    sendCustomEmail(email, subject, text)
+    // const subject = 'Reset password'
+    // const text = `To set a new password please follow the link. ${process.env.SERVER_PASS_URL}?id=${user._id}&token=${token}`
+    // sendCustomEmail(email, subject, text)
     await userService.update(user._id, update)
-    res.status(202).json({ message: 'Recovery email sent', token })
+    res.status(202).json({ message: 'Reset token created', token })
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -158,7 +157,9 @@ const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
 
 const findById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.json(await userService.findById(req.params.userId))
+    const user = await userService.findById(req.params.userId)
+    delete user.password
+    res.json(user)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -175,7 +176,9 @@ const findByEmailAndPassword = async (
 ) => {
   try {
     const { email, password } = req.body
-    res.json(await userService.findByEmailAndPassword(email, password))
+    const user = await userService.findByEmailAndPassword(email, password)
+    delete user.password
+    res.json(user)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

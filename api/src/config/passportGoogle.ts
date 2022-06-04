@@ -24,8 +24,7 @@ type Payload = {
   profile: string
 }
 
-// dummy way to check if admin.
-// you might have a whitelist of admins
+// TODO: Have a whitelist of admins
 function isAdmin(domain: string) {
   if (domain !== 'integrify.io') return false
   return true
@@ -34,7 +33,6 @@ function isAdmin(domain: string) {
 function googleLoginStrategy() {
   return new GoogleTokenStrategy(
     {
-      // the clientId is optional in this case
       cliendID: process.env.GOOGLE_CLIENT_ID,
     },
     async (
@@ -44,12 +42,10 @@ function googleLoginStrategy() {
       googleID: string,
       done: Function
     ) => {
-      console.log('parsedToken ', parsedToken)
       try {
         let user = await UserService.findByEmailOrNull(
           parsedToken.payload.email
         )
-        console.log('isUserExists:', !!user)
 
         if (!user) {
           user = {

@@ -39,7 +39,6 @@ describe('user controller', () => {
 
   it('should create a user', async () => {
     const res = await createUser()
-    // console.log('res ', res)
     expect(res.status).toBe(200)
     expect(res.body).toHaveProperty('_id')
     expect(res.body.name).toBe('Alex')
@@ -57,7 +56,7 @@ describe('user controller', () => {
     expect(res.status).toBe(400)
   })
 
-  it('should get back an existing user', async () => {
+  it('should get back an existing user with id', async () => {
     let res = await createUser()
     expect(res.status).toBe(200)
 
@@ -91,7 +90,7 @@ describe('user controller', () => {
     expect(res3.body[1]._id).toEqual(res2.body._id)
   })
 
-  it('should update an existing user', async () => {
+  it('should update an existing user profile', async () => {
     let res = await createUser()
     expect(res.status).toBe(200)
 
@@ -108,6 +107,73 @@ describe('user controller', () => {
     expect(res.body.lastname).toEqual('Doroti')
   })
 
+  it('should update an existing user status', async () => {
+    let res = await createUser()
+    expect(res.status).toBe(200)
+
+    const userId = res.body._id
+    const update = {
+      status: 'BANNED',
+    }
+
+    res = await request(app).put(`/api/v1/users/${userId}/status`).send(update)
+
+    expect(res.status).toEqual(200)
+    expect(res.body.status).toEqual('BANNED')
+  })
+
+  it('should update the users password', async () => {
+    let res = await createUser()
+    expect(res.status).toBe(200)
+
+    const userId = res.body._id
+    const update = {
+      oldPassword: '6287dba664e931cb46c9d0a0',
+      newPassword: 'newsupersecurepassword',
+    }
+
+    res = await request(app)
+      .put(`/api/v1/users/${userId}/password`)
+      .send(update)
+
+    expect(res.status).toEqual(204)
+  })
+
+  it('should update the users password with reset token', async () => {
+    let res = await createUser()
+    expect(res.status).toBe(200)
+    const userId = res.body._id
+
+    res = await request(app).put('/api/v1/users/password-reset').send({
+      email: 'alex.doe@mail.com',
+    })
+    expect(res.status).toEqual(202)
+    const token = res.body.token
+
+    const update = {
+      resetToken: token,
+      newPassword: 'newsupersecurepassword',
+    }
+
+    res = await request(app)
+      .put(`/api/v1/users/${userId}/password`)
+      .send(update)
+
+    expect(res.status).toEqual(204)
+  })
+
+  it('should create a new reset password token', async () => {
+    let res = await createUser()
+    expect(res.status).toBe(200)
+
+    res = await request(app).put('/api/v1/users/password-reset').send({
+      email: 'alex.doe@mail.com',
+    })
+
+    expect(res.status).toEqual(202)
+    expect(res.body.message).toEqual('Reset token created')
+  })
+
   it('should delete an existing user', async () => {
     let res = await createUser()
     expect(res.status).toBe(200)
@@ -120,4 +186,19 @@ describe('user controller', () => {
     res = await request(app).get(`/api/v1/users/${userId}`)
     expect(res.status).toBe(404)
   })
+
+  it('should login an existing user with email and password', async () => {
+    let res = await createUser()
+    expect(res.status).toBe(200)
+
+    const userId = res.body._id
+    res = await request(app).post('/api/v1/users/login').send({
+      email: 'alex.doe@mail.com',
+      password: '6287dba664e931cb46c9d0a0',
+    })
+
+    expect(res.body._id).toEqual(userId)
+  })
+
+  // TODO: should login with google token
 })
