@@ -8,7 +8,7 @@ import ProductDetail from './pages/ProductDetail'
 import EditProduct from './pages/EditProduct'
 import Checkout from './pages/Checkout'
 import NotFound from './pages/NotFound'
-import Login from './pages/Login'
+import LogIn from './pages/LogIn'
 import SignUp from './pages/SignUp'
 import RequireAuth from './components/RequireAuth'
 
@@ -29,7 +29,7 @@ function BrowserRoutes() {
         />
         <Route path="checkout" element={<Checkout />}></Route>
       </Route>
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<LogIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

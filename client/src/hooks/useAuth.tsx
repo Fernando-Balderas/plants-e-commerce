@@ -3,12 +3,14 @@ import { Children } from '../types/types'
 
 type AuthContext = {
   authed: boolean
-  login: () => Promise<void>
+  accessToken: string
+  login: (token: string) => Promise<void>
   logout: () => Promise<void>
 }
 
 const AuthContextDefaults = {
   authed: false,
+  accessToken: '',
   login: () => Promise.reject(),
   logout: () => Promise.reject(),
 }
@@ -17,17 +19,21 @@ const authContext = createContext<AuthContext>(AuthContextDefaults)
 
 function useAuth() {
   const [authed, setAuthed] = useState(false)
+  const [accessToken, setAccessToken] = useState('')
 
   return {
     authed,
-    login() {
+    accessToken,
+    login(token: string) {
       return new Promise<void>((res) => {
+        setAccessToken(token)
         setAuthed(true)
         res()
       })
     },
     logout() {
       return new Promise<void>((res) => {
+        setAccessToken('')
         setAuthed(false)
         res()
       })
