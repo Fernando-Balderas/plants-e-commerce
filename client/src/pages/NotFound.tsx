@@ -1,10 +1,10 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 function NotFound() {
   const location = useLocation()
-  const navigate = useNavigate()
-  const handleClick = () => navigate('/')
+  const history = useHistory()
+  const handleClick = () => history.push('/')
   return (
     <main className="not-found">
       <section className="not-found__content">

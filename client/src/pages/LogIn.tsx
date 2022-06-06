@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import axios from 'axios'
 
@@ -8,36 +8,49 @@ import { LocationState } from '../types/types'
 import { GOOGLE_CLIENT_ID } from '../util/secrets'
 
 function LogIn() {
-  const navigate = useNavigate()
-  const { login } = useAuth()
-  const { state }: LocationState = useLocation()
+  let history = useHistory()
+  let location: { state: { from: any } } = useLocation()
+  let auth = useAuth()
 
-  const handleSignUp = async (googleResponse: any) => {
-    console.log('googleResponse:', googleResponse)
-    const googleToken = googleResponse.credential
-
-    const res = await axios.post(
-      'http://localhost:5000/api/v1/users/google-login',
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${googleToken}`,
-        },
-      }
-    )
-
-    const apiToken: string = res.data.token
-    login(apiToken).then(() => {
-      navigate(state?.path || '/')
+  let { from } = location.state || { from: { pathname: '/' } }
+  let login = () => {
+    auth.login('').then(() => {
+      history.replace(from)
     })
   }
+
+  // const { login } = useAuth()
+  // const { state }: LocationState = useLocation()
+
+  // const handleSignUp = async (googleResponse: any) => {
+  //   console.log('googleResponse:', googleResponse)
+  //   const googleToken = googleResponse.credential
+
+  //   const res = await axios.post(
+  //     'http://localhost:5000/api/v1/users/google-login',
+  //     {},
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${googleToken}`,
+  //       },
+  //     }
+  //   )
+
+  //   const apiToken: string = res.data.token
+  //   login(apiToken).then(() => {
+  //     history.push(state?.path || '/')
+  //   })
+  // }
 
   return (
     <>
       <h1>LogIn page</h1>
-      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <p>You must log in to view the page at {from.pathname}</p>
+      <button onClick={login}>Log in</button>
+
+      {/* <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <GoogleLogin onSuccess={handleSignUp} />
-      </GoogleOAuthProvider>
+      </GoogleOAuthProvider> */}
     </>
   )
 }

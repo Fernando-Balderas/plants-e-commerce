@@ -18,6 +18,7 @@ const AuthContextDefaults = {
 const authContext = createContext<AuthContext>(AuthContextDefaults)
 
 function useAuth() {
+  console.log('into useAuth')
   const [authed, setAuthed] = useState(false)
   const [accessToken, setAccessToken] = useState('')
 
@@ -42,11 +43,15 @@ function useAuth() {
 }
 
 export function AuthProvider({ children }: Children) {
+  console.log('into AuthProvider')
+
   const auth = useAuth()
 
   return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }
 
 export default function AuthConsumer() {
+  console.log('into AuthConsumer')
+
   return useContext(authContext)
 }
