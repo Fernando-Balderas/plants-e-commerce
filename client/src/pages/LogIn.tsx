@@ -9,8 +9,7 @@ import { GOOGLE_CLIENT_ID } from '../util/secrets'
 
 function LogIn() {
   let history = useHistory()
-  let location: { state: { from: any } } = useLocation()
-  // const { state }: LocationState = useLocation()
+  let location: LocationState = useLocation()
   let auth = useAuth()
   let { from } = location.state || { from: { pathname: '/' } }
 
@@ -30,7 +29,6 @@ function LogIn() {
 
     const apiToken: string = res.data.token
     auth.login(apiToken).then(() => {
-      // history.push(state?.path || '/')
       history.replace(from)
     })
   }

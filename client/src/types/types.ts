@@ -3,5 +3,5 @@ import { ReactNode } from 'react'
 export type Children = { children: ReactNode }
 
 export type LocationState = {
-  state: any
+  state?: { from: any }
 }

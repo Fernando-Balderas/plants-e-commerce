@@ -1,6 +1,6 @@
 import React from 'react'
 import GlobalNavBar from './components/GlobalNavBar'
-import Routes from './Routes'
+import Routes from './routes/Routes'
 // import { Outlet } from 'react-router-dom'
 
 function App() {
