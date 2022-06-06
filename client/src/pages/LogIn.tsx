@@ -10,47 +10,38 @@ import { GOOGLE_CLIENT_ID } from '../util/secrets'
 function LogIn() {
   let history = useHistory()
   let location: { state: { from: any } } = useLocation()
+  // const { state }: LocationState = useLocation()
   let auth = useAuth()
-
   let { from } = location.state || { from: { pathname: '/' } }
-  let login = () => {
-    auth.login('').then(() => {
+
+  const handleSignUp = async (googleResponse: any) => {
+    console.log('googleResponse:', googleResponse)
+    const googleToken = googleResponse.credential
+
+    const res = await axios.post(
+      'http://localhost:5000/api/v1/users/google-login',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${googleToken}`,
+        },
+      }
+    )
+
+    const apiToken: string = res.data.token
+    auth.login(apiToken).then(() => {
+      // history.push(state?.path || '/')
       history.replace(from)
     })
   }
-
-  // const { login } = useAuth()
-  // const { state }: LocationState = useLocation()
-
-  // const handleSignUp = async (googleResponse: any) => {
-  //   console.log('googleResponse:', googleResponse)
-  //   const googleToken = googleResponse.credential
-
-  //   const res = await axios.post(
-  //     'http://localhost:5000/api/v1/users/google-login',
-  //     {},
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${googleToken}`,
-  //       },
-  //     }
-  //   )
-
-  //   const apiToken: string = res.data.token
-  //   login(apiToken).then(() => {
-  //     history.push(state?.path || '/')
-  //   })
-  // }
 
   return (
     <>
       <h1>LogIn page</h1>
       <p>You must log in to view the page at {from.pathname}</p>
-      <button onClick={login}>Log in</button>
-
-      {/* <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <GoogleLogin onSuccess={handleSignUp} />
-      </GoogleOAuthProvider> */}
+      </GoogleOAuthProvider>
     </>
   )
 }
