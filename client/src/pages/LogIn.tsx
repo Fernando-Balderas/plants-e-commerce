@@ -8,10 +8,10 @@ import { LocationState } from '../types/types'
 import { GOOGLE_CLIENT_ID } from '../util/secrets'
 
 function LogIn() {
-  let history = useHistory()
-  let location: LocationState = useLocation()
-  let auth = useAuth()
-  let { from } = location.state || { from: { pathname: '/' } }
+  const history = useHistory()
+  const location: LocationState = useLocation()
+  const auth = useAuth()
+  const { from } = location.state || { from: { pathname: '/' } }
 
   const handleSignUp = async (googleResponse: any) => {
     console.log('googleResponse:', googleResponse)

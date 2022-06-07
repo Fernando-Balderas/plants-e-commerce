@@ -10,6 +10,9 @@ function GlobalNavBar() {
           <Link to="/">Home</Link>
         </li>
         <li>
+          <Link to="/products">Products</Link>
+        </li>
+        <li>
           <Link to="/product/abcdef/edit">Protected Page</Link>
         </li>
         <li>

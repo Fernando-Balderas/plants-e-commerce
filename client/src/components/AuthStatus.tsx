@@ -3,8 +3,8 @@ import { Link, useHistory } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 
 function AuthStatus() {
-  let history = useHistory()
-  let auth = useAuth()
+  const history = useHistory()
+  const auth = useAuth()
 
   return auth.authed ? (
     <p>
