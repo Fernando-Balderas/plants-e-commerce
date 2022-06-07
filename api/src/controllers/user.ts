@@ -7,6 +7,7 @@ import userService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 import timeConstantCompare from '../util/timeConstantCompare'
 import { JWT_SECRET } from '../util/secrets'
+import { PartialUser } from 'user'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -142,7 +143,11 @@ const _delete = async (req: Request, res: Response, next: NextFunction) => {
 const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as UserDocument
-    const token = jwt.sign({ email: user.email, role: user.role }, JWT_SECRET, {
+    const payload: PartialUser = {
+      email: user.email,
+      role: user.role,
+    }
+    const token = jwt.sign(payload, JWT_SECRET, {
       expiresIn: '1h',
     })
     res.json({ token })

@@ -1,18 +1,26 @@
 import express from 'express'
 
-import productController from '../controllers/product'
 import verifyAuth from '../middlewares/verifyAuth'
+import verifyPermission from '../middlewares/verifyPermission'
+import productController from '../controllers/product'
 
 const router = express.Router()
 
 // Every path we define here will get /api/v1/products prefix
 router.get('/', productController.findAll)
-// router.get('/', verifyAuth, productController.findAll)
 router.get('/:productId', productController.findById)
-
-// TODO: Add autentication for the next endpoints
-router.put('/:productId', productController.update)
-router.delete('/:productId', productController._delete)
-router.post('/', productController.create)
+router.put(
+  '/:productId',
+  verifyAuth,
+  verifyPermission,
+  productController.update
+)
+router.delete(
+  '/:productId',
+  verifyAuth,
+  verifyPermission,
+  productController._delete
+)
+router.post('/', verifyAuth, verifyPermission, productController.create)
 
 export default router

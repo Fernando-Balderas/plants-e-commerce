@@ -25,6 +25,7 @@ type Payload = {
 }
 
 // TODO: Have a whitelist of admins
+
 function isAdmin(domain: string) {
   if (domain !== 'integrify.io') return false
   return true
@@ -53,6 +54,7 @@ function googleLoginStrategy() {
             lastname: parsedToken.payload.family_name,
             email: parsedToken.payload.email,
             role: isAdmin(parsedToken.payload.hd) ? 'ADMIN' : 'USER',
+            // TODO: picture: parsedToken.payload.picture
           } as UserDocument
 
           const newUser = new User(user)
