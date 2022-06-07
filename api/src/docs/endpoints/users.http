@@ -14,7 +14,6 @@ Content-Type: application/json
 {
   "name": "Alex",
   "lastname": "Doe",
-  "email": "alex.doe@mail.com"
 }
 
 ### Ban/Unban user
@@ -47,15 +46,15 @@ Content-Type: application/json
 
 ### Update password with token
 
-PUT http://localhost:5000/api/v1/users/6294f9c3e116f67786ea47fc/password HTTP/1.1
+PUT http://localhost:5000/api/v1/users/password-reset HTTP/1.1
 Content-Type: application/json
 
 {
-  "resetToken": "62961bea4204a44c66351859",
+  "resetToken": "ca8e607bcca3238a5df6c40153615723932b0517beba3105410094d04d67447adf7de7fbe68a92bfa8b1f5040abb86dc559e714d685b5f723ad3f3d7e9028aba",
   "newPassword": "password-reseted"
 }
 
-###
+### Create user
 
 POST http://localhost:5000/api/v1/users/signup HTTP/1.1
 Content-Type: application/json
@@ -68,7 +67,7 @@ Content-Type: application/json
   "role": "ADMIN"
 }
 
-###
+### Login user
 
 POST http://localhost:5000/api/v1/users/login HTTP/1.1
 Content-Type: application/json

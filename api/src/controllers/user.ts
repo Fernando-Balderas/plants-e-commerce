@@ -1,27 +1,26 @@
 import { Request, Response, NextFunction } from 'express'
-import mongoose from 'mongoose'
-import jwt from 'jsonwebtoken'
 
 import User, { UserDocument } from '../models/User'
 import userService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
-import timeConstantCompare from '../util/timeConstantCompare'
-import { JWT_SECRET } from '../util/secrets'
-import { PartialUser } from 'user'
+import { timeConstantCompare } from '../util/password'
+import { cryptoHexHash, isHashMatch, toHash } from '../util/hashing'
+import { createJwtToken } from '../util/jwt'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, lastname, email, password, role } = req.body
+    const hashedPassword = await toHash(password)
     const user = new User({
       name,
       lastname,
       email,
-      password,
+      password: hashedPassword,
       role,
     })
     await userService.create(user)
-    delete user.password
-    res.json(user)
+    user.password = undefined
+    res.status(201).json({ message: 'User created' })
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -77,21 +76,18 @@ const updatePassword = async (
   next: NextFunction
 ) => {
   try {
-    const { oldPassword, newPassword, resetToken } = req.body
-    const update = { password: newPassword }
+    const { oldPassword, newPassword } = req.body
     const userId = req.params.userId
     const user = await userService.findById(userId)
 
-    if (resetToken) {
-      if (!(await timeConstantCompare(resetToken, user.resetPasswordToken)))
-        throw new BadRequestError('Invalid token')
-    } else if (user.password) {
-      if (oldPassword === newPassword)
-        throw new BadRequestError('Invalid inputs')
-      if (!(await timeConstantCompare(oldPassword, user.password)))
+    const match = await isHashMatch(oldPassword, user.password || '')
+    if (match) {
+      if (!timeConstantCompare(oldPassword, newPassword))
         throw new BadRequestError('Invalid inputs')
     }
 
+    const hashedPassword = await toHash(newPassword)
+    const update = { password: hashedPassword }
     await userService.update(userId, update)
     res.status(204).end()
   } catch (error) {
@@ -109,15 +105,23 @@ const resetPassword = async (
   next: NextFunction
 ) => {
   try {
-    const { email } = req.body
-    const token = new mongoose.Types.ObjectId().toHexString()
-    const update = { resetPasswordToken: token }
-    const user = await userService.findByEmail(email)
-    // const subject = 'Reset password'
-    // const text = `To set a new password please follow the link. ${process.env.SERVER_PASS_URL}?id=${user._id}&token=${token}`
-    // sendCustomEmail(email, subject, text)
-    await userService.update(user._id, update)
-    res.status(202).json({ message: 'Reset token created', token })
+    const { email, resetToken, newPassword } = req.body
+    if (email) {
+      const token = cryptoHexHash(new Date().toString(), 'sha512')
+      const update = { resetPasswordToken: token }
+      const user = await userService.findByEmail(email)
+      // const subject = 'Reset password'
+      // const text = `To set a new password please follow the link. ${process.env.SERVER_PASS_URL}?id=${user._id}&token=${token}`
+      // sendCustomEmail(email, subject, text)
+      await userService.update(user._id, update)
+      res.status(202).json({ message: 'Reset token created', token })
+    } else if (resetToken) {
+      const user = await userService.findByResetToken(email)
+      const hashedPassword = await toHash(newPassword)
+      const update = { password: hashedPassword, resetPasswordToken: '' }
+      await userService.update(user._id, update)
+      res.status(204).end()
+    }
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -143,13 +147,7 @@ const _delete = async (req: Request, res: Response, next: NextFunction) => {
 const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as UserDocument
-    const payload: PartialUser = {
-      email: user.email,
-      role: user.role,
-    }
-    const token = jwt.sign(payload, JWT_SECRET, {
-      expiresIn: '1h',
-    })
+    const token = createJwtToken(user)
     res.json({ token })
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -163,7 +161,7 @@ const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
 const findById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await userService.findById(req.params.userId)
-    delete user.password
+    user.password = undefined
     res.json(user)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -181,9 +179,12 @@ const findByEmailAndPassword = async (
 ) => {
   try {
     const { email, password } = req.body
-    const user = await userService.findByEmailAndPassword(email, password)
-    delete user.password
-    res.json(user)
+    const user = await userService.findByEmail(email)
+    const match = await isHashMatch(password, user.password || '')
+    if (!match) throw new BadRequestError('TESTING ERROR')
+    user.password = undefined
+    const token = createJwtToken(user)
+    res.json({ token })
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

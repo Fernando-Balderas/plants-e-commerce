@@ -35,24 +35,20 @@ const findByEmailOrNull = async (
   return await User.findOne({ email })
 }
 
-const findByEmailAndPassword = async (
-  email: string,
-  password: string
+const findByResetToken = async (
+  resetPasswordToken: string
 ): Promise<UserDocument> => {
-  const userFound = await User.findOne({
-    email,
-    password,
-  })
+  const userFound = await User.findOne({ resetPasswordToken })
 
   if (!userFound) {
-    throw new NotFoundError(`User ${email} not found`)
+    throw new NotFoundError(`Token ${resetPasswordToken} not found`)
   }
 
   return userFound
 }
 
 const findAll = async (): Promise<UserDocument[]> => {
-  return User.find().sort({ email: 1 })
+  return User.find({}, { password: 0 }).sort({ email: 1 })
 }
 
 const update = async (
@@ -85,7 +81,7 @@ export default {
   findById,
   findByEmail,
   findByEmailOrNull,
-  findByEmailAndPassword,
+  findByResetToken,
   findAll,
   update,
   _delete,
