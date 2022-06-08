@@ -11,3 +11,13 @@ export type User = {
   name: string
   role: string
 }
+
+export type Product = {
+  _id: string
+  name: string
+  description: string
+  price: number
+  categories: string[]
+  variants: string[]
+  sizes: string[]
+}
