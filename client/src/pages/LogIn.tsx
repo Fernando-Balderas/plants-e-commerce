@@ -26,11 +26,21 @@ function LogIn() {
         },
       }
     )
+    const apiToken: string = res.data.token || ''
+    await auth.login(apiToken)
 
-    const apiToken: string = res.data.token
-    auth.login(apiToken).then(() => {
-      history.replace(from)
-    })
+    const res2 = await axios.post(
+      'http://localhost:5000/api/v1/users/validate-token',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+        },
+      }
+    )
+    const user = res2.status === 200 ? res2.data : null
+    await auth.setUser(user)
+    history.replace(from)
   }
 
   return (
