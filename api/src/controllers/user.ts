@@ -210,6 +210,22 @@ export const findAll = async (
   }
 }
 
+const validateToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.json(req.user)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
 export default {
   create,
   updateProfile,
@@ -221,4 +237,5 @@ export default {
   findById,
   findByEmailAndPassword,
   findAll,
+  validateToken,
 }

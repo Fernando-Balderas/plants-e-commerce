@@ -28,5 +28,6 @@ router.post(
 )
 router.post('/login', userController.findByEmailAndPassword)
 router.post('/signup', userController.create)
+router.post('/validate-token', verifyAuth, userController.validateToken)
 
 export default router
