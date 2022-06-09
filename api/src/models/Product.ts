@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-delimiter-style */
-import mongoose, { Document } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 
 export type ProductDocument = Document & {
   name: string
@@ -8,31 +8,39 @@ export type ProductDocument = Document & {
   categories: string[]
   variants: string[]
   sizes: string[]
+  userId: string
 }
 
-const productSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    index: true,
+const productSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      index: true,
+    },
+    description: {
+      type: String,
+    },
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    categories: {
+      type: [String],
+    },
+    variants: {
+      type: [String],
+    },
+    sizes: {
+      type: [String],
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
-  description: {
-    type: String,
-  },
-  price: {
-    type: Number,
-    required: true,
-    min: 0,
-  },
-  categories: {
-    type: [String],
-  },
-  variants: {
-    type: [String],
-  },
-  sizes: {
-    type: [String],
-  },
-})
+  { timestamps: true }
+)
 
 export default mongoose.model<ProductDocument>('Product', productSchema)

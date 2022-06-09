@@ -1,12 +1,16 @@
-###
+### Get all
 
 GET http://localhost:5000/api/v1/orders HTTP/1.1
 
-###
+### Get user orders
+
+GET http://localhost:5000/api/v1/orders/user/629fbfe0993ae4b222872f6e HTTP/1.1
+
+### Get one by id
 
 GET http://localhost:5000/api/v1/orders/628bc689b18bcd1f0a2a520b HTTP/1.1
 
-###
+### Edit order
 
 PUT http://localhost:5000/api/v1/orders HTTP/1.1
 Content-Type: application/json
@@ -15,7 +19,7 @@ Content-Type: application/json
   "products": ["628a8020ef535926d3cb4786", "628a8020ef535926d3cb4786"]
 }
 
-###
+### Create order
 
 POST http://localhost:5000/api/v1/orders HTTP/1.1
 Content-Type: application/json
@@ -23,10 +27,10 @@ Content-Type: application/json
 {
   "total": "500",
   "status": "PENDING",
-  "userId": "6287dba664e931cb46c9d0a0",
+  "userId": "629fbfe0993ae4b222872f6e",
   "products": ["628a8020ef535926d3cb4786"]
 }
 
-###
+### Delete order
 
 DELETE http://localhost:5000/api/v1/orders/628bc0b7b18bcd1f0a2a5201 HTTP/1.1

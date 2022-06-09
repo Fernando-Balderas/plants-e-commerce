@@ -22,6 +22,10 @@ const findAll = async (): Promise<OrderDocument[]> => {
   return Order.find().sort({ total: -1 })
 }
 
+const findUserOrders = async (userId: string): Promise<OrderDocument[]> => {
+  return Order.find({ userId }).sort({ createdAt: -1 })
+}
+
 const update = async (
   orderId: string,
   update: Partial<OrderDocument>
@@ -51,6 +55,7 @@ export default {
   create,
   findById,
   findAll,
+  findUserOrders,
   update,
   _delete,
 }

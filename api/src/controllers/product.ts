@@ -4,10 +4,12 @@ import Product from '../models/Product'
 import productService from '../services/product'
 import { BadRequestError } from '../helpers/apiError'
 import { ProductsFindAllFilter, ProductsSortOrder } from 'product'
+import { PartialUser } from 'user'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, description, price, categories, variants, sizes } = req.body
+    const { _id } = req.user as PartialUser
 
     const product = new Product({
       name,
@@ -16,6 +18,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
       categories,
       variants,
       sizes,
+      userId: _id,
     })
 
     await productService.create(product)
@@ -95,10 +98,29 @@ const findAll = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
+const findUserProducts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { userId } = req.params
+    const results = await productService.findUserProducts(userId)
+    res.json(results)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
 export default {
   create,
   update,
   _delete,
   findById,
   findAll,
+  findUserProducts,
 }

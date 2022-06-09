@@ -80,10 +80,29 @@ const findAll = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
+const findUserOrders = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { userId } = req.params
+    const results = await orderService.findUserOrders(userId)
+    res.json(results)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
 export default {
   create,
   update,
   _delete,
   findById,
   findAll,
+  findUserOrders,
 }

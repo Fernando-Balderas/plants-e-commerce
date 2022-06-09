@@ -8,6 +8,7 @@ const router = express.Router()
 
 // Every path we define here will get /api/v1/products prefix
 router.get('/', productController.findAll)
+router.get('/user/:userId', productController.findUserProducts)
 router.get('/:productId', productController.findById)
 router.put(
   '/:productId',

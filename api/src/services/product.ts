@@ -25,6 +25,10 @@ const findAll = async (
   return Product.find(filter).sort(sort).skip(offset).limit(limit)
 }
 
+const findUserProducts = async (userId: string): Promise<ProductDocument[]> => {
+  return Product.find({ userId }).sort({ createdAt: -1 })
+}
+
 const update = async (
   productId: string,
   update: Partial<ProductDocument>
@@ -54,6 +58,7 @@ export default {
   create,
   findById,
   findAll,
+  findUserProducts,
   update,
   _delete,
 }

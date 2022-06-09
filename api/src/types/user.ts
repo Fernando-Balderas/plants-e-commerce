@@ -1,3 +1,5 @@
+import { UserDocument } from '../models/User'
+
 export enum Role {
   ADMIN = 'ADMIN',
   USER = 'USER',
@@ -8,10 +10,9 @@ export enum UserStatus {
   BANNED = 'BANNED',
 }
 
-export type PartialUser = Partial<{
-  name: string
-  lastname: string
-  email: string
-  role: Role
-  status: UserStatus
-}>
+export type PartialUser = Partial<
+  {
+    _id: string
+    picture: string
+  } & UserDocument
+>

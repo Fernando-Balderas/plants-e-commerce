@@ -9,27 +9,30 @@ export type OrderDocument = Document & {
   products: string[]
 }
 
-const orderSchema = new mongoose.Schema({
-  total: {
-    type: Number,
-    required: true,
-    min: 0,
-  },
-  status: {
-    type: String,
-    enum: Object.values(PaymentStatus),
-    default: PaymentStatus.PENDING,
-  },
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
-  products: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Product',
+const orderSchema = new mongoose.Schema(
+  {
+    total: {
+      type: Number,
+      required: true,
+      min: 0,
     },
-  ],
-})
+    status: {
+      type: String,
+      enum: Object.values(PaymentStatus),
+      default: PaymentStatus.PENDING,
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    products: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+      },
+    ],
+  },
+  { timestamps: true }
+)
 
 export default mongoose.model<OrderDocument>('Order', orderSchema)

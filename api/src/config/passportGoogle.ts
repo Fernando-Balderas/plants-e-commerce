@@ -58,7 +58,8 @@ function googleLoginStrategy() {
           } as UserDocument
 
           const newUser = new User(user)
-          await UserService.create(newUser)
+          const savedUser = await UserService.create(newUser)
+          user._id = savedUser._id
         }
         // Append user object to req.user
         done(null, user)
