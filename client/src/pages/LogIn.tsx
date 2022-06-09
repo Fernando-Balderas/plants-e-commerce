@@ -1,8 +1,8 @@
 import React from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
-import axios from 'axios'
 
+import axios from '../helpers/axios'
 import useAuth from '../hooks/useAuth'
 import { LocationState } from '../types/types'
 import { GOOGLE_CLIENT_ID } from '../util/secrets'
@@ -18,7 +18,7 @@ function LogIn() {
     const googleToken = googleResponse.credential
 
     const res = await axios.post(
-      'http://localhost:5000/api/v1/users/google-login',
+      '/users/google-login',
       {},
       {
         headers: {
@@ -30,7 +30,7 @@ function LogIn() {
     await auth.login(apiToken)
 
     const res2 = await axios.post(
-      'http://localhost:5000/api/v1/users/validate-token',
+      '/users/validate-token',
       {},
       {
         headers: {

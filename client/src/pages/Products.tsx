@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 
+import axios from '../helpers/axios'
 import useAuth from '../hooks/useAuth'
 import Can from '../helpers/Can'
 import { Product } from '../types/types'
@@ -15,14 +15,11 @@ function Products() {
   useEffect(() => {
     const handleGetProducts = async () => {
       try {
-        const response = await axios.get(
-          'http://localhost:5000/api/v1/products',
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
+        const response = await axios.get('/products', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
         console.log('response:', response.data)
         setProducts(response.data)
       } catch (error: any) {
@@ -35,15 +32,11 @@ function Products() {
   const handleNewProduct = async (data: any) => {
     console.log('data ', data)
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/v1/products',
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      const response = await axios.post('/products', data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       console.log('response:', response.data)
     } catch (error: any) {
       console.log('error:', error.response.data)
