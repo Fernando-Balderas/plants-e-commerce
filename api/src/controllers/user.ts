@@ -148,7 +148,7 @@ const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as UserDocument
     const token = createJwtToken(user)
-    res.json({ token })
+    res.json({ token, user })
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

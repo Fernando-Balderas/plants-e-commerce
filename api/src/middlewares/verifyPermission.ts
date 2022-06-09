@@ -11,8 +11,6 @@ export default function verifyPermission(
   next: NextFunction
 ) {
   try {
-    console.log('into verifyPermission ', req.method)
-    console.log('user ', req.user)
     const { role } = req.user as PartialUser
     if (!hasPermission(role as Role, req.method as Method)) throw new Error()
     next()
