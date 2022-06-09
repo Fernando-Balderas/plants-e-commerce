@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store/store'
 import { User } from '../../types/types'
-import { fetchUsers } from './usersAPI'
+import axios from '../../helpers/axios/instance'
 
 export interface UsersState {
   users: User[]
@@ -19,7 +19,7 @@ const initialState: UsersState = {
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
 export const loadUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await fetchUsers()
+  const response = await axios.get('/users')
   // The value we return becomes the `fulfilled` action payload
   return response.data
 })

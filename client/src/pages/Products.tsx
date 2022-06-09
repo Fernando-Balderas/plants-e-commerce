@@ -15,11 +15,7 @@ function Products() {
   useEffect(() => {
     const handleGetProducts = async () => {
       try {
-        const response = await axios.get('/products', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
+        const response = await axios.get('/products')
         console.log('response:', response.data)
         setProducts(response.data)
       } catch (error: any) {
@@ -32,11 +28,7 @@ function Products() {
   const handleNewProduct = async (data: any) => {
     console.log('data ', data)
     try {
-      const response = await axios.post('/products', data, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+      const response = await axios.post('/products', data)
       console.log('response:', response.data)
     } catch (error: any) {
       console.log('error:', error.response.data)

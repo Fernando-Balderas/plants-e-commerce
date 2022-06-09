@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 import { Children, User } from '../types/types'
+import { LOCALSTORAGE_TOKEN, LOCALSTORAGE_USER } from '../util/constants'
 
 type UserOrNull = Partial<User> | null
 
@@ -28,6 +29,15 @@ function useAuth() {
   const [accessToken, setAccessToken] = useState('')
   const [user, setUser] = useState<UserOrNull>(null)
 
+  const token = localStorage.getItem(LOCALSTORAGE_TOKEN)
+  const userStr = localStorage.getItem(LOCALSTORAGE_USER)
+  const parsedUser = userStr ? JSON.parse(userStr) : null
+  if (token && !accessToken) {
+    setAuthed(true)
+    setAccessToken(token)
+    setUser(parsedUser)
+  }
+
   return {
     authed,
     accessToken,
@@ -36,6 +46,7 @@ function useAuth() {
       return new Promise<void>((res) => {
         setAccessToken(token)
         setAuthed(true)
+        localStorage.setItem(LOCALSTORAGE_TOKEN, token)
         res()
       })
     },
@@ -44,12 +55,15 @@ function useAuth() {
         setAccessToken('')
         setUser(null)
         setAuthed(false)
+        localStorage.removeItem(LOCALSTORAGE_TOKEN)
+        localStorage.removeItem(LOCALSTORAGE_USER)
         res()
       })
     },
     setUser(user: UserOrNull) {
       return new Promise<void>((res) => {
         setUser(user)
+        localStorage.setItem(LOCALSTORAGE_USER, JSON.stringify(user))
         res()
       })
     },

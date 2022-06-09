@@ -1,11 +1,14 @@
 import axios from 'axios'
-import { API_URL } from '../../util/secrets'
+import { API_BASE_URL } from '../../util/secrets'
+import { LOCALSTORAGE_TOKEN } from '../../util/constants'
 
 const instance = axios.create({
-  baseURL: API_URL,
+  baseURL: API_BASE_URL,
+  timeout: 60000,
 })
 
-// instance.defaults.headers.common['Authorization'] = AUTH_TOKEN
+const token = localStorage.getItem(LOCALSTORAGE_TOKEN)
+if (token) instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
 instance.interceptors.request.use(
   (config) => {
@@ -14,6 +17,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     // Do something with request error
+    console.log('req error ', error)
     return Promise.reject(error)
   }
 )

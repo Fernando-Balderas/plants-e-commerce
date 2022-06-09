@@ -13,6 +13,8 @@ function LogIn() {
   const auth = useAuth()
   const { from } = location.state || { from: { pathname: '/' } }
 
+  if (auth.authed) history.replace(from)
+
   const handleSignUp = async (googleResponse: any) => {
     console.log('googleResponse:', googleResponse)
     const googleToken = googleResponse.credential
@@ -29,16 +31,7 @@ function LogIn() {
     const apiToken: string = res.data.token || ''
     await auth.login(apiToken)
 
-    const res2 = await axios.post(
-      '/users/validate-token',
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${apiToken}`,
-        },
-      }
-    )
-    const user = res2.status === 200 ? res2.data : null
+    const user = res.status === 200 ? res.data.user : null
     await auth.setUser(user)
     history.replace(from)
   }
