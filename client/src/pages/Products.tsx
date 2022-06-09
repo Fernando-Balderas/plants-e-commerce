@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import useAuth from '../hooks/useAuth'
-import Can from '../components/Can'
+import Can from '../helpers/Can'
 import { Product } from '../types/types'
 import ProductForm from '../components/product/Form'
 import { Link } from 'react-router-dom'

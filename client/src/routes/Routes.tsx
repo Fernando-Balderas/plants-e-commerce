@@ -9,7 +9,7 @@ import Checkout from '../pages/Checkout'
 import NotFound from '../pages/NotFound'
 import LogIn from '../pages/LogIn'
 import SignUp from '../pages/SignUp'
-import PrivateRoute from './PrivateRoute'
+import PrivateRoute from '../helpers/PrivateRoute'
 
 const Routes = () => {
   let location = useLocation()
