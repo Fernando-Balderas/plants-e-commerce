@@ -5,7 +5,7 @@ import { store } from './store/store'
 import { AuthProvider } from './hooks/useAuth'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
-import './index.css'
+import './assets/sass/index.scss'
 import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(

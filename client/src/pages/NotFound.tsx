@@ -12,7 +12,7 @@ function NotFound() {
         <h2 className="not-found__subtitle">
           <code>{location.pathname}</code> not found
         </h2>
-        <button className="not-found__go-back" onClick={handleClick}>
+        <button className="not-found__button" onClick={handleClick}>
           Take me home!
         </button>
       </section>
