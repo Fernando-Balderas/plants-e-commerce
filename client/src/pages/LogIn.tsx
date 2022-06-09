@@ -2,7 +2,7 @@ import React from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 
-import axios from '../helpers/axios'
+import axios from '../helpers/axios/instance'
 import useAuth from '../hooks/useAuth'
 import { LocationState } from '../types/types'
 import { GOOGLE_CLIENT_ID } from '../util/secrets'

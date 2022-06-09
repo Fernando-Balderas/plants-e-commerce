@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import axios from '../helpers/axios'
+import axios from '../helpers/axios/instance'
 import useAuth from '../hooks/useAuth'
 import Can from '../helpers/Can'
 import { Product } from '../types/types'

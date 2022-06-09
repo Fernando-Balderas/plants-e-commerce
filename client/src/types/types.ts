@@ -7,9 +7,12 @@ export type LocationState = {
 }
 
 export type User = {
-  email: string
+  _id: string
   name: string
+  lastname: string
+  email: string
   role: string
+  status: string
 }
 
 export type Product = {
