@@ -1,9 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-function Form({ handleNewProduct }: any) {
-  console.log('func ', handleNewProduct)
-  console.log('func ', typeof handleNewProduct)
+function Form({ handleNewProduct, handleCancelProduct }: any) {
   const {
     register,
     handleSubmit,
@@ -24,6 +22,9 @@ function Form({ handleNewProduct }: any) {
           <input type="text" {...register('price', { required: true })} />
           {errors.price && <span>This field is required</span>}
         </div>
+        <button type="button" onClick={handleCancelProduct}>
+          Cancel
+        </button>
         <button type="submit">Submit</button>
       </fieldset>
     </form>

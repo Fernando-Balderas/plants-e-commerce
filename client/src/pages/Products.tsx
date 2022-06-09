@@ -44,6 +44,8 @@ function Products() {
     setShowForm(false)
   }
 
+  const handleCancelProduct = () => setShowForm(false)
+
   return (
     <>
       <h1>Products page</h1>
@@ -56,7 +58,12 @@ function Products() {
         />
       )}
 
-      {showForm && <ProductForm handleNewProduct={handleNewProduct} />}
+      {showForm && (
+        <ProductForm
+          handleNewProduct={handleNewProduct}
+          handleCancelProduct={handleCancelProduct}
+        />
+      )}
 
       <ul>
         {products.length > 0 &&
