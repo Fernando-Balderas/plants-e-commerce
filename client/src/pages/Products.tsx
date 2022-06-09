@@ -4,7 +4,8 @@ import axios from 'axios'
 import useAuth from '../hooks/useAuth'
 import Can from '../components/Can'
 import { Product } from '../types/types'
-import ProductForm from '../components/ProductForm'
+import ProductForm from '../components/product/Form'
+import { Link } from 'react-router-dom'
 
 function Products() {
   const { accessToken } = useAuth()
@@ -53,19 +54,25 @@ function Products() {
   return (
     <>
       <h1>Products page</h1>
-      <Can
-        perform="products:create"
-        yes={() => (
-          <button onClick={() => setShowForm(true)}>New Product</button>
-        )}
-      />
+      {!showForm && (
+        <Can
+          perform="products:create"
+          yes={() => (
+            <button onClick={() => setShowForm(true)}>New Product</button>
+          )}
+        />
+      )}
 
       {showForm && <ProductForm handleNewProduct={handleNewProduct} />}
 
       <ul>
         {products.length > 0 &&
           products.map((product) => (
-            <li key={product._id}>{`${product.name} - ${product.price}`}</li>
+            <li key={product._id}>
+              <Link
+                to={`/product/${product._id}`}
+              >{`${product.name} - ${product.price}`}</Link>
+            </li>
           ))}
       </ul>
     </>

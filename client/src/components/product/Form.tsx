@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-function ProductForm({ handleNewProduct }: any) {
+function Form({ handleNewProduct }: any) {
   console.log('func ', handleNewProduct)
   console.log('func ', typeof handleNewProduct)
   const {
@@ -30,4 +30,4 @@ function ProductForm({ handleNewProduct }: any) {
   )
 }
 
-export default ProductForm
+export default Form
