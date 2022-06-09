@@ -13,13 +13,23 @@ export const rbacRules: Rules = {
       'products:create',
       'products:edit',
       'products:delete',
+      'orders:get',
+      'orders:create',
+      'orders:edit',
+      'orders:delete',
       'users:get',
       'users:edit',
     ],
   },
   USER: {
     view: ['home', 'products', 'orders'],
-    actions: [],
+    actions: [
+      'products:get',
+      'orders:get',
+      'orders:create',
+      'orders:edit',
+      'orders:delete',
+    ],
   },
 }
 

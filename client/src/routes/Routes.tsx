@@ -10,6 +10,8 @@ import NotFound from '../pages/NotFound'
 import LogIn from '../pages/LogIn'
 import SignUp from '../pages/SignUp'
 import PrivateRoute from '../helpers/PrivateRoute'
+import Orders from '../pages/Orders'
+import Users from '../pages/Users'
 
 const Routes = () => {
   let location = useLocation()
@@ -20,6 +22,12 @@ const Routes = () => {
       <Route exact path="/product/:productId" component={ProductDetail} />
       <PrivateRoute exact path="/product/:productId/edit">
         <EditProduct />
+      </PrivateRoute>
+      <PrivateRoute exact path="/orders">
+        <Orders />
+      </PrivateRoute>
+      <PrivateRoute exact path="/users">
+        <Users />
       </PrivateRoute>
       <Route exact path="/checkout" component={Checkout} />
       <Route exact path="/login" component={LogIn} />
