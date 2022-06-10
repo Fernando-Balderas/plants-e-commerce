@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
-import { fetchProducts, selectProducts } from './productsSlice'
+import { deleteProduct, fetchProducts, selectProducts } from './productsSlice'
 
 function Products() {
   const dispatch = useStoreDispatch()
@@ -21,7 +21,7 @@ function Products() {
             <button onClick={() => console.log('edit product clicked')}>
               Edit
             </button>
-            <button onClick={() => console.log('delete product clicked')}>
+            <button onClick={() => dispatch(deleteProduct(product._id))}>
               Delete
             </button>
           </li>

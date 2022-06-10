@@ -31,6 +31,15 @@ export const createProduct = createAsyncThunk(
   }
 )
 
+export const deleteProduct = createAsyncThunk(
+  'products/deleteProduct',
+  async (productId: string) => {
+    await axios.delete(`/products/${productId}`)
+    // The value we return becomes the `fulfilled` action payload
+    return productId
+  }
+)
+
 export const productsSlice = createSlice({
   name: 'products',
   initialState,
@@ -55,6 +64,19 @@ export const productsSlice = createSlice({
         state.status = 'idle'
       })
       .addCase(createProduct.rejected, (state) => {
+        state.status = 'failed'
+      })
+      .addCase(deleteProduct.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        const index = state.products.findIndex(
+          (product) => product._id === action.payload
+        )
+        if (index > -1) state.products.splice(index, 1)
+        state.status = 'idle'
+      })
+      .addCase(deleteProduct.rejected, (state) => {
         state.status = 'failed'
       })
   },
