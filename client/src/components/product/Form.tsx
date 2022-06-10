@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-function Form({ handleNewProduct, handleCancelProduct }: any) {
+function Form({ title, handleNewProduct, handleCancelProduct }: any) {
   const {
     register,
     handleSubmit,
@@ -11,7 +11,7 @@ function Form({ handleNewProduct, handleCancelProduct }: any) {
   return (
     <form onSubmit={handleSubmit(handleNewProduct)}>
       <fieldset>
-        <legend>Product Form</legend>
+        <legend>{title}</legend>
         <div>
           <label htmlFor="name">Name</label>
           <input type="text" {...register('name', { required: true })} />

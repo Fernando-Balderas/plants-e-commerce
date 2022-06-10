@@ -29,6 +29,7 @@ function LogIn() {
       }
     )
     const apiToken: string = res.data.token || ''
+    console.log('apiToken:', apiToken)
     await auth.login(apiToken)
 
     const user = res.status === 200 ? res.data.user : null
