@@ -1,12 +1,22 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { createProduct } from '../../features/products/productsSlice'
+import { useStoreDispatch } from '../../store/hooks'
 
-function Form({ title, handleNewProduct, handleCancelProduct }: any) {
+function Form({ title, setShowForm }: any) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
+  const dispatch = useStoreDispatch()
+
+  const handleNewProduct = (data: any) => {
+    dispatch(createProduct(data))
+    setShowForm(false)
+  }
+
+  const handleCancelProduct = () => setShowForm(false)
 
   return (
     <form onSubmit={handleSubmit(handleNewProduct)}>

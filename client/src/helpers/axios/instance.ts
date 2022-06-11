@@ -2,17 +2,27 @@ import axios from 'axios'
 import { API_BASE_URL } from '../../util/secrets'
 import { LOCALSTORAGE_TOKEN } from '../../util/constants'
 
+type Config = {
+  headers?: {
+    common?: {
+      Authorization?: string
+    }
+  }
+}
+
 const instance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 60000,
 })
 
-const token = localStorage.getItem(LOCALSTORAGE_TOKEN)
-if (token) instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
-
 instance.interceptors.request.use(
-  (config) => {
+  (config: Config) => {
     // Do something before request is sent
+    if (!config.headers?.common?.['Authorization']) {
+      const token = localStorage.getItem(LOCALSTORAGE_TOKEN)
+      if (token)
+        instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    }
     return config
   },
   (error) => {
