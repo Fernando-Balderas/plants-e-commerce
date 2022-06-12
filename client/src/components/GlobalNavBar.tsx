@@ -14,9 +14,14 @@ function GlobalNavBar() {
         <li>
           <Link to="/products">Products</Link>
         </li>
-        <li>
-          <Link to="/orders">Orders</Link>
-        </li>
+        <Can
+          perform="orders"
+          yes={() => (
+            <li>
+              <Link to="/orders">Orders</Link>
+            </li>
+          )}
+        />
         <Can
           perform="users"
           yes={() => (
