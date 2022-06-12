@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+
+import Can from '../../helpers/Can'
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
 import { addToCart, removeFromCart, selectCart } from '../cart/cartSlice'
 import {
@@ -40,13 +42,20 @@ function Products() {
             <Link
               to={`/product/${product._id}`}
             >{`${product.name} - ${product.price}`}</Link>
-            {cartButton(product, cart)}
-            <button onClick={() => dispatch(setEditingProduct(product))}>
-              Edit
-            </button>
-            <button onClick={() => dispatch(deleteProduct(product._id))}>
-              Delete
-            </button>
+            <Can
+              perform="products:edit"
+              yes={() => (
+                <>
+                  {cartButton(product, cart)}
+                  <button onClick={() => dispatch(setEditingProduct(product))}>
+                    Edit
+                  </button>
+                  <button onClick={() => dispatch(deleteProduct(product._id))}>
+                    Delete
+                  </button>
+                </>
+              )}
+            />
           </li>
         ))}
     </ul>
