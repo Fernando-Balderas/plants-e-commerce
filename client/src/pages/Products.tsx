@@ -1,3 +1,5 @@
+import Button from 'react-bootstrap/Button'
+
 import Can from '../helpers/Can'
 import ProductForm from '../components/product/Form'
 import ProductsList from '../features/products/Products'
@@ -15,9 +17,13 @@ function Products() {
         <Can
           perform="products:create"
           yes={() => (
-            <button onClick={() => dispatch(setShowForm(true))}>
+            <Button
+              variant="success"
+              className="mx-1"
+              onClick={() => dispatch(setShowForm(true))}
+            >
               New Product
-            </button>
+            </Button>
           )}
         />
       )}

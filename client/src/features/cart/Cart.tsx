@@ -95,7 +95,7 @@ function Cart() {
       <Alert variant="light" className="m-0 cart-footer">
         <p className="cart-footer__text">Total: {total}</p>
         <Button
-          variant="outline-success"
+          variant="success"
           className="m-0 card-footer__button"
           onClick={handlePlaceOrder}
           // onClick={() => console.log('place order clicked')}

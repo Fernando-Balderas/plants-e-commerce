@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
+import Button from 'react-bootstrap/Button'
+
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
-import { User } from '../../types/types'
 import { loadUsers, selectUsers, updateUserStatus } from './usersSlice'
+import { User } from '../../types/types'
 
 function Users() {
   const dispatch = useStoreDispatch()
@@ -21,10 +23,15 @@ function Users() {
       {users.length > 0 &&
         users.map((user) => (
           <li key={user._id}>
-            <p>{`${user.name} - ${user.lastname}`}</p>
-            <button onClick={() => handleUpdateStatus(user)}>
+            <p>{`${user.name} ${user.lastname} - ${user.email}`}</p>
+            <Button
+              variant="outline-danger"
+              className="mx-1"
+              aria-label="Remove product"
+              onClick={() => handleUpdateStatus(user)}
+            >
               {banMessage(user.status)}
-            </button>
+            </Button>
           </li>
         ))}
     </ul>

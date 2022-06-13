@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+import { BiEdit } from 'react-icons/bi'
+import { RiDeleteBin6Line } from 'react-icons/ri'
 
 import Can from '../../helpers/Can'
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
@@ -31,7 +34,16 @@ function Products() {
       fn = () => dispatch(removeFromCart(product._id))
       msg = 'Remove from cart'
     }
-    return <button onClick={fn}>{msg}</button>
+    return (
+      <Button
+        variant="outline-success"
+        className="mx-1"
+        aria-label="Add product"
+        onClick={fn}
+      >
+        {msg}
+      </Button>
+    )
   }
 
   return (
@@ -47,12 +59,22 @@ function Products() {
               yes={() => (
                 <>
                   {cartButton(product, cart)}
-                  <button onClick={() => dispatch(setEditingProduct(product))}>
-                    Edit
-                  </button>
-                  <button onClick={() => dispatch(deleteProduct(product._id))}>
-                    Delete
-                  </button>
+                  <Button
+                    variant="outline-warning"
+                    className="mx-1"
+                    aria-label="Edit product"
+                    onClick={() => dispatch(setEditingProduct(product))}
+                  >
+                    <BiEdit size="1.2em" />
+                  </Button>
+                  <Button
+                    variant="outline-danger"
+                    className="mx-1"
+                    aria-label="Remove product"
+                    onClick={() => dispatch(deleteProduct(product._id))}
+                  >
+                    <RiDeleteBin6Line size="1.2em" />
+                  </Button>
                 </>
               )}
             />

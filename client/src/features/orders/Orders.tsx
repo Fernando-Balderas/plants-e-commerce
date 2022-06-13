@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+import { BiEdit } from 'react-icons/bi'
 
 import Can from '../../helpers/Can'
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
@@ -23,9 +25,14 @@ function Orders() {
             <Can
               perform="orders:edit"
               yes={() => (
-                <button onClick={() => dispatch(setEditingOrder(order))}>
-                  Edit
-                </button>
+                <Button
+                  variant="outline-warning"
+                  className="mx-1"
+                  aria-label="Edit order"
+                  onClick={() => dispatch(setEditingOrder(order))}
+                >
+                  <BiEdit size="1.2em" />
+                </Button>
               )}
             />
           </li>
