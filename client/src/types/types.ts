@@ -24,3 +24,18 @@ export type Product = {
   variants: string[]
   sizes: string[]
 }
+
+export enum PaymentStatus {
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  DECLINED = 'DECLINED',
+}
+
+export type Order = {
+  _id: string
+  total: number
+  status: PaymentStatus
+  userId: string
+  products: string[]
+  createdAt: any
+}

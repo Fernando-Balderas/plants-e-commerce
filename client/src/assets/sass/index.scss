@@ -42,3 +42,27 @@ code {
     cursor: pointer;
   }
 }
+
+.cart-card {
+  display: flex;
+  &__body {
+    margin-left: auto;
+  }
+  &__price {
+    margin-right: 1em;
+  }
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  &__text {
+    margin: auto 0;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  &__button {
+    float: 'right';
+  }
+}

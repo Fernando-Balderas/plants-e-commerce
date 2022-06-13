@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store/store'
 import { Product } from '../../types/types'
-// import axios from '../../helpers/axios/instance'
 
 export interface CartState {
   cart: Product[]
@@ -14,12 +13,6 @@ const initialState: CartState = {
   status: 'idle',
   showCart: false,
 }
-
-// export const createOrder = createAsyncThunk('orders/createOrder', async (order: Partial<Order>) => {
-//   const response = await axios.post('/orders', order)
-//   // The value we return becomes the `fulfilled` action payload
-//   return response.data
-// })
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -37,23 +30,14 @@ export const cartSlice = createSlice({
     setShowCart: (state, action: PayloadAction<boolean>) => {
       state.showCart = action.payload
     },
+    clearCart: (state) => {
+      state.cart = []
+    },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(createOrder.pending, (state) => {
-  //       state.status = 'loading'
-  //     })
-  //     .addCase(createOrder.fulfilled, (state, action) => {
-  //       state.status = 'idle'
-  //       state.users = action.payload
-  //     })
-  //     .addCase(createOrder.rejected, (state) => {
-  //       state.status = 'failed'
-  //     })
-  // },
 })
 
-export const { addToCart, removeFromCart, setShowCart } = cartSlice.actions
+export const { addToCart, removeFromCart, setShowCart, clearCart } =
+  cartSlice.actions
 
 export const selectCart = (state: RootState) => state.cart.cart
 export const selectShowCart = (state: RootState) => state.cart.showCart

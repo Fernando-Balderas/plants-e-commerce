@@ -56,7 +56,11 @@ function UserOptions() {
           onClick={() => dispatch(setShowCart(!showCart))}
         >
           <BsCart2 size="1.6em" />
-          {cart.length > 0 && <Badge bg="danger">{cart.length}</Badge>}
+          {cart.length > 0 && (
+            <Badge pill bg="danger">
+              {cart.length}
+            </Badge>
+          )}
         </Nav.Link>
       </>
     )
