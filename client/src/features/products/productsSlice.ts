@@ -38,7 +38,6 @@ export const createProduct = createAsyncThunk(
 export const updateProduct = createAsyncThunk(
   'products/updateProduct',
   async (product: Partial<Product>) => {
-    console.log('product ', product)
     const response = await axios.put(`/products/${product._id}`, product)
     // The value we return becomes the `fulfilled` action payload
     return response.data

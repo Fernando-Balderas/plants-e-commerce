@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store/store'
 import { Product } from '../../types/types'
-import axios from '../../helpers/axios/instance'
+// import axios from '../../helpers/axios/instance'
 
 export interface CartState {
   cart: Product[]
@@ -15,8 +15,8 @@ const initialState: CartState = {
   showCart: false,
 }
 
-// export const loadUsers = createAsyncThunk('users/fetchUsers', async () => {
-//   const response = await axios.get('/users')
+// export const createOrder = createAsyncThunk('orders/createOrder', async (order: Partial<Order>) => {
+//   const response = await axios.post('/orders', order)
 //   // The value we return becomes the `fulfilled` action payload
 //   return response.data
 // })
@@ -34,23 +34,26 @@ export const cartSlice = createSlice({
       )
       if (index > -1) state.cart.splice(index, 1)
     },
+    setShowCart: (state, action: PayloadAction<boolean>) => {
+      state.showCart = action.payload
+    },
   },
   // extraReducers: (builder) => {
   //   builder
-  //     .addCase(loadUsers.pending, (state) => {
+  //     .addCase(createOrder.pending, (state) => {
   //       state.status = 'loading'
   //     })
-  //     .addCase(loadUsers.fulfilled, (state, action) => {
+  //     .addCase(createOrder.fulfilled, (state, action) => {
   //       state.status = 'idle'
   //       state.users = action.payload
   //     })
-  //     .addCase(loadUsers.rejected, (state) => {
+  //     .addCase(createOrder.rejected, (state) => {
   //       state.status = 'failed'
   //     })
   // },
 })
 
-export const { addToCart, removeFromCart } = cartSlice.actions
+export const { addToCart, removeFromCart, setShowCart } = cartSlice.actions
 
 export const selectCart = (state: RootState) => state.cart.cart
 export const selectShowCart = (state: RootState) => state.cart.showCart
