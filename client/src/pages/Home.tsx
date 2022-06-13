@@ -19,8 +19,7 @@ function Home() {
           <Alert variant="primary" className="home-product-card">
             <h2>Buy a box of fruit</h2>
             <p>
-              Buy the fruit of the season without any processing or storage
-              delay!
+              Buy the seasonal fruit without any processing or storage delay!
             </p>
             <Button variant="secondary">Buy</Button>
           </Alert>

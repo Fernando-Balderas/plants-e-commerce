@@ -4,7 +4,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import Nav from 'react-bootstrap/Nav'
 import Badge from 'react-bootstrap/Badge'
 import { CgUserList } from 'react-icons/cg'
-import { TbLogout } from 'react-icons/tb'
+import { TbLogout, TbLogin } from 'react-icons/tb'
 import { GoListUnordered } from 'react-icons/go'
 import { TbUsers } from 'react-icons/tb'
 import { BsCart2 } from 'react-icons/bs'
@@ -67,7 +67,7 @@ function UserOptions() {
 
   return (
     <Nav.Link onClick={() => history.push('/login')}>
-      <TbLogout size="1.3em" /> Log In
+      <TbLogin size="1.3em" /> Log In
     </Nav.Link>
   )
 }

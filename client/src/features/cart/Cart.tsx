@@ -82,7 +82,7 @@ function Cart() {
     >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title as="h2" id="cart-title">
-          Cart
+          Order
         </Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>

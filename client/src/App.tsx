@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import GlobalNavBar from './components/GlobalNavBar'
 import Routes from './routes/Routes'
 import Cart from './features/cart/Cart'
+import GlobalFooter from './components/GlobalFooter'
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Container fluid>
         <Routes />
       </Container>
-      {/* <GlobalFooter /> */}
+      <GlobalFooter />
     </>
   )
 }
