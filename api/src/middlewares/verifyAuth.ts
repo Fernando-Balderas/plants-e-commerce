@@ -16,6 +16,9 @@ export default function verifyAuth(
     req.user = user
     next()
   } catch (error) {
+    console.log('auth error ', error)
+    // TODO: Send expired token response
+    // TODO: Add refresh token endpoint
     throw new ForbiddenError()
   }
 }

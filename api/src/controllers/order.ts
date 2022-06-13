@@ -3,15 +3,17 @@ import { Request, Response, NextFunction } from 'express'
 import Order from '../models/Order'
 import orderService from '../services/order'
 import { BadRequestError } from '../helpers/apiError'
+import { PartialUser } from 'user'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { total, paymentStatus, userId, products } = req.body
+    const { total, paymentStatus, products } = req.body
+    const { _id } = req.user as PartialUser
 
     const order = new Order({
       total,
       paymentStatus,
-      userId,
+      userId: _id,
       products,
     })
 
