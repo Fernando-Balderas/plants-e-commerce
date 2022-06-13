@@ -73,3 +73,13 @@ code {
   align-items: center;
   margin: 0 1em;
 }
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > p {
+    margin: 0;
+    padding: 0;
+  }
+}

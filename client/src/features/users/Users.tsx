@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
@@ -19,10 +20,10 @@ function Users() {
   }
 
   return (
-    <ul>
+    <ListGroup>
       {users.length > 0 &&
         users.map((user) => (
-          <li key={user._id}>
+          <ListGroup.Item as="li" key={user._id} className="list-group-item">
             <p>{`${user.name} ${user.lastname} - ${user.email}`}</p>
             <Button
               variant="outline-danger"
@@ -32,9 +33,9 @@ function Users() {
             >
               {banMessage(user.status)}
             </Button>
-          </li>
+          </ListGroup.Item>
         ))}
-    </ul>
+    </ListGroup>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 import { BiEdit } from 'react-icons/bi'
 
@@ -15,10 +16,10 @@ function Orders() {
   const orders = useStoreSelector(selectOrders)
 
   return (
-    <ul>
+    <ListGroup>
       {orders.length > 0 &&
         orders.map((order) => (
-          <li key={order._id}>
+          <ListGroup.Item as="li" key={order._id} className="list-group-item">
             <Link
               to={`/order/${order._id}`}
             >{`${order.createdAt} - ${order.total}`}</Link>
@@ -35,9 +36,9 @@ function Orders() {
                 </Button>
               )}
             />
-          </li>
+          </ListGroup.Item>
         ))}
-    </ul>
+    </ListGroup>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 import { BiEdit } from 'react-icons/bi'
 import { RiDeleteBin6Line } from 'react-icons/ri'
@@ -47,17 +48,17 @@ function Products() {
   }
 
   return (
-    <ul>
+    <ListGroup>
       {products.length > 0 &&
         products.map((product) => (
-          <li key={product._id}>
+          <ListGroup.Item as="li" key={product._id} className="list-group-item">
             <Link
               to={`/product/${product._id}`}
             >{`${product.name} - ${product.price}`}</Link>
             <Can
               perform="products:edit"
               yes={() => (
-                <>
+                <div className="list-group-item__options">
                   {cartButton(product, cart)}
                   <Button
                     variant="outline-warning"
@@ -75,12 +76,12 @@ function Products() {
                   >
                     <RiDeleteBin6Line size="1.2em" />
                   </Button>
-                </>
+                </div>
               )}
             />
-          </li>
+          </ListGroup.Item>
         ))}
-    </ul>
+    </ListGroup>
   )
 }
 
