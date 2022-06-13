@@ -4,7 +4,7 @@ import UsersList from '../features/users/Users'
 function Users() {
   return (
     <>
-      <h1>Users page</h1>
+      <h1>Users</h1>
       <UsersList />
     </>
   )

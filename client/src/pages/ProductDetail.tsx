@@ -6,7 +6,7 @@ function ProductDetail() {
   let { productId } = useParams<{ productId: string }>()
   return (
     <>
-      <h1>Product detail page</h1>
+      <h1>Product detail</h1>
       <ProductDetailCard id={productId} />
     </>
   )

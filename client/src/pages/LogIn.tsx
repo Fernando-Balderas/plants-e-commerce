@@ -39,8 +39,10 @@ function LogIn() {
 
   return (
     <>
-      <h1>LogIn page</h1>
-      <p>You must log in to view the page at {from.pathname}</p>
+      <h1>LogIn</h1>
+      {from.pathname !== '/' && (
+        <p>You must log in to view the page at {from.pathname}</p>
+      )}
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <GoogleLogin onSuccess={handleSignUp} />
       </GoogleOAuthProvider>

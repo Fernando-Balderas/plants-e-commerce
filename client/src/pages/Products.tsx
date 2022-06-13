@@ -12,7 +12,7 @@ function Products() {
 
   return (
     <>
-      <h1>Products page</h1>
+      <h1>Products</h1>
       {!showForm && (
         <Can
           perform="products:create"

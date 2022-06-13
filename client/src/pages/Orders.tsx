@@ -3,7 +3,7 @@ import OrdersList from '../features/orders/Orders'
 function Orders() {
   return (
     <>
-      <h1>Orders page</h1>
+      <h1>Orders</h1>
       <OrdersList />
     </>
   )

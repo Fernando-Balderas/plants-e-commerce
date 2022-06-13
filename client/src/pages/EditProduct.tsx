@@ -5,7 +5,7 @@ function EditProduct() {
   let { productId } = useParams<{ productId: string }>()
   return (
     <>
-      <h1>Edit product page</h1>
+      <h1>Edit product</h1>
       {productId}
     </>
   )
