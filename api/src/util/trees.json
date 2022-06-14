@@ -1,0 +1,236 @@
+[
+    {
+        "name": "Banana Plant",
+        "price": 49,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm3.staticflickr.com/2084/2367391744_5e920c46cd_z.jpg",
+        "description": "Banana is the common name for monocarpic flowering plants of the genus Musa.\n They are some of the oldest cultivated plants and are grown in at least\n 107 countries. In popular culture and commerce, “banana” usually refers\n to soft, sweet, dessert bananas. By contrast, Musa cultivars with firmer, starchier fruit are called plantains or “cooking bananas”. The distinction is purely arbitrary."
+    },
+    {
+        "name": "Pineapple Plant",
+        "price": 38,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://twistedsifter.com/wp-content/uploads/2012/12/pineapple-plant-field.jpg",
+        "description": "The Pineapple (Ananas comosus), named for its resemblance to \nthe pine cone, is a tropical plant with edible multiple fruit consisting\n of coalesced berries. Pineapples may be cultivated from a crown cutting\n of the fruit, possibly flowering in 20–24 months and fruiting in the \nfollowing six months. Raw pineapple is an excellent source of manganese \n(76% Daily Value (DV) in a one US cup serving) and vitamin C (131% DV \nper cup serving)."
+    },
+    {
+        "name": "Olive Tree",
+        "price": 28,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://twistedsifter.com/wp-content/uploads/2012/12/olive_trees_on_thassos.jpg",
+        "description": "The olive is a species of small tree in the family Oleaceae, \nnative to the coastal areas of the eastern Mediterranean Basin as well \nas northern Iraq, and northern Iran at the south of the Caspian Sea. Its\n fruit, also called the olive, is of major agricultural importance in \nthe Mediterranean region as the source of olive oil. The tree and its \nfruit give its name to the plant family, which also includes species \nsuch as lilacs, jasmine, forsythia and the true ash trees."
+    },
+    {
+        "name": "Avocado Tree",
+        "price": 25,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://twistedsifter.com/wp-content/uploads/2012/12/avocado-tree.jpg",
+        "description": "The avocado (Persea americana) is a tree native to Central Mexico, classified in the flowering plant family Lauraceae\n along with cinnamon, camphor and bay laurel. Avocado or alligator pear \nalso refers to the fruit of the tree. Avocados are cultivated in \ntropical and Mediterranean climates throughout the world. Trees are \npartially self-pollinating and often are propagated through grafting to \nmaintain a predictable quality and quantity of the fruit."
+    },
+    {
+        "name": "Durian Tree",
+        "price": 26,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm9.staticflickr.com/8331/8150331626_e146ff663e_c.jpg",
+        "description": "The Durian is the fruit of several tree species belonging to the genus Durio and the Malvaceae\n family. Regarded by many people in southeast Asia as the “king of \nfruits”, the durian is distinctive for its large size, strong odour and \nformidable thorn-covered husk. The fruit can grow as large as 30 \ncentimetres (12 in) long and 15 centimetres (6 in) in diameter, and it \ntypically weighs one to three kilograms (2 to 7 lb)."
+    },
+    {
+        "name": "Watermelon Plant",
+        "price": 27,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://twistedsifter.com/wp-content/uploads/2012/12/watermelon-plant.jpg",
+        "description": "Watermelon (Citrullus lanatus, family Cucurbitaceae) \nis a vine-like (scrambler and trailer) flowering plant originally from \nsouthern Africa. Its fruit, which is also called watermelon, is a \nspecial kind referred to by botanists as a pepo, a berry which \nhas a thick rind (exocarp) and fleshy center (mesocarp and endocarp). \nThe watermelon fruit, loosely considered a type of melon – although not \nin the genus Cucumis – has a smooth exterior rind (green, \nyellow and sometimes white) and a juicy, sweet interior flesh. A \nwatermelon contains about 6% sugar and 92% water by weight."
+    },
+    {
+        "name": "Mango Tree",
+        "price": 37,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm8.staticflickr.com/7150/6753382655_03b8ba0999_b.jpg",
+        "description": "The mango is a fleshy stone fruit belonging to the genus Mangifera, consisting of numerous tropical fruiting trees in the flowering plant family Anacardiaceae.\n The mango is native to the South Asia from where it was distributed \nworldwide to become one of the most cultivated fruits in the tropics. Mangifera indica\n – the ‘common mango’ or ‘Indian mango’ – is the only mango tree \ncommonly cultivated in many tropical and subtropical regions. It is the \nnational fruit of India, Philippines, and Pakistan."
+    },
+    {
+        "name": "The Date Palm",
+        "price": 29,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm7.staticflickr.com/6080/6048456000_3d0d135c1b_b.jpg",
+        "description": "The date palm (Phoenix dactylifera) is a palm cultivated for \nits edible sweet fruit. Although its place of origin is unknown because \nof long cultivation, it probably originated from lands around Iraq. It \ngrows 70–75 feet in height, growing singly or forming a clump with \nseveral stems from a single root system. The leaves are 4–6 m long, with\n spines on the petiole, and pinnate, with about 150 leaflets; the \nleaflets are 30 cm long and 2 cm wide. The full span of the crown ranges\n from 6 to 10 m. Dates contain 20-70 calories each, depending on size \nand species."
+    },
+    {
+        "name": "Cantaloupe Plant",
+        "price": 43,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm4.staticflickr.com/3203/3767021934_a224ce6b99_b.jpg",
+        "description": "Cantaloupe (also canteloupe, cantaloup, mushmelon, muskmelon, rockmelon, sweet melon, and Persian melon) refers to a variety of Cucumis melo, a species in the family Cucurbitaceae. Cantaloupes range in size from 500 g to 5 kg (1 to 10 lb). It is the most popular variety of melon in the United States. "
+    },
+    {
+        "name": "Papaya Tree",
+        "price": 34,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm4.staticflickr.com/3438/3224330541_8ed2cfe18d_z.jpg?zz=1",
+        "description": "The papaya is a large, tree-like plant, with a single stem growing from 5\n to 10 m (16 to 33 ft) tall, with spirally arranged leaves confined to \nthe top of the trunk. The lower trunk is conspicuously scarred where \nleaves and fruit were borne. The leaves are large, 50–70 cm (20–28 in) \nin diameter, deeply palmately lobed, with seven lobes. The tree is \nusually unbranched, unless lopped. The flowers are similar in shape to \nthe flowers of the Plumeria, but are much smaller and wax-like. They \nappear on the axils of the leaves, maturing into large fruit – 15–45 cm \n(5.9–18 in) long and 10–30 cm (3.9–12 in) in diameter. The fruit is ripe\n when it feels soft (as soft as a ripe avocado or a bit softer) and its \nskin has attained an amber to orange hue."
+    },
+    {
+        "name": "Plum Tree",
+        "price": 32,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm1.staticflickr.com/73/227070792_877d2cb658_z.jpg?zz=1",
+        "description": "A plum is a drupe fruit of the genus Prunus. The subgenus is \ndistinguished from other subgenera (peaches, cherries, bird cherries, \netc.) in the shoots having a terminal bud and solitary side buds (not \nclustered), the flowers in groups of one to five together on short \nstems, and the fruit having a groove running down one side and a smooth \nstone (or pit). The commercially important plum trees are medium sized, \nusually pruned to 5-6 meters height. The tree is of medium hardiness. \nWithout pruning, the trees can reach 12 meters in height and spread \nacross 10 meters."
+    },
+    {
+        "name": "Grapefruit Tree",
+        "price": 35,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm4.staticflickr.com/3293/2687013167_356fb751da_b.jpg",
+        "description": "The grapefruit is a subtropical citrus tree known for its bitter fruit, \nan 18th-century hybrid first bred in Barbados. When found, it was named \nthe “forbidden fruit”. These evergreen trees usually grow to around 5–6 \nmeters (16–20 ft) tall, although they can reach 13–15 meters (43–49 ft).\n The leaves are dark green, long (up to 150 mm, 6 inches) and thin. It \nproduces 5 cm (2 in) white four-petaled flowers. The fruit is \nyellow-orange skinned and largely an oblate spheroid; it ranges in \ndiameter from 10–15 cm. The flesh is segmented and acidic, varying in \ncolor depending on the cultivars, which include white, pink and red \npulps of varying sweetness. The 1929 US Ruby Red (of the Redblush \nvariety) has the first grapefruit patent."
+    },
+    {
+        "name": "Pomegranate Tree",
+        "price": 41,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm4.staticflickr.com/3293/2865870086_68a531331a_b.jpg",
+        "description": "The pomegranate is a fruit-bearing deciduous shrub or small tree growing\n between five and eight meters tall. Native to the area of modern day \nIran and Iraq, the pomegranate has been cultivated in the Caucasus since\n ancient times. From there it spread to Asian areas such as the Caucasus\n as well as the Himalayas in Northern India. Today, it is widely \ncultivated throughout the Mediterranean region of southern Europe, the \nMiddle East, northern Africa and tropical Africa, Indian subcontinent \nand the drier parts of southeast Asia. Introduced into Latin America and\n California by Spanish settlers in 1769, pomegranate is also cultivated \nin parts of California and Arizona."
+    },
+    {
+        "name": "Coconut Tree",
+        "price": 42,
+        "categories": [
+            "tree"
+        ],
+        "image": "http://farm5.staticflickr.com/4111/5044921464_5df8e8688d_b.jpg",
+        "description": "The coconut palm, Cocos nucifera, is a member of the family Arecaceae (palm family). It is the only accepted species in the genus Cocos.\n The term coconut can refer to the entire coconut palm, the seed, or the\n fruit, which, botanically, is a drupe, not a nut. Found throughout the \ntropic and subtropic area, the coconut is known for its great \nversatility as seen in the many domestic, commercial, and industrial \nuses of its different parts. Coconuts are part of the daily diet of many\n people. Coconuts are different from any other fruits because they \ncontain a large quantity of “water” and when immature they may be \nharvested for drinking."
+    },
+    {
+        "name": "Peach Tree",
+        "price": 35,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/4.-Peaches.jpg",
+        "description": "Peach trees grow fast and attain a good height within a year of planting. \nThey bear delicious fruits in 2-3 years of growth and also comes in \ndwarf varieties."
+    },
+    {
+        "name": "Mulberry Tree",
+        "price": 32,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/2.-Mulberry-1.jpg",
+        "description": "There are varieties available for every type of climate; mulberries \nripen in summers, producing sweet fruits that can’t be stored for long. \nThe tree grows fast, and if you buy a big specimen, it might fruit in a \nyear or two."
+    },
+    {
+        "name": "Lemon Tree",
+        "price": 40,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/3.-Lemon-1.jpg",
+        "description": "Depending on the size, favorable climate, and age of the lemon tree \nyou buy, the fruit will be produced in the first year itself. Most of \nthe grafted lemon plant varieties start bearing fruit in the same year.\nWhile lemon trees grow best in warmer regions, you can still grow \nthem in a cold climate by keeping them indoors during cool weather and \nmoving them outdoors in summers."
+    },
+    {
+        "name": "Pear Tree",
+        "price": 29,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/4.-Pear-Tree.jpg",
+        "description": "Pear trees are fast-growing, attaining a good height in a short span of time. If \nyou buy a 2-3 years old pear tree from a nursery, it can start bearing \nfruit within 2 years after planting from mid-summer.\nDwarf varieties reach up to 8-10 feet tall with 6-10 feet of spread, making them an excellent choice for container growing."
+    },
+    {
+        "name": "Fig Tree",
+        "price": 45,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/6.-Fig-Tree-1.jpg",
+        "description": "Fig trees grow fast and bear fruit quickly, even from the first year of \nplanting, if you select the right cultivar that is slightly mature. They\n flower during spring and ripen figs can be harvested in the entire \nsummer months. You can control the height by growing dwarf variety in \npots."
+    },
+    {
+        "name": "Apple Tree",
+        "price": 30,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2016/05/how-to-grow-apple-tree-in-pot-2.jpg",
+        "description": "If you grow an apple tree from a seed, it’ll take 6-10 years to fruit. \nBut if you don’t want to wait for that long, get a grafted apple tree \nthat is at least 4 feet tall, and it’ll start bearing fruits in just 2 \nyears."
+    },
+    {
+        "name": "Apricot Tree",
+        "price": 28,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/8.-Apricot-Tree-1.jpg",
+        "description": "The apricot tree bears fruits in mid to late summer. Since it’s a fast-growing fruit \ntree, it’ll reward you with fruits from the next year of planting in \noptimum growing conditions."
+    },
+    {
+        "name": "Cherry Tree",
+        "price": 48,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/9.-Cherry-Tree.jpg",
+        "description": "A dwarf cherry tree can fruit as early as 2 years after transplanting in\n the garden, whereas you’ve to wait for 3-4 years for the standard \ncherry tree variety."
+    },
+    {
+        "name": "Blueberry",
+        "price": 33,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/10.-Blueberry.jpg",
+        "description": "Blueberries are fast growers, and the berries can be harvested in the \nsame or next year after planting if you can find a 2-3 years old \nspecimen in the nursery. They can be grown in containers as well."
+    },
+    {
+        "name": "Raspberry",
+        "price": 45,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/11.-Raspberry.jpg",
+        "description": "Raspberry bushes start to bear fruits from the second year of planting. \nThese plants are self-pollinating. Some of the varieties start fruiting \nin summer, whereas others bear fruit in the fall."
+    },
+    {
+        "name": "Strawberry",
+        "price": 27,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/5.-Strawberry-1.jpg",
+        "description": "Strawberry can be grown in every climate, either as an annual or \nperennial in pots, in hanging baskets, upside-down planters, and in \ngarden beds. The plant will be ready to provide you with fruits within \nthe same year if you get large transplants!"
+    },
+    {
+        "name": "Passion Fruit Tree",
+        "price": 41,
+        "categories": [
+            "tree"
+        ],
+        "image": "https://balconygardenweb-lhnfx0beomqvnhspx.netdna-ssl.com/wp-content/uploads/2021/05/13.-Passion-Fruit.jpg",
+        "description": "Passion fruit vine bear fruits in 10-14 months, and you will get one \nlarge crop of this fragrant fruit in the summer and fall. In tropical \nareas, gardeners get a continuous yield."
+    }
+]

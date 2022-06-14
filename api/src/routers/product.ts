@@ -23,5 +23,11 @@ router.delete(
   productController._delete
 )
 router.post('/', verifyAuth, verifyPermission, productController.create)
+router.post(
+  '/load-dataset',
+  verifyAuth,
+  verifyPermission,
+  productController.loadDataset
+)
 
 export default router

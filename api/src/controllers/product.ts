@@ -5,6 +5,7 @@ import productService from '../services/product'
 import { BadRequestError } from '../helpers/apiError'
 import { ProductsFindAllFilter, ProductsSortOrder } from 'product'
 import { PartialUser } from 'user'
+import readJson from '../util/readJson'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -116,6 +117,20 @@ const findUserProducts = async (
   }
 }
 
+const loadDataset = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const products = readJson()
+    const results = await productService.loadDataset(products)
+    res.json(results)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
 export default {
   create,
   update,
@@ -123,4 +138,5 @@ export default {
   findById,
   findAll,
   findUserProducts,
+  loadDataset,
 }

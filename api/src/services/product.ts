@@ -54,6 +54,12 @@ const _delete = async (productId: string): Promise<ProductDocument | null> => {
   return foundProduct
 }
 
+const loadDataset = async (
+  products: ProductDocument[]
+): Promise<ProductDocument[]> => {
+  return Product.create(products)
+}
+
 export default {
   create,
   findById,
@@ -61,4 +67,5 @@ export default {
   findUserProducts,
   update,
   _delete,
+  loadDataset,
 }

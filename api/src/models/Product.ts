@@ -9,6 +9,7 @@ export type ProductDocument = Document & {
   variants: string[]
   sizes: string[]
   userId: string
+  picture: string
 }
 
 const productSchema = new mongoose.Schema(
@@ -38,6 +39,9 @@ const productSchema = new mongoose.Schema(
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
+    },
+    image: {
+      type: String,
     },
   },
   { timestamps: true }
