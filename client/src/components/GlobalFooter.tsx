@@ -7,8 +7,8 @@ import {
 
 function GlobalFooter() {
   return (
-    <footer className="bg-white">
-      {/* <hr /> */}
+    <footer className="bg-white mt-4">
+      <hr />
       <div className="container">
         <div className="row py-4 justify-content-md-center">
           <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">

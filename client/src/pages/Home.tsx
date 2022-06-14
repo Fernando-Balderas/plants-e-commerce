@@ -6,8 +6,8 @@ import Button from 'react-bootstrap/Button'
 function Home() {
   return (
     <>
-      <h1>Home</h1>
-      <Row>
+      <h1 className="page-title">Home</h1>
+      <Row className="my-5">
         <Col>
           <Alert variant="primary" className="home-product-card">
             <h2>Adopt a tree</h2>

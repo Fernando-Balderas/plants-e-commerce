@@ -1,5 +1,10 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 import {
   createProduct,
   selectEditingProduct,
@@ -9,7 +14,7 @@ import {
 } from '../../features/products/productsSlice'
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
 
-function Form({ title = '' }: any) {
+function FormP({ title = '' }: any) {
   const dispatch = useStoreDispatch()
   const {
     register,
@@ -34,34 +39,38 @@ function Form({ title = '' }: any) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} className="product-form">
       <fieldset>
         <legend>{title}</legend>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
+        <Form.Group>
+          <Form.Label htmlFor="name">Name</Form.Label>
+          <Form.Control
             type="text"
             {...register('name', { required: true })}
             defaultValue={product?.name || ''}
           />
           {errors.name && <span>This field is required</span>}
-        </div>
-        <div>
-          <label htmlFor="price">Price</label>
-          <input
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="price">Price</Form.Label>
+          <Form.Control
             type="text"
             {...register('price', { required: true })}
             defaultValue={product?.price || ''}
           />
           {errors.price && <span>This field is required</span>}
+        </Form.Group>
+        <div className="product-form__footer">
+          <Button variant="secondary" onClick={handleCancel} className="px-4">
+            Cancel
+          </Button>
+          <Button variant="success" type="submit" className="px-4">
+            Submit
+          </Button>
         </div>
-        <button type="button" onClick={handleCancel}>
-          Cancel
-        </button>
-        <button type="submit">Submit</button>
       </fieldset>
-    </form>
+    </Form>
   )
 }
 
-export default Form
+export default FormP

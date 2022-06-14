@@ -14,28 +14,29 @@ function Products() {
 
   return (
     <>
-      <h1>Products</h1>
-      {!showForm && (
-        <Can
-          perform="products:create"
-          yes={() => (
-            <Button
-              variant="success"
-              className="mx-1"
-              onClick={() => dispatch(setShowForm(true))}
-            >
-              New Product
-            </Button>
-          )}
-        />
-      )}
-      <ModalP />
-
+      <h1 className="page-title">Products</h1>
       <Row className="justify-content-md-center">
+        <Col md={8}>
+          {!showForm && (
+            <Can
+              perform="products:create"
+              yes={() => (
+                <Button
+                  variant="success"
+                  className="new-product-button"
+                  onClick={() => dispatch(setShowForm(true))}
+                >
+                  New Product
+                </Button>
+              )}
+            />
+          )}
+        </Col>
         <Col md={8}>
           <ProductsList />
         </Col>
       </Row>
+      <ModalP />
     </>
   )
 }

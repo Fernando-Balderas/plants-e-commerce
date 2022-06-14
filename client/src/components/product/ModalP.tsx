@@ -1,7 +1,6 @@
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
 
-import ProductForm from './Form'
+import ProductForm from './FormP'
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
 import {
   selectEditingProduct,
@@ -16,8 +15,8 @@ function ModalP() {
   const product = useStoreSelector(selectEditingProduct)
 
   const handleClose = () => {
-    if (product !== null) dispatch(setEditingProduct(null))
     dispatch(setShowForm(false))
+    if (product !== null) dispatch(setEditingProduct(null))
   }
 
   const title = product === null ? 'New Product' : 'Edit Product'
@@ -30,12 +29,6 @@ function ModalP() {
       <Modal.Body>
         <ProductForm />
       </Modal.Body>
-      {/* <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary">Understood</Button>
-      </Modal.Footer> */}
     </Modal>
   )
 }
