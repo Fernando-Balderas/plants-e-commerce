@@ -9,7 +9,7 @@ import {
 } from '../../features/products/productsSlice'
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
 
-function Form({ title }: any) {
+function Form({ title = '' }: any) {
   const dispatch = useStoreDispatch()
   const {
     register,

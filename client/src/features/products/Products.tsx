@@ -27,13 +27,13 @@ function Products() {
 
   const cartButton = (product: any, cart: any) => {
     let fn: Fn = () => dispatch(addToCart(product))
-    let msg = 'Add to cart'
+    let msg = 'Add'
     const index = cart.findIndex(
       (cartProduct: any) => cartProduct._id === product._id
     )
     if (index !== -1) {
       fn = () => dispatch(removeFromCart(product._id))
-      msg = 'Remove from cart'
+      msg = 'Remove'
     }
     return (
       <Button

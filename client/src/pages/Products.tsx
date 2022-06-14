@@ -3,7 +3,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 import Can from '../helpers/Can'
-import ProductForm from '../components/product/Form'
+import ModalP from '../components/product/ModalP'
 import ProductsList from '../features/products/Products'
 import { useStoreDispatch, useStoreSelector } from '../store/hooks'
 import { selectShowForm, setShowForm } from '../features/products/productsSlice'
@@ -29,7 +29,7 @@ function Products() {
           )}
         />
       )}
-      {showForm && <ProductForm title="New Product" />}
+      <ModalP />
 
       <Row className="justify-content-md-center">
         <Col md={8}>
