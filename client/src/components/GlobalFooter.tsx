@@ -31,17 +31,32 @@ function GlobalFooter() {
                 </a>
               </li>
               <li className="list-inline-item">
-                <a href="#" target="_blank" rel="noreferrer" title="Twitter">
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Twitter"
+                >
                   <AiFillTwitterCircle size="1.85em" />
                 </a>
               </li>
               <li className="list-inline-item">
-                <a href="#" target="_blank" rel="noreferrer" title="Facebook">
+                <a
+                  href="https://www.facebook.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Facebook"
+                >
                   <BsFacebook size="1.6em" />
                 </a>
               </li>
               <li className="list-inline-item">
-                <a href="#" target="_blank" rel="noreferrer" title="Instagram">
+                <a
+                  href="https://www.instagram.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Instagram"
+                >
                   <TiSocialInstagramCircular size="2.1em" />
                 </a>
               </li>
