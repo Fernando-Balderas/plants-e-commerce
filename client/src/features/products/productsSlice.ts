@@ -3,11 +3,16 @@ import { RootState } from '../../store/store'
 import { Product } from '../../types/types'
 import axios from '../../helpers/axios/instance'
 
+type Filters = {
+  [key: string]: boolean
+}
+
 export interface ProductsState {
   products: Product[]
   status: 'idle' | 'loading' | 'failed'
   editingProduct: Product | null
   showForm: boolean
+  filters: Filters
 }
 
 const initialState: ProductsState = {
@@ -15,6 +20,7 @@ const initialState: ProductsState = {
   status: 'idle',
   editingProduct: null,
   showForm: false,
+  filters: {},
 }
 
 export const fetchProducts = createAsyncThunk(
@@ -63,6 +69,9 @@ export const productsSlice = createSlice({
     setEditingProduct: (state, action: PayloadAction<Product | null>) => {
       state.editingProduct = action.payload
       state.showForm = true
+    },
+    setFilters: (state, action: PayloadAction<Filters>) => {
+      state.filters = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -116,11 +125,26 @@ export const productsSlice = createSlice({
   },
 })
 
-export const { setShowForm, setEditingProduct } = productsSlice.actions
+export const { setShowForm, setEditingProduct, setFilters } =
+  productsSlice.actions
 
 export const selectProducts = (state: RootState) => state.products.products
 export const selectShowForm = (state: RootState) => state.products.showForm
 export const selectEditingProduct = (state: RootState) =>
   state.products.editingProduct
+export const selectFilters = (state: RootState) => state.products.filters
+export const selectIsFilterActive = (state: RootState) =>
+  Object.values(state.products.filters).find((filter) => filter === true)
+export const selectFilteredProducts = (state: RootState) => {
+  const filters: string[] = []
+  Object.entries(
+    state.products.filters as { tree: boolean; fruit: boolean }
+  ).forEach(([k, v]) => {
+    if (v) filters.push(k)
+  })
+  return state.products.products.filter((product) =>
+    product.categories.find((category) => filters.includes(category))
+  )
+}
 
 export default productsSlice.reducer

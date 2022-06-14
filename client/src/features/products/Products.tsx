@@ -11,6 +11,8 @@ import { addToCart, removeFromCart, selectCart } from '../cart/cartSlice'
 import {
   deleteProduct,
   fetchProducts,
+  selectFilteredProducts,
+  selectIsFilterActive,
   selectProducts,
   setEditingProduct,
 } from './productsSlice'
@@ -22,8 +24,12 @@ function Products() {
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
-  const products = useStoreSelector(selectProducts)
+  const allProducts = useStoreSelector(selectProducts)
   const cart = useStoreSelector(selectCart)
+  const filteredProducts = useStoreSelector(selectFilteredProducts)
+  const isFilterActive = useStoreSelector(selectIsFilterActive)
+
+  const products = isFilterActive ? filteredProducts : allProducts
 
   const cartButton = (product: any, cart: any) => {
     let fn: Fn = () => dispatch(addToCart(product))

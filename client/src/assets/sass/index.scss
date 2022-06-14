@@ -95,12 +95,21 @@ code {
   }
 }
 
-.new-product-button {
-  float: right;
-  margin-bottom: 0.8em;
-}
-
 .page-title {
   margin-left: 1em;
   margin-top: 0.2em;
+}
+
+.filter-options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1em;
+}
+
+.filters-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
 }
