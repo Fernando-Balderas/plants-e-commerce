@@ -15,6 +15,7 @@ import {
 } from './cartSlice'
 import { Product } from '../../types/types'
 import { createOrder } from '../orders/ordersSlice'
+import addCurrency from '../../util/addCurrency'
 
 function Cart() {
   const dispatch = useStoreDispatch()
@@ -42,7 +43,6 @@ function Cart() {
       variant="light"
       className="p-0 cart-card"
     >
-      {/* {product.image} */}
       <Link
         to={`/products/${product._id}`}
         className="ms-2"
@@ -52,7 +52,7 @@ function Cart() {
       </Link>
       <div className="cart-card__body">
         <Badge bg="secondary" className="cart-card__price">
-          {product.price}
+          {addCurrency(product.price)}
         </Badge>
         <Button
           variant="outline-danger"
@@ -93,7 +93,7 @@ function Cart() {
       </Offcanvas.Body>
       <hr />
       <Alert variant="light" className="m-0 cart-footer">
-        <p className="cart-footer__text">Total: {total}</p>
+        <p className="cart-footer__text">Total: {addCurrency(total)}</p>
         <Button
           variant="success"
           className="m-0 card-footer__button"

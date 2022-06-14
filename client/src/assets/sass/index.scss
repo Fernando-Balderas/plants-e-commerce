@@ -117,3 +117,18 @@ code {
 .underlined {
   text-decoration: underline;
 }
+
+.detailed-product-card {
+  &__title {
+    font-size: 2em;
+  }
+  &__subtitle {
+    font-size: 1.6em;
+  }
+  &__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+  }
+}

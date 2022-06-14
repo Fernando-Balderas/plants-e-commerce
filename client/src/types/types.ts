@@ -23,6 +23,7 @@ export type Product = {
   categories: string[]
   variants: string[]
   sizes: string[]
+  image: string
 }
 
 export enum PaymentStatus {

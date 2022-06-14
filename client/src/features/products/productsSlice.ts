@@ -146,5 +146,7 @@ export const selectFilteredProducts = (state: RootState) => {
     product.categories.find((category) => filters.includes(category))
   )
 }
+export const selectProductById = (productId: string) => (state: RootState) =>
+  state.products.products.find((product) => product._id === productId)
 
 export default productsSlice.reducer
