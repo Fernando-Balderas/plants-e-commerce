@@ -1,11 +1,15 @@
+import { Nav } from 'react-bootstrap'
 import { AiFillTwitterCircle } from 'react-icons/ai'
 import { BsFacebook } from 'react-icons/bs'
 import {
   TiSocialInstagramCircular,
   TiSocialLinkedinCircular,
 } from 'react-icons/ti'
+import { useHistory } from 'react-router-dom'
 
 function GlobalFooter() {
+  const history = useHistory()
+
   return (
     <footer className="bg-white mt-4">
       <hr />
@@ -46,25 +50,31 @@ function GlobalFooter() {
           <div className="col-lg-2 col-md-6 mb-4 mb-lg-0">
             <h6 className="text-uppercase font-weight-bold mb-4">Shop</h6>
             <ul className="list-unstyled mb-0">
-              <li className="mb-2">
-                <a href="#" className="text-muted">
+              <li>
+                <Nav.Link
+                  onClick={() => history.push('/products?filter=tree')}
+                  className="text-muted ps-0 underlined"
+                >
                   Trees
-                </a>
+                </Nav.Link>
               </li>
-              <li className="mb-2">
-                <a href="#" className="text-muted">
+              <li>
+                <Nav.Link
+                  onClick={() => history.push('/products?filter=fruit')}
+                  className="text-muted ps-0 underlined"
+                >
                   Fruits
-                </a>
+                </Nav.Link>
               </li>
             </ul>
           </div>
           <div className="col-lg-2 col-md-6 mb-4 mb-lg-0">
             <h6 className="text-uppercase font-weight-bold mb-4">Company</h6>
             <ul className="list-unstyled mb-0">
-              <li className="mb-2">
-                <a href="#" className="text-muted">
+              <li>
+                <Nav.Link href="#" className="text-muted ps-0 underlined">
                   About us
-                </a>
+                </Nav.Link>
               </li>
             </ul>
           </div>
