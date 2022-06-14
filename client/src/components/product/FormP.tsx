@@ -20,8 +20,17 @@ function FormP({ title = '' }: any) {
     formState: { errors },
   } = useForm()
   const product = useStoreSelector(selectEditingProduct)
+  let treeProps: object = { checked: true }
+  let fruitProps: object = {}
+  if (product !== null) {
+    if (product.categories.find((category: string) => category === 'fruit')) {
+      treeProps = {}
+      fruitProps = { checked: true }
+    }
+  }
 
   const onSubmit = (data: any) => {
+    data.categories = [data.categories]
     if (!product) dispatch(createProduct(data))
     else {
       const update = { ...product, ...data }
@@ -57,6 +66,24 @@ function FormP({ title = '' }: any) {
             defaultValue={product?.price || ''}
           />
           {errors.price && <span>This field is required</span>}
+        </Form.Group>
+        <Form.Group className="m-3">
+          <Form.Check
+            inline
+            label="Tree"
+            type="radio"
+            value="tree"
+            {...treeProps}
+            {...register('categories')}
+          />
+          <Form.Check
+            inline
+            label="Fruit"
+            type="radio"
+            value="fruit"
+            {...fruitProps}
+            {...register('categories')}
+          />
         </Form.Group>
         <div className="product-form__footer">
           <Button variant="secondary" onClick={handleCancel} className="px-4">

@@ -34,7 +34,8 @@ function FilterForm() {
           type="checkbox"
           label="Tree"
           {...register('tree')}
-          checked={check.tree || false}
+          // TODO: Control checked status, e.g. when editing a product
+          // checked={check.tree || false}
           onClick={() => setCheck({ ...check, tree: !check.tree })}
         />
       </Form.Group>
@@ -43,7 +44,7 @@ function FilterForm() {
           type="checkbox"
           label="Fruit"
           {...register('fruit')}
-          checked={check.fruit || false}
+          // checked={check.fruit || false}
           onClick={() => setCheck({ ...check, fruit: !check.fruit })}
         />
       </Form.Group>
