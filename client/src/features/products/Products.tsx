@@ -58,7 +58,10 @@ function Products() {
                     variant="outline-danger"
                     className="mx-1"
                     aria-label="Remove product"
-                    onClick={() => dispatch(deleteProduct(product._id))}
+                    onClick={() =>
+                      window.confirm('Confirm to remove this product?') &&
+                      dispatch(deleteProduct(product._id))
+                    }
                   >
                     <RiDeleteBin6Line size="1.2em" />
                   </Button>
