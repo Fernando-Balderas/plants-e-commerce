@@ -2,11 +2,13 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
+import Badge from 'react-bootstrap/Badge'
 import { BiEdit } from 'react-icons/bi'
 
 import Can from '../../helpers/Can'
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
 import { fetchOrders, selectOrders, setEditingOrder } from './ordersSlice'
+import addCurrency from '../../util/addCurrency'
 
 function Orders() {
   const dispatch = useStoreDispatch()
@@ -20,9 +22,14 @@ function Orders() {
       {orders.length > 0 &&
         orders.map((order) => (
           <ListGroup.Item as="li" key={order._id} className="list-group-item">
-            <Link
-              to={`/order/${order._id}`}
-            >{`${order.createdAt} - ${order.total}`}</Link>
+            <div>
+              <Link to={`/order/${order._id}`}>
+                {new Date(order.createdAt).toLocaleDateString()}
+              </Link>
+              <Badge bg="secondary" className="product-price">
+                {addCurrency(order.total)}
+              </Badge>
+            </div>
             <Can
               perform="orders:edit"
               yes={() => (

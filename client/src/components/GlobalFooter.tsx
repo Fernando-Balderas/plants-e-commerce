@@ -87,7 +87,10 @@ function GlobalFooter() {
             <h6 className="text-uppercase font-weight-bold mb-4">Company</h6>
             <ul className="list-unstyled mb-0">
               <li>
-                <Nav.Link href="#" className="text-muted ps-0 underlined">
+                <Nav.Link
+                  onClick={() => history.push('/about-us')}
+                  className="text-muted ps-0 underlined"
+                >
                   About us
                 </Nav.Link>
               </li>

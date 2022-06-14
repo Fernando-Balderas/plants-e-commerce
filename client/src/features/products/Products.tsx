@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
+import Badge from 'react-bootstrap/Badge'
 import { BiEdit } from 'react-icons/bi'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 
@@ -16,6 +17,7 @@ import {
   setEditingProduct,
 } from './productsSlice'
 import AddToCartButton from '../../components/product/AddToCartButton'
+import addCurrency from '../../util/addCurrency'
 
 function Products() {
   const dispatch = useStoreDispatch()
@@ -33,9 +35,12 @@ function Products() {
       {products.length > 0 &&
         products.map((product) => (
           <ListGroup.Item as="li" key={product._id} className="list-group-item">
-            <Link
-              to={`/product/${product._id}`}
-            >{`${product.name} - ${product.price}`}</Link>
+            <div>
+              <Link to={`/product/${product._id}`}>{product.name}</Link>
+              <Badge bg="secondary" className="product-price">
+                {addCurrency(product.price)}
+              </Badge>
+            </div>
             <Can
               perform="products:edit"
               yes={() => (
