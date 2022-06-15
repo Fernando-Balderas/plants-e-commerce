@@ -9,7 +9,6 @@ import { LocationState } from '../types/types'
 import { GOOGLE_CLIENT_ID } from '../util/secrets'
 
 function LogIn() {
-  console.log('ID ', GOOGLE_CLIENT_ID)
   const history = useHistory()
   const location: LocationState = useLocation()
   const auth = useAuth()
@@ -18,7 +17,6 @@ function LogIn() {
   if (auth.authed) history.replace(from)
 
   const handleSignUp = async (googleResponse: any) => {
-    console.log('googleResponse:', googleResponse)
     const googleToken = googleResponse.credential
 
     const res = await axios.post(
@@ -31,7 +29,6 @@ function LogIn() {
       }
     )
     const apiToken: string = res.data.token || ''
-    console.log('apiToken:', apiToken)
     await auth.login(apiToken)
 
     const user = res.status === 200 ? res.data.user : null
@@ -49,7 +46,12 @@ function LogIn() {
           )}
           <div className="margin">
             <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-              <GoogleLogin onSuccess={handleSignUp} />
+              <GoogleLogin
+                onSuccess={handleSignUp}
+                onError={() => {
+                  console.log('Login Failed')
+                }}
+              />
             </GoogleOAuthProvider>
           </div>
         </Col>
