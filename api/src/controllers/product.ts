@@ -3,8 +3,8 @@ import { Request, Response, NextFunction } from 'express'
 import Product from '../models/Product'
 import productService from '../services/product'
 import { BadRequestError } from '../helpers/apiError'
-import { ProductsFindAllFilter, ProductsSortOrder } from 'product'
-import { PartialUser } from 'user'
+import { ProductsFindAllFilter, ProductsSortOrder } from '../types/product'
+import { PartialUser } from '../types/user'
 import readJson from '../util/readJson'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {

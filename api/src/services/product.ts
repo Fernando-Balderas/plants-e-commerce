@@ -1,6 +1,6 @@
 import Product, { ProductDocument } from '../models/Product'
 import { NotFoundError } from '../helpers/apiError'
-import { ProductsFindAllFilter, ProductsSortOrder } from 'product'
+import { ProductsFindAllFilter, ProductsSortOrder } from '../types/product'
 
 const create = async (product: ProductDocument): Promise<ProductDocument> => {
   return product.save()

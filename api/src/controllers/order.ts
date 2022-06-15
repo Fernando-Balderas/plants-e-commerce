@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import Order from '../models/Order'
 import orderService from '../services/order'
 import { BadRequestError } from '../helpers/apiError'
-import { PartialUser } from 'user'
+import { PartialUser } from '../types/user'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {

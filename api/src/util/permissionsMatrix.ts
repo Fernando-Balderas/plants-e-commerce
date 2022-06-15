@@ -1,4 +1,4 @@
-import { Role } from 'user'
+import { Role } from '../types/user'
 
 export enum Method {
   POST = 'POST',
