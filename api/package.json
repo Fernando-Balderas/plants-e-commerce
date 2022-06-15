@@ -12,8 +12,8 @@
     "node": ">=16.15.0"
   },
   "scripts": {
-    "start:prod": "node --no-experimental-fetch dist/server.js",
-    "start:dev": "nodemon src/server.ts",
+    "start": "node --no-experimental-fetch dist/server.js",
+    "dev": "nodemon src/server.ts",
     "build": "tsc",
     "watch-ts": "tsc -w",
     "test": "jest --forceExit --detectOpenHandles --coverage --verbose false",
