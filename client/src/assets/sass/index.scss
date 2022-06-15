@@ -136,3 +136,14 @@ code {
 .product-price {
   margin-left: 1em;
 }
+
+.margin {
+  margin: 4em 0;
+  display: flex;
+  justify-content: center;
+}
+
+.login-title {
+  width: fit-content;
+  margin: 1.4em auto 0;
+}

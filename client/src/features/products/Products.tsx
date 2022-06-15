@@ -41,33 +41,38 @@ function Products() {
                 {addCurrency(product.price)}
               </Badge>
             </div>
-            <Can
-              perform="products:edit"
-              yes={() => (
-                <div className="list-group-item__options">
-                  <AddToCartButton product={product} />
-                  <Button
-                    variant="outline-warning"
-                    className="mx-1"
-                    aria-label="Edit product"
-                    onClick={() => dispatch(setEditingProduct(product))}
-                  >
-                    <BiEdit size="1.2em" />
-                  </Button>
-                  <Button
-                    variant="outline-danger"
-                    className="mx-1"
-                    aria-label="Remove product"
-                    onClick={() =>
-                      window.confirm('Confirm to remove this product?') &&
-                      dispatch(deleteProduct(product._id))
-                    }
-                  >
-                    <RiDeleteBin6Line size="1.2em" />
-                  </Button>
-                </div>
-              )}
-            />
+            <div className="list-group-item__options">
+              <Can
+                perform="orders"
+                yes={() => <AddToCartButton product={product} />}
+              />
+              <Can
+                perform="products:edit"
+                yes={() => (
+                  <>
+                    <Button
+                      variant="outline-warning"
+                      className="mx-1"
+                      aria-label="Edit product"
+                      onClick={() => dispatch(setEditingProduct(product))}
+                    >
+                      <BiEdit size="1.2em" />
+                    </Button>
+                    <Button
+                      variant="outline-danger"
+                      className="mx-1"
+                      aria-label="Remove product"
+                      onClick={() =>
+                        window.confirm('Confirm to remove this product?') &&
+                        dispatch(deleteProduct(product._id))
+                      }
+                    >
+                      <RiDeleteBin6Line size="1.2em" />
+                    </Button>
+                  </>
+                )}
+              />
+            </div>
           </ListGroup.Item>
         ))}
     </ListGroup>

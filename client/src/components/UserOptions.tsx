@@ -1,4 +1,3 @@
-import React from 'react'
 import { useHistory } from 'react-router-dom'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Nav from 'react-bootstrap/Nav'
@@ -9,6 +8,7 @@ import { GoListUnordered } from 'react-icons/go'
 import { TbUsers } from 'react-icons/tb'
 import { BsCart2 } from 'react-icons/bs'
 
+import Can from '../helpers/Can'
 import useAuth from '../hooks/useAuth'
 import { useStoreDispatch, useStoreSelector } from '../store/hooks'
 import {
@@ -43,13 +43,21 @@ function UserOptions() {
           >
             <GoListUnordered /> Orders
           </NavDropdown.Item>
-          <NavDropdown.Item
-            aria-label={`Dropdown`}
-            onClick={() => history.push('/users')}
-          >
-            <TbUsers /> Users
-          </NavDropdown.Item>
           {/* TODO: Add wishlist */}
+
+          <Can
+            perform="products:create"
+            yes={() => (
+              <>
+                <NavDropdown.Item
+                  aria-label={`Dropdown`}
+                  onClick={() => history.push('/users')}
+                >
+                  <TbUsers /> Users
+                </NavDropdown.Item>
+              </>
+            )}
+          />
         </NavDropdown>
         <Nav.Link
           aria-label="Cart"

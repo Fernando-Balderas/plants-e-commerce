@@ -1,6 +1,7 @@
-import React from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import axios from '../helpers/axios/instance'
 import useAuth from '../hooks/useAuth'
@@ -39,13 +40,19 @@ function LogIn() {
 
   return (
     <>
-      <h1>LogIn</h1>
-      {from.pathname !== '/' && (
-        <p>You must log in to view the page at {from.pathname}</p>
-      )}
-      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-        <GoogleLogin onSuccess={handleSignUp} />
-      </GoogleOAuthProvider>
+      <Row className="justify-content-md-center">
+        <Col md={3}>
+          <h1 className="login-title">LogIn</h1>
+          {from.pathname !== '/' && (
+            <p>You must log in to view the page at {from.pathname}</p>
+          )}
+          <div className="margin">
+            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+              <GoogleLogin onSuccess={handleSignUp} />
+            </GoogleOAuthProvider>
+          </div>
+        </Col>
+      </Row>
     </>
   )
 }
