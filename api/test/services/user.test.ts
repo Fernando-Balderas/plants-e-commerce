@@ -58,16 +58,6 @@ describe('user service', () => {
     expect(found?._id).toEqual(user._id)
   })
 
-  it('should get a user with email and password', async () => {
-    const user = await createUser()
-    const found = await UserService.findByEmailAndPassword(
-      user.email,
-      user.password as string
-    )
-    expect(found.name).toEqual(user.name)
-    expect(found._id).toEqual(user._id)
-  })
-
   // Check https://jestjs.io/docs/en/asynchronous for more info about
   // how to test async code, especially with error
   it('should not get a non-existing user', async () => {
