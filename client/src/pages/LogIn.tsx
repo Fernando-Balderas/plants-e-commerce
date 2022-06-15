@@ -9,6 +9,7 @@ import { LocationState } from '../types/types'
 import { GOOGLE_CLIENT_ID } from '../util/secrets'
 
 function LogIn() {
+  console.log('ID ', GOOGLE_CLIENT_ID)
   const history = useHistory()
   const location: LocationState = useLocation()
   const auth = useAuth()

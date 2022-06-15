@@ -8,8 +8,6 @@ import addCurrency from '../../util/addCurrency'
 
 function DetailCard({ productId }: any) {
   const product = useStoreSelector(selectProductById(productId))
-  console.log('productId ', productId)
-  console.log('product ', product)
 
   return (
     <Card className="detailed-product-card">

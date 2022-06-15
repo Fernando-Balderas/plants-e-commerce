@@ -67,9 +67,8 @@ function Cart() {
   )
 
   const handlePlaceOrder = async () => {
-    const x = await dispatch(createOrder({ total, products }))
-    console.log('x ', x)
-    if (x.meta.requestStatus === 'fulfilled') alert('Order placed')
+    const placed = await dispatch(createOrder({ total, products }))
+    if (placed.meta.requestStatus === 'fulfilled') alert('Order placed')
     else alert('Error')
   }
 
@@ -98,7 +97,6 @@ function Cart() {
           variant="success"
           className="m-0 card-footer__button"
           onClick={handlePlaceOrder}
-          // onClick={() => console.log('place order clicked')}
           {...props}
         >
           Place order

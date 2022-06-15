@@ -25,9 +25,7 @@ export const fetchOrders = createAsyncThunk('orders/fetchOrders', async () => {
 export const createOrder = createAsyncThunk(
   'orders/createOrder',
   async (order: Partial<Order>, { dispatch }) => {
-    console.log('into createOrder ', order)
     const response = await axios.post('/orders', order)
-    console.log('response ', response)
     if (response.status === 200) dispatch(clearCart())
     // The value we return becomes the `fulfilled` action payload
     return response.data
