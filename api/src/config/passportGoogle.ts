@@ -56,11 +56,12 @@ function googleLoginStrategy() {
             role: isAdmin(parsedToken.payload.hd) ? 'ADMIN' : 'USER',
             // TODO: picture: parsedToken.payload.picture
           } as UserDocument
-
           const newUser = new User(user)
           const savedUser = await UserService.create(newUser)
           user._id = savedUser._id
+          user.status = savedUser.status
         }
+
         // Append user object to req.user
         done(null, user)
       } catch (error) {

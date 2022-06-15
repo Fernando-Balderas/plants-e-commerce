@@ -8,10 +8,7 @@ import userController from '../controllers/user'
 const router = express.Router()
 
 // Every path we define here will get /api/v1/users prefix
-
-// router.get('/', verifyAuth, userController.findAll)
-router.get('/', userController.findAll)
-// TODO: Add auth verification to findAll path
+router.get('/', verifyAuth, verifyPermission, userController.findAll)
 router.get('/:userId', verifyAuth, userController.findById)
 router.put('/:userId/profile', verifyAuth, userController.updateProfile)
 router.put('/:userId/password', verifyAuth, userController.updatePassword)

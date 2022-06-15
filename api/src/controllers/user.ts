@@ -6,7 +6,7 @@ import { BadRequestError } from '../helpers/apiError'
 import { timeConstantCompare } from '../util/password'
 import { cryptoHexHash, isHashMatch, toHash } from '../util/hashing'
 import { createJwtToken } from '../util/jwt'
-import { PartialUser } from 'user'
+import { PartialUser } from '../types/user'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -147,9 +147,9 @@ const _delete = async (req: Request, res: Response, next: NextFunction) => {
 
 const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { _id, name, lastname, email, role, picture } =
+    const { _id, name, lastname, email, role, picture, status } =
       req.user as PartialUser
-    const user = { _id, name, lastname, email, role, picture }
+    const user = { _id, name, lastname, email, role, picture, status }
     const token = createJwtToken(user)
     res.json({ token, user })
   } catch (error) {
@@ -185,8 +185,8 @@ const findByEmailAndPassword = async (
     const user = await userService.findByEmail(email)
     const match = await isHashMatch(password, user.password || '')
     if (!match) throw new BadRequestError('TESTING ERROR')
-    const { _id, name, lastname, role, picture } = user as PartialUser
-    const userForHash = { _id, name, lastname, email, role, picture }
+    const { _id, name, lastname, role, picture, status } = user as PartialUser
+    const userForHash = { _id, name, lastname, email, role, picture, status }
     const token = createJwtToken(userForHash)
     res.json({ token })
   } catch (error) {
