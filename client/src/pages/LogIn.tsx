@@ -7,6 +7,7 @@ import axios from '../helpers/axios/instance'
 import useAuth from '../hooks/useAuth'
 import { LocationState } from '../types/types'
 import { GOOGLE_CLIENT_ID } from '../util/secrets'
+import LoginForm from '../components/LoginForm'
 
 function LogIn() {
   const history = useHistory()
@@ -16,24 +17,27 @@ function LogIn() {
 
   if (auth.authed) history.replace(from)
 
-  const handleSignUp = async (googleResponse: any) => {
-    const googleToken = googleResponse.credential
-
-    const res = await axios.post(
-      '/users/google-login',
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${googleToken}`,
-        },
-      }
-    )
-    const apiToken: string = res.data.token || ''
-    await auth.login(apiToken)
-
-    const user = res.status === 200 ? res.data.user : null
-    await auth.setUser(user)
-    history.replace(from)
+  const handleGoogleLogin = async (googleResponse: any) => {
+    try {
+      const googleToken = googleResponse.credential
+      const res = await axios.post(
+        '/users/google-login',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${googleToken}`,
+          },
+        }
+      )
+      if (res.status !== 200) throw new Error()
+      const apiToken: string = res.data.token || ''
+      const user = res.data.user || null
+      await auth.login(apiToken)
+      await auth.setUser(user)
+      history.replace(from)
+    } catch (error) {
+      alert('Login error')
+    }
   }
 
   return (
@@ -44,12 +48,13 @@ function LogIn() {
           {from.pathname !== '/' && (
             <p>You must log in to view the page at {from.pathname}</p>
           )}
+          <LoginForm from={from} />
           <div className="margin">
             <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
               <GoogleLogin
-                onSuccess={handleSignUp}
+                onSuccess={handleGoogleLogin}
                 onError={() => {
-                  console.log('Login Failed')
+                  console.log('Google login Failed')
                 }}
               />
             </GoogleOAuthProvider>

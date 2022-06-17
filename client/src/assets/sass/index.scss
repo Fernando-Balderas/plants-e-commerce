@@ -138,12 +138,25 @@ code {
 }
 
 .margin {
-  margin: 4em 0;
+  margin: 1.8em 0;
   display: flex;
   justify-content: center;
 }
 
 .login-title {
   width: fit-content;
-  margin: 1.4em auto 0;
+  margin: 0.2em auto 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2em;
+  margin-top: 1em;
+  &__signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

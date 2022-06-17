@@ -1,9 +1,16 @@
-import React from 'react'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import SignupForm from '../components/SignupForm'
 
 function SignUp() {
   return (
     <>
-      <h1>SignUp</h1>
+      <Row className="justify-content-md-center">
+        <Col md={3}>
+          <h1 className="login-title">SignUp</h1>
+          <SignupForm />
+        </Col>
+      </Row>
     </>
   )
 }
