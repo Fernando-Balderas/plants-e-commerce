@@ -117,7 +117,7 @@ const resetPassword = async (
       await userService.update(user._id, update)
       res.status(202).json({ message: 'Reset token created', token })
     } else if (resetToken) {
-      const user = await userService.findByResetToken(email)
+      const user = await userService.findByResetToken(resetToken)
       const hashedPassword = await toHash(newPassword)
       const update = { password: hashedPassword, resetPasswordToken: '' }
       await userService.update(user._id, update)
@@ -188,7 +188,8 @@ const findByEmailAndPassword = async (
     const { _id, name, lastname, role, picture, status } = user as PartialUser
     const userForHash = { _id, name, lastname, email, role, picture, status }
     const token = createJwtToken(userForHash)
-    res.json({ token })
+    user.password = undefined
+    res.json({ token, user })
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

@@ -45,7 +45,7 @@ PUT http://localhost:5000/api/v1/users/password-reset HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "alex.doe@mail.com"
+  "email": "fernando.balderas@integrify.io"
 }
 
 ### Update password with token
@@ -54,7 +54,7 @@ PUT http://localhost:5000/api/v1/users/password-reset HTTP/1.1
 Content-Type: application/json
 
 {
-  "resetToken": "ca8e607bcca3238a5df6c40153615723932b0517beba3105410094d04d67447adf7de7fbe68a92bfa8b1f5040abb86dc559e714d685b5f723ad3f3d7e9028aba",
+  "resetToken": "8eb6519ee65029db8f024a6cdd4785921f0e0b70fea276aac5e21864d824bcc9832658942f2a6c9b059a463fb8a560c02b82a8f1c14acc9c6d0242a4e097bb19",
   "newPassword": "password-reseted"
 }
 
@@ -68,7 +68,6 @@ Content-Type: application/json
   "lastname": "Doe",
   "email": "alex.doe@mail.com",
   "password": "6287dba664e931cb46c9d0a0",
-  "role": "ADMIN"
 }
 
 ### Login user
