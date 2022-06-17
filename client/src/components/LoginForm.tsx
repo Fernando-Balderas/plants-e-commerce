@@ -21,7 +21,6 @@ function LoginForm({ from }: LoginFormProps) {
   } = useForm()
 
   const onLoginSubmit = async (data: any) => {
-    console.log('into onLoginSubmitonLoginSubmit')
     try {
       const res = await axios.post('/users/login', data)
       if (res.status !== 200) throw new Error()

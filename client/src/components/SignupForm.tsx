@@ -14,7 +14,6 @@ function LoginForm() {
   } = useForm()
 
   const onSignupSubmit = async (data: any) => {
-    console.log('into onSignupSubmit')
     try {
       const res = await axios.post('/users/signup', data)
       if (res.status !== 201) throw new Error()
