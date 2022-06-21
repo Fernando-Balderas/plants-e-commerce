@@ -2,32 +2,16 @@
 
 ### Get all
 
-GET http://localhost:5000/api/v1/products HTTP/1.1
+GET http://localhost:3000/api/v1/products HTTP/1.1
 Authorization: Barer {{token}}
 
 ### Get one by id
 
-GET http://localhost:5000/api/v1/products/628a8020ef535926d3cb4786 HTTP/1.1
-
-### Get user products
-
-GET http://localhost:5000/api/v1/products/user/6297a0199cbf305de050c27f HTTP/1.1
-
-### Get all matching with one or more query params
-
-GET http://localhost:5000/api/v1/products?name=name&categories=categories&variants=variants HTTP/1.1
-
-### Get with pagination
-
-GET http://localhost:5000/api/v1/products?limit=0&offset=0 HTTP/1.1
-
-### Get with sort
-
-GET http://localhost:5000/api/v1/products?sort=name&ascDesc=asc HTTP/1.1
+GET http://localhost:3000/api/v1/products/628a8020ef535926d3cb4786 HTTP/1.1
 
 ### Create product
 
-POST http://localhost:5000/api/v1/products HTTP/1.1
+POST http://localhost:3000/api/v1/products HTTP/1.1
 Content-Type: application/json
 Authorization: Barer {{token}}
 
@@ -39,7 +23,7 @@ Authorization: Barer {{token}}
 
 ### Update one
 
-PUT http://localhost:5000/api/v1/products/628a8020ef535926d3cb4786 HTTP/1.1
+PUT http://localhost:3000/api/v1/products/628a8020ef535926d3cb4786 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -50,10 +34,4 @@ Content-Type: application/json
 
 ### Delete one 
 
-DELETE http://localhost:5000/api/v1/products/628a8020ef535926d3cb4786 HTTP/1.1
-
-### Load dataset
-
-POST http://localhost:5000/api/v1/products/load-dataset HTTP/1.1
-Content-Type: application/json
-Authorization: Barer {{token}}
+DELETE http://localhost:3000/api/v1/products/628a8020ef535926d3cb4786 HTTP/1.1
