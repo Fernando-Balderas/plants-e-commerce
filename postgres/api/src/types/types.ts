@@ -7,3 +7,9 @@ export enum UserStatus {
   ACTIVE = "ACTIVE",
   BANNED = "BANNED",
 }
+
+export enum PaymentStatus {
+  PENDING = "PENDING",
+  APPROVED = "APPROVED",
+  DECLINED = "DECLINED",
+}

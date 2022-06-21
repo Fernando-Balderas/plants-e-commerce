@@ -15,13 +15,13 @@ PUT http://localhost:3000/api/v1/users/1 HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Alex",
-  "lastname": "Doe"
+  "name": "Alexander",
+  "lastname": "Dowee"
 }
 
 ### Ban/Unban user
 
-PUT http://localhost:3000/api/v1/users/629fbfe0993ae4b222872f6e/status HTTP/1.1
+PUT http://localhost:3000/api/v1/users/1 HTTP/1.1
 Content-Type: application/json
 Authorization: Barer {{token}}
 
@@ -31,31 +31,11 @@ Authorization: Barer {{token}}
 
 ### Update password
 
-PUT http://localhost:3000/api/v1/users/6287dba664e931cb46c9d0a0/password HTTP/1.1
+PUT http://localhost:3000/api/v1/users/1 HTTP/1.1
 Content-Type: application/json
 
 {
-  "oldPassword": "password",
-  "newPassword": "password-changed"
-}
-
-### Forgot password request
-
-PUT http://localhost:3000/api/v1/users/password-reset HTTP/1.1
-Content-Type: application/json
-
-{
-  "email": "fernando.balderas@integrify.io"
-}
-
-### Update password with token
-
-PUT http://localhost:3000/api/v1/users/password-reset HTTP/1.1
-Content-Type: application/json
-
-{
-  "resetToken": "8eb6519ee65029db8f024a6cdd4785921f0e0b70fea276aac5e21864d824bcc9832658942f2a6c9b059a463fb8a560c02b82a8f1c14acc9c6d0242a4e097bb19",
-  "newPassword": "password-reseted"
+  "password": "password-changed"
 }
 
 ### Create user
@@ -72,13 +52,13 @@ Content-Type: application/json
 
 ### Login user
 
-POST http://localhost:3000/api/v1/users/login HTTP/1.1
-Content-Type: application/json
+# POST http://localhost:3000/api/v1/users/login HTTP/1.1
+# Content-Type: application/json
 
-{
-  "email": "alex.doe@mail.com",
-  "password": "6287dba664e931cb46c9d0a0"
-}
+# {
+#   "email": "alex.doe@mail.com",
+#   "password": "6287dba664e931cb46c9d0a0"
+# }
 
 ### Delete one
 
