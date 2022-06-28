@@ -10,9 +10,11 @@ export default function verifyPermission(
   next: NextFunction
 ) {
   try {
+    const { baseUrl, method } = req
     const { role, status } = req.user as PartialUser
     if (status && status !== UserStatus.ACTIVE) throw new Error()
-    if (!hasPermission(role as Role, req.method as Method)) throw new Error()
+    if (!hasPermission(role as Role, baseUrl, method as Method))
+      throw new Error()
     next()
   } catch (error) {
     throw new ForbiddenError()

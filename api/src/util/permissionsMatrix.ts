@@ -1,3 +1,4 @@
+// Role-Based Access Control (RBAC)
 import { Role } from '../types/user'
 
 export enum Method {
@@ -9,6 +10,7 @@ export enum Method {
   TRACE = 'TRACE',
   PUT = 'PUT',
   DELETE = 'DELETE',
+  PATCH = 'PATCH',
 }
 
 export enum Permission {
@@ -18,12 +20,29 @@ export enum Permission {
   DELETE = 'DELETE',
 }
 
-const permissions = {
-  USER: ['READ'] as Permission[],
-  ADMIN: ['CREATE', 'READ', 'UPDATE', 'DELETE'] as Permission[],
+const roles = {
+  USER: [
+    'orders:CREATE',
+    'orders:READ',
+    'orders:UPDATE',
+    'products:READ',
+    'user:READ',
+  ],
+  ADMIN: [
+    'orders:CREATE',
+    'orders:READ',
+    'orders:UPDATE',
+    'orders:DELETE',
+    'products:CREATE',
+    'products:READ',
+    'products:UPDATE',
+    'products:DELETE',
+    'users:CREATE',
+    'users:READ',
+    'users:UPDATE',
+    'users:DELETE',
+  ],
 }
-
-// TODO: Add validation for routes
 
 function methodToPermission(method: Method) {
   switch (method) {
@@ -37,7 +56,8 @@ function methodToPermission(method: Method) {
     case Method.TRACE: {
       return Permission.READ
     }
-    case Method.PUT: {
+    case Method.PUT:
+    case Method.PATCH: {
       return Permission.UPDATE
     }
     case Method.DELETE: {
@@ -48,8 +68,10 @@ function methodToPermission(method: Method) {
   }
 }
 
-export function hasPermission(target: Role, method: Method) {
+export function hasPermission(role: Role, url: string, method: Method) {
   const permission = methodToPermission(method)
-  if (permission && permissions[target].includes(permission)) return true
+  const endpoint = url.split('/')
+  const resource = endpoint[endpoint.length - 1] + ':' + permission
+  if (roles[role].includes(resource)) return true
   return false
 }
