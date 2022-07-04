@@ -71,7 +71,3 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=client/build --prod
-
-      - name: test
-        working-directory: client/build
-        run: echo ls -a
