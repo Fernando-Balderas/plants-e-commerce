@@ -30,7 +30,7 @@ jobs:
           mv -v api/* .
 
       - name: Remove former folder
-        run: rm -d apis
+        run: rm -d api
 
       - name: Get yarn cache dir
         id: yarn-cache-dir
