@@ -1,0 +1,39 @@
+name: API CI/CD workflow
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - "api/**"
+      - ".github/workflows/**"
+
+jobs:
+  ci:
+    name: Setup, Test, and Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup node
+        run: echo "setup node"
+      - name: Checkout
+        run: echo "checkout"
+      - name: Cache packages
+        run: echo "catching"
+      - name: Install packages
+        run: echo "installing packages"
+      - name: Lint
+        run: echo "Linting"
+      - name: Test
+        run: echo "Testing"
+      - name: Build
+        run: echo "Building"
+      - name: Setup node
+        run: echo "setup node"
+  cd:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: ci
+    steps:
+      - name: Deploy to Heroku
+        run: echo "Deploying"
