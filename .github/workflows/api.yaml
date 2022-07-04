@@ -15,19 +15,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup node
-        run: echo "setup node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
       - name: Checkout
-        run: echo "checkout"
+        uses: Bhacaz/checkout-files@v2
+        with:
+          files: api
+
+      - name: Listing
+        run: ls -a
+
       - name: Cache packages
         run: echo "catching"
+
       - name: Install packages
         run: echo "installing packages"
+
       - name: Lint
         run: echo "Linting"
+
       - name: Test
         run: echo "Testing"
+
       - name: Build
         run: echo "Building"
+
       - name: Setup node
         run: echo "setup node"
   cd:
