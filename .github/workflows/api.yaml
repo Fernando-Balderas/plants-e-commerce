@@ -72,6 +72,9 @@ jobs:
       # git add .
       # git commit -m "First commit"
 
+      - name: Git log
+        run: git log --oneline
+
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
