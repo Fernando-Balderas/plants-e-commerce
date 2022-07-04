@@ -26,11 +26,10 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Setup yarn cache
-        working-directory: api
         uses: actions/cache@v3
         with:
           path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-api-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-api-modules-${{ hashFiles('client/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-api-modules-
             ${{ runner.os }}-
