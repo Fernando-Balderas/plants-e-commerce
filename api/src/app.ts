@@ -12,6 +12,7 @@ import orderRouter from './routers/order'
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
 import swaggerDocument from './docs/swagger-spec.json'
+import { rmdirSync } from 'fs'
 // import swaggerSpec from './config/swagger'
 
 dotenv.config({ path: '.env' })
@@ -28,6 +29,7 @@ app.use(passport.initialize())
 passport.use(googleLoginStrategy())
 
 // Set up routers
+app.use('/', (req, res) => res.json({ app: 'plants-e-commerce' }))
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.use('/api/v1/users', userRouter)
