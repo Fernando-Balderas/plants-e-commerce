@@ -68,8 +68,9 @@ jobs:
           git config --global user.name ${{ secrets.NAME }}
           git config --global init.defaultBranch main
           git init
-          git add .
-          git commit -m "First commit"
+
+      # git add .
+      # git commit -m "First commit"
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
