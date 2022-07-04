@@ -10,12 +10,12 @@ on:
       - ".github/workflows/**"
 
 jobs:
-  ci:
+  build:
     name: Setup, Test, and Build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: api
+    # defaults:
+    #   run:
+    #     working-directory: api
     steps:
       - name: Setup node
         uses: actions/setup-node@v3
@@ -24,12 +24,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Pwd
-        run: pwd
-
-      - name: Git log
-        run: git log --oneline
 
       - name: Get yarn cache dir
         id: yarn-cache-dir
@@ -45,27 +39,21 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install packages
+        working-directory: api
         run: yarn install --frozen-lockfile
 
       - name: Lint
+        working-directory: api
         run: yarn lint
 
       # - name: Test
+      #   working-directory: api
       #   run: yarn test
 
       - name: Build
+        working-directory: api
         run: yarn build
 
-      - name: Return to base dir
-        run: cd ..
-
-  cd:
-    name: Deploy
-    runs-on: ubuntu-latest
-    needs: ci
-    steps:
-      - name: Ls
-        run: ls -a
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
