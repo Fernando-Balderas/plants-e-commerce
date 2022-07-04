@@ -7,15 +7,12 @@ on:
       - develop
     paths:
       - "api/**"
-      - ".github/workflows/**"
+      - ".github/workflows/api.*"
 
 jobs:
   build:
-    name: Setup, Test, and Build
+    name: Build and Deploy to Heroku
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: api
     steps:
       - name: Setup node
         uses: actions/setup-node@v3

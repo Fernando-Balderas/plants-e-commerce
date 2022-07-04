@@ -12,14 +12,13 @@ import orderRouter from './routers/order'
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
 import swaggerDocument from './docs/swagger-spec.json'
-import { rmdirSync } from 'fs'
 // import swaggerSpec from './config/swagger'
 
 dotenv.config({ path: '.env' })
 const app = express()
 
 // Express configuration
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT || 5000)
 
 // Global middleware
 app.use(apiContentType)
