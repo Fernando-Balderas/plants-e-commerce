@@ -56,7 +56,7 @@ jobs:
 
       - if: ${{ github.event_name == 'pull_request' }}
         name: Deploy to Netlify (draft)
-        uses: netlify/cli@master
+        uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets. NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETILFY_SITE_ID }}
@@ -65,7 +65,7 @@ jobs:
 
       - if: ${{ github.event_name == 'push' }}
         name: Deploy to Netlify (production)
-        uses: netlify/cli@master
+        uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets. NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETILFY_SITE_ID }}
