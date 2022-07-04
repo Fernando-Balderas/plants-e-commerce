@@ -73,5 +73,5 @@ jobs:
           args: deploy --dir=client/build --prod
 
       - name: test
-        work-directory: client/build
+        working-directory: client/build
         run: echo ls -a
