@@ -19,18 +19,24 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Checkout folder
-        uses: Bhacaz/checkout-files@v2
-        with:
-          files: api
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Move folder contents to root
-        run: |
-          shopt -s dotglob
-          mv -v api/* .
+      - name: Change dir
+        run: cd api
 
-      - name: Remove former folder
-        run: rm -d api
+      # - name: Checkout folder
+      #   uses: Bhacaz/checkout-files@v2
+      #   with:
+      #     files: api
+
+      # - name: Move folder contents to root
+      #   run: |
+      #     shopt -s dotglob
+      #     mv -v api/* .
+
+      # - name: Remove former folder
+      #   run: rm -d api
 
       - name: Get yarn cache dir
         id: yarn-cache-dir
@@ -40,9 +46,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-api-modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-modules-
+            ${{ runner.os }}-api-modules-
             ${{ runner.os }}-
 
       - name: Install packages
@@ -57,17 +63,20 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Return to base dir
+        run: cd ..
+
   cd:
     name: Deploy
     runs-on: ubuntu-latest
     needs: ci
     steps:
-      - name: Git init
-        run: |
-          git config --global user.email ${{ secrets.HEROKU_EMAIL }}
-          git config --global user.name ${{ secrets.NAME }}
-          git config --global init.defaultBranch main
-          git init
+      # - name: Git init
+      #   run: |
+      #     git config --global user.email ${{ secrets.HEROKU_EMAIL }}
+      #     git config --global user.name ${{ secrets.NAME }}
+      #     git config --global init.defaultBranch main
+      #     git init
 
       # git add .
       # git commit -m "First commit"
@@ -81,6 +90,6 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "peaceful-canyonlands-26888"
-          appdir: "."
+          appdir: "api"
           # justlogin: true
       # - run: heroku auth:whoami
