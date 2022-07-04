@@ -14,10 +14,10 @@ jobs:
     name: Setup, Test, and Build
     runs-on: ubuntu-latest
     steps:
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
+      # - name: Setup node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16.x
 
       - name: Checkout folder
         uses: Bhacaz/checkout-files@v2
@@ -34,6 +34,9 @@ jobs:
 
       - name: List folder contents
         run: ls -a
+
+      - name: List api contents
+        run: ls -a api
 
       - name: Remove former folder
         run: rm -d api
