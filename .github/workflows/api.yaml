@@ -64,9 +64,12 @@ jobs:
     steps:
       - name: Git init
         run: |
+          git config user.email ${{ secrets.HEROKU_EMAIL }}
+          git config user.name ${{ secrets.NAME }}
           git init
           git add .
           git commit -m "First commit"
+          git branch -m main
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
