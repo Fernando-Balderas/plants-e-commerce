@@ -28,7 +28,12 @@ jobs:
         run: ls -a
 
       - name: Move folder contents to root
-        run: mv api/* .
+        run: |
+          mv -v api/* .
+          echo $?
+
+      - name: List folder contents
+        run: ls -a
 
       - name: Remove former folder
         run: rm -d api
