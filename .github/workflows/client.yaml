@@ -30,10 +30,11 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Setup yarn cache
+        working-directory: client
         uses: actions/cache@v3
         with:
           path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-client-modules-${{ hashFiles('client/**/yarn-lock') }}
+          key: ${{ runner.os }}-client-modules-${{ hashFiles('**/yarn-lock') }}
           restore-keys: |
             ${{ runner.os }}-client-modules-
             ${{ runner.os }}-
@@ -59,7 +60,7 @@ jobs:
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets. NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETILFY_SITE_ID }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=client/build
 
@@ -68,6 +69,6 @@ jobs:
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets. NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETILFY_SITE_ID }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=client/build --prod
