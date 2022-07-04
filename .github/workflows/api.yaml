@@ -13,6 +13,9 @@ jobs:
   ci:
     name: Setup, Test, and Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
     steps:
       - name: Setup node
         uses: actions/setup-node@v3
@@ -21,14 +24,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Pwd
-        run: pwd
-
-      - name: Change dir
-        run: |
-          cd api
-          pwd
 
       - name: Pwd
         run: pwd
