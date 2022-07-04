@@ -22,10 +22,13 @@ jobs:
       - name: Checkout folder
         uses: Bhacaz/checkout-files@v2
         with:
-          files: api/*
+          files: api
 
-      - name: Listing
-        run: ls -a
+      - name: Move folder contents to root
+        run: |
+          ls -a
+          mv api/* .
+          rm -d api
 
       - name: Cache packages
         run: echo "catching"
