@@ -25,18 +25,8 @@ jobs:
       - name: Change dir
         run: cd api
 
-      # - name: Checkout folder
-      #   uses: Bhacaz/checkout-files@v2
-      #   with:
-      #     files: api
-
-      # - name: Move folder contents to root
-      #   run: |
-      #     shopt -s dotglob
-      #     mv -v api/* .
-
-      # - name: Remove former folder
-      #   run: rm -d api
+      - name: Pwd
+        run: pwd
 
       - name: Get yarn cache dir
         id: yarn-cache-dir
