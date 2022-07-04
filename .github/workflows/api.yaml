@@ -24,11 +24,17 @@ jobs:
         with:
           files: api
 
+      - name: List folder contents
+        run: ls -a
+
       - name: Move folder contents to root
-        run: |
-          ls -a
-          mv api/* .
-          rm -d api
+        run: mv api/* .
+
+      - name: Remove former folder
+        run: rm -d api
+
+      - name: List folder contents
+        run: ls -a
 
       - name: Cache packages
         run: echo "catching"
