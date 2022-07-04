@@ -64,9 +64,9 @@ jobs:
     steps:
       - name: Git init
         run: |
+          git init
           git config user.email ${{ secrets.HEROKU_EMAIL }}
           git config user.name ${{ secrets.NAME }}
-          git init
           git add .
           git commit -m "First commit"
           git branch -m main
