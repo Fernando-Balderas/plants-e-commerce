@@ -29,6 +29,7 @@ jobs:
 
       - name: Move folder contents to root
         run: |
+          shopt -s dotglob
           mv -v api/* .
           echo $?
 
