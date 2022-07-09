@@ -76,7 +76,6 @@ jobs:
       - name: Print all
         run: |
           ls -a
-          ls -a client
 
       - if: ${{ github.event_name == 'pull_request' }}
         name: Deploy to Netlify (draft)
