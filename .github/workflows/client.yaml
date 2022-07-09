@@ -69,11 +69,20 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           DEBUG: "*"
-        run: netlify -h
+        run: netlify build
 
       - name: Print all
         run: |
           ls -a
+
+      - if: ${{ github.event_name == 'push' }}
+        name: Deploy to Netlify (production)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          DEBUG: "*"
+        with:
+          args: netlify deploy --dir build --prod --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --message=${{ github.event.head_commit.message }}
 
       # - if: ${{ github.event_name == 'pull_request' }}
       #   name: Deploy to Netlify (draft)
