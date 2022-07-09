@@ -91,4 +91,4 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           DEBUG: "*"
         with:
-          args: deploy --build --prod --message=deploymessage
+          args: deploy --dir=client --build --prod --message=deploymessage
