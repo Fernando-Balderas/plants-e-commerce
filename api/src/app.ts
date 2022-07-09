@@ -28,12 +28,12 @@ app.use(passport.initialize())
 passport.use(googleLoginStrategy())
 
 // Set up routers
-app.use('/', (req, res) => res.json({ app: 'plants-e-commerce' }))
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/orders', orderRouter)
+app.use('/', (req, res) => res.json({ app: 'plants-e-commerce' }))
 
 // Custom API error handler
 app.use(apiErrorHandler)
