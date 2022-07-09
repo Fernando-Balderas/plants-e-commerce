@@ -28,14 +28,20 @@ jobs:
       - name: Print all
         run: ls -a
 
-      - name: Remove all files except client
-        run: find . -type f \! -path "./client*" -delete
+      # - name: Remove all files except client
+      #   run: find . -type f \! -path "./client*" -delete
+
+      # - name: Print all
+      #   run: ls -a
+
+      - name: Remove all folders except client
+        run: find . -type d -type f \( \! -path "./client*" -o \! -path "./.git*" \) -delete
 
       - name: Print all
         run: ls -a
 
-      - name: Remove all folders except client
-        run: find . -type d \( \! -path "./client*" \! -path "./.git*" \) -delete
+      - name: Move files to root folder
+        run: mv -v client/* .
 
       - name: Print all
         run: ls -a
