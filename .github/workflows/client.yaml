@@ -25,24 +25,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Print all
-        run: ls -a
+      # - name: Print all
+      #   run: ls -a
 
-      - name: Remove all except client
-        run: |
-          find . -type f \! -path "./client*" -delete
-          find . -type d \! -path "./client*" \! -path "./.git*" -delete
+      # - name: Remove all except client
+      #   run: |
+      #     find . -type f \! -path "./client*" -delete
+      #     find . -type d \! -path "./client*" \! -path "./.git*" -delete
 
-      - name: Print all
-        run: ls -a
+      # - name: Print all
+      #   run: ls -a
 
-      - name: Remove all folders except client
-        run: |
-          mv client/* .
-          rm -r client
+      # - name: Remove all folders except client
+      #   run: |
+      #     mv client/* .
+      #     rm -r client
 
-      - name: Print all
-        run: ls -a
+      # - name: Print all
+      #   run: ls -a
 
       - name: Get yarn cache dir
         id: yarn-cache-dir
@@ -58,19 +58,19 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install packages
-        # working-directory: client
+        working-directory: client
         run: yarn install --frozen-lockfile
 
       - name: Lint
-        # working-directory: client
+        working-directory: client
         run: yarn lint
 
       - name: Test
-        # working-directory: client
+        working-directory: client
         run: yarn test
 
       - name: Build
-        # working-directory: client
+        working-directory: client
         run: yarn build
 
       - if: ${{ github.event_name == 'pull_request' }}
