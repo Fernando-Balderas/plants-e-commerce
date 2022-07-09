@@ -25,15 +25,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - name: Remove all except client
-      #   run: |
-      #     find . -type f \! -path "./client*" -delete
-      #     find . -type d \! -path "./client*" \! -path "./.git*" -delete
+      - name: Remove all except client
+        run: |
+          find . -type f \! -path "./client*" -delete
+          find . -type d \! -path "./client*" \! -path "./.git*" -delete
 
-      # - name: Move client content to root
-      #   run: |
-      #     mv client/* .
-      #     rm -r client
+      - name: Move client content to root
+        run: |
+          mv client/* .
+          rm -r client
 
       - name: Get yarn cache dir
         id: yarn-cache-dir
@@ -49,20 +49,20 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install packages
-        working-directory: client
+        # working-directory: client
         run: yarn install --frozen-lockfile
 
       - name: Lint
-        working-directory: client
+        # working-directory: client
         run: yarn lint
 
       - name: Test
-        working-directory: client
+        # working-directory: client
         run: yarn test
 
-      # - name: Build
-      #   working-directory: client
-      #   run: yarn build
+      - name: Build
+        # working-directory: client
+        run: yarn build
 
       - name: Netlify build
         uses: netlify/actions/cli@master
@@ -77,7 +77,6 @@ jobs:
         run: |
           ls -a
           ls -a client
-          ls -a build
 
       - if: ${{ github.event_name == 'pull_request' }}
         name: Deploy to Netlify (draft)
@@ -86,7 +85,7 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
-          args: deploy --dir=client/build
+          args: deploy --dir=build
 
       - if: ${{ github.event_name == 'push' }}
         name: Deploy to Netlify (production)
@@ -96,4 +95,4 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           DEBUG: "*"
         with:
-          args: deploy --dir=client/build --prod --message=${{ github.event.head_commit.message }}
+          args: deploy --dir=build --prod --message=${{ github.event.head_commit.message }}
