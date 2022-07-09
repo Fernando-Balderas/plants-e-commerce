@@ -25,70 +25,53 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Get yarn cache dir
-        id: yarn-cache-dir
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Only use client content
+        run: ls
 
-      - name: Setup yarn cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-client-modules-${{ hashFiles('client/yarn-lock') }}
-          restore-keys: |
-            ${{ runner.os }}-client-modules-
-            ${{ runner.os }}-
+      # - name: Get yarn cache dir
+      #   id: yarn-cache-dir
+      #   run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Install packages
-        working-directory: client
-        run: yarn install --frozen-lockfile
+      # - name: Setup yarn cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ${{ steps.yarn-cache-dir.outputs.dir }}
+      #     key: ${{ runner.os }}-client-modules-${{ hashFiles('client/yarn-lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-client-modules-
+      #       ${{ runner.os }}-
 
-      - name: Lint
-        working-directory: client
-        run: yarn lint
+      # - name: Install packages
+      #   working-directory: client
+      #   run: yarn install --frozen-lockfile
 
-      - name: Test
-        working-directory: client
-        run: yarn test
+      # - name: Lint
+      #   working-directory: client
+      #   run: yarn lint
 
-      - name: Build
-        working-directory: client
-        run: yarn build
+      # - name: Test
+      #   working-directory: client
+      #   run: yarn test
+
+      # - name: Build
+      #   working-directory: client
+      #   run: yarn build
+
+      # - if: ${{ github.event_name == 'pull_request' }}
+      #   name: Deploy to Netlify (draft)
+      #   uses: netlify/actions/cli@master
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #   with:
+      #     args: deploy --dir=client/build
 
       # - if: ${{ github.event_name == 'push' }}
-      #   name: Link project
+      #   name: Deploy to Netlify (production)
       #   uses: netlify/actions/cli@master
       #   env:
       #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       #     DEBUG: "*"
       #   with:
-      #     args: link --id ${{ secrets.NETLIFY_SITE_ID }}
-
-      # - if: ${{ github.event_name == 'push' }}
-      #   name: Print env variables
-      #   uses: netlify/actions/cli@master
-      #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #     DEBUG: "*"
-      #   with:
-      #     args: env:list
-
-      - if: ${{ github.event_name == 'pull_request' }}
-        name: Deploy to Netlify (draft)
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: deploy --dir=client/build
-
-      - if: ${{ github.event_name == 'push' }}
-        name: Deploy to Netlify (production)
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          DEBUG: "*"
-        with:
-          args: deploy --dir=client --build --prod --message=deploymessage
+      #     args: deploy --dir=client/build --build --prod --message=deploymessage
