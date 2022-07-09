@@ -25,8 +25,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Only use client content
-        run: ls
+      - name: Print all
+        run: ls -a
+
+      - name: Remove all except client
+        run: find . -type f \! -path "./client*" -delete
+
+      - name: Print all
+        run: ls -a
 
       # - name: Get yarn cache dir
       #   id: yarn-cache-dir
