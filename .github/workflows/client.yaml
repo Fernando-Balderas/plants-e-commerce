@@ -52,46 +52,44 @@ jobs:
         # working-directory: client
         run: yarn install --frozen-lockfile
 
-      - name: Lint
-        # working-directory: client
-        run: yarn lint
+      # - name: Lint
+      #   # working-directory: client
+      #   run: yarn lint
 
-      - name: Test
-        # working-directory: client
-        run: yarn test
+      # - name: Test
+      #   # working-directory: client
+      #   run: yarn test
 
-      - name: Build
-        # working-directory: client
-        run: yarn build
+      # - name: Build
+      #   # working-directory: client
+      #   run: yarn build
 
       - name: Netlify build
-        uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           DEBUG: "*"
-        with:
-          args: build
+        run: netlify -h
 
       - name: Print all
         run: |
           ls -a
 
-      - if: ${{ github.event_name == 'pull_request' }}
-        name: Deploy to Netlify (draft)
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: deploy --dir=build
+      # - if: ${{ github.event_name == 'pull_request' }}
+      #   name: Deploy to Netlify (draft)
+      #   uses: netlify/actions/cli@master
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #   with:
+      #     args: deploy --dir=build
 
-      - if: ${{ github.event_name == 'push' }}
-        name: Deploy to Netlify (production)
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          DEBUG: "*"
-        with:
-          args: deploy --dir=build --prod --message=${{ github.event.head_commit.message }}
+      # - if: ${{ github.event_name == 'push' }}
+      #   name: Deploy to Netlify (production)
+      #   uses: netlify/actions/cli@master
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #     DEBUG: "*"
+      #   with:
+      #     args: deploy --dir=build --prod --message=${{ github.event.head_commit.message }}
