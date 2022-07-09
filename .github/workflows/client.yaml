@@ -83,6 +83,16 @@ jobs:
           args: deploy --dir=build
 
       - if: ${{ github.event_name == 'push' }}
+        name: Netlify build
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          DEBUG: "*"
+        with:
+          args: build
+
+      - if: ${{ github.event_name == 'push' }}
         name: Deploy to Netlify (production)
         uses: netlify/actions/cli@master
         env:
@@ -90,4 +100,4 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           DEBUG: "*"
         with:
-          args: deploy --dir=build --build --prod --message=deploymessage
+          args: deploy --dir=build --prod --message=deploymessage
