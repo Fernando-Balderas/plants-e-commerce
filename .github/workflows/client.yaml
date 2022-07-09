@@ -36,11 +36,13 @@ jobs:
       - name: Print all
         run: ls -a
 
-      # - name: Remove all folders except client
-      #   run: find . -type d \! -path "./client*" \! -path "./.git*" -delete
+      - name: Remove all folders except client
+        run: |
+          mv -v client/* .
+          rm client
 
-      # - name: Print all
-      #   run: ls -a
+      - name: Print all
+        run: ls -a
 
       # - name: Get yarn cache dir
       #   id: yarn-cache-dir
