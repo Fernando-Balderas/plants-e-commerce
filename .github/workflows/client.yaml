@@ -73,6 +73,12 @@ jobs:
         with:
           args: build
 
+      - name: Print all
+        run: |
+          ls -a
+          ls -a client
+          ls -a build
+
       - if: ${{ github.event_name == 'pull_request' }}
         name: Deploy to Netlify (draft)
         uses: netlify/actions/cli@master
@@ -90,4 +96,4 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           DEBUG: "*"
         with:
-          args: deploy --dir=client/build --prod --message=deploymessage
+          args: deploy --dir=client/build --prod --message=${{ github.event.head_commit.message }}
