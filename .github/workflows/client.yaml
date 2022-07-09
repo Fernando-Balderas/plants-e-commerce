@@ -25,13 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Remove all except client
+      - name: Use only client content
         run: |
           find . -type f \! -path "./client*" -delete
           find . -type d \! -path "./client*" \! -path "./.git*" -delete
-
-      - name: Move client content to root
-        run: |
           mv client/* .
           rm -r client
 
@@ -49,30 +46,29 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install packages
-        # working-directory: client
         run: yarn install --frozen-lockfile
 
-      # - name: Lint
-      #   # working-directory: client
-      #   run: yarn lint
+      - name: Lint
+        run: yarn lint
 
-      # - name: Test
-      #   # working-directory: client
-      #   run: yarn test
+      - name: Test
+        run: yarn test
 
       # - name: Build
-      #   # working-directory: client
       #   run: yarn build
 
-      - name: Netlify build
+      - name: Build with Netlify CLI
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: netlify build
 
-      - name: Print all
-        run: |
-          ls -a
+      - if: ${{ github.event_name == 'pull_request' }}
+        name: Deploy to Netlify (draft)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: netlify deploy --dir build --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --message=${{ github.event.head_commit.message }}
 
       - if: ${{ github.event_name == 'push' }}
         name: Deploy to Netlify (production)
@@ -80,22 +76,3 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: netlify deploy --dir build --prod --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --message=${{ github.event.head_commit.message }}
-
-      # - if: ${{ github.event_name == 'pull_request' }}
-      #   name: Deploy to Netlify (draft)
-      #   uses: netlify/actions/cli@master
-      #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #   with:
-      #     args: deploy --dir=build
-
-      # - if: ${{ github.event_name == 'push' }}
-      #   name: Deploy to Netlify (production)
-      #   uses: netlify/actions/cli@master
-      #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #     DEBUG: "*"
-      #   with:
-      #     args: deploy --dir=build --prod --message=${{ github.event.head_commit.message }}
