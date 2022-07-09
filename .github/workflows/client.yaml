@@ -39,7 +39,7 @@ jobs:
       - name: Remove all folders except client
         run: |
           mv -v client/* .
-          rm client
+          rm -r client
 
       - name: Print all
         run: ls -a
