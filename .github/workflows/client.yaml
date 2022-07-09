@@ -35,7 +35,7 @@ jobs:
         run: ls -a
 
       - name: Remove all folders except client
-        run: find . -type d \( \! -path "./client*" \! -path "./.git*" ) -delete
+        run: find . -type d \( \! -path "./client*" \! -path "./.git*" \) -delete
 
       - name: Print all
         run: ls -a
