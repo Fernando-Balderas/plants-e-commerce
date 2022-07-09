@@ -54,6 +54,26 @@ jobs:
         working-directory: client
         run: yarn build
 
+      - if: ${{ github.event_name == 'push' }}
+        name: Link project
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          DEBUG: *
+        with:
+          args: link --id ${{ secrets.NETLIFY_SITE_ID }}
+        
+      - if: ${{ github.event_name == 'push' }}
+        name: Print env variables
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          DEBUG: *
+        with:
+          args: env:list
+
       - if: ${{ github.event_name == 'pull_request' }}
         name: Deploy to Netlify (draft)
         uses: netlify/actions/cli@master
@@ -69,5 +89,6 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          DEBUG: *
         with:
           args: deploy --dir=client/build --prod
