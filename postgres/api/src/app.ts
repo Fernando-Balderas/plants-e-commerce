@@ -33,6 +33,7 @@ app.use(cors())
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/orders', orderRouter)
+app.use('/', (req, res) => res.json({ app: 'plants-e-commerce pg demo' }))
 
 // Custom API error handler
 app.use(apiErrorHandler)
