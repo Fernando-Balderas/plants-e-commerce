@@ -5,6 +5,8 @@
   "engines": {
     "node": ">=16.15.0"
   },
+  "proxy": "http://localhost:3000",
+  "homepage": ".",
   "dependencies": {
     "@react-oauth/google": "^0.2.5",
     "@reduxjs/toolkit": "^1.8.2",
@@ -30,8 +32,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
+    "start": "react-scripts start",
+    "prod": "pm2 serve build 3000 --spa",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --fix '**/*.{ts,tsx}'"
