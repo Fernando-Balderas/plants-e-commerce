@@ -4,9 +4,7 @@ import { LOCALSTORAGE_TOKEN } from '../../util/constants'
 
 type Config = {
   headers?: {
-    common?: {
       Authorization?: string
-    }
   }
 }
 
@@ -18,10 +16,14 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config: Config) => {
     // Do something before request is sent
-    if (!config.headers?.common?.['Authorization']) {
+    if (!config.headers?.['Authorization'] ) {
+      if (config.headers === undefined)
+        config.headers = {}
       const token = localStorage.getItem(LOCALSTORAGE_TOKEN)
-      if (token)
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`
         instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      }
     }
     return config
   },

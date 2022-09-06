@@ -3,7 +3,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks'
-import { loadUsers, selectUsers, updateUserStatus } from './usersSlice'
+import { banUser, loadUsers, selectUsers } from './usersSlice'
 import { User } from '../../types/types'
 
 function Users() {
@@ -16,13 +16,13 @@ function Users() {
   const banMessage = (status: string) => (status === 'ACTIVE' ? 'BAN' : 'UNBAN')
   const handleUpdateStatus = (user: User) => {
     const update = user.status === 'ACTIVE' ? 'BANNED' : 'ACTIVE'
-    dispatch(updateUserStatus({ id: user._id, status: update }))
+    dispatch(banUser({ userId: user._id, status: update }))
   }
 
   return (
     <ListGroup>
       {users.length > 0 &&
-        users.map((user) => (
+        users.map((user: User) => (
           <ListGroup.Item as="li" key={user._id} className="list-group-item">
             <p>{`${user.name} ${user.lastname} - ${user.email}`}</p>
             <Button

@@ -24,6 +24,11 @@ export const loadUsers = createAsyncThunk('users/fetchUsers', async () => {
   return response.data
 })
 
+export const banUser = createAsyncThunk('users/banUser', async ({userId, status}: {userId: string, status: string}) => {
+  const response = await axios.put(`users/${userId}/status`, {status})
+  return response.data
+})
+
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
@@ -33,9 +38,10 @@ export const usersSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; status: string }>
     ) => {
-      const { id, status } = action.payload
-      const index = state.users.findIndex((user) => user._id === id)
-      if (index > -1) state.users[index].status = status
+      // const { id, status } = action.payload
+      // const index = state.users.findIndex((user) => user._id === id)
+      // console.log(index)
+      // if (index > -1) state.users[index].status = status
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -50,6 +56,18 @@ export const usersSlice = createSlice({
         state.users = action.payload
       })
       .addCase(loadUsers.rejected, (state) => {
+        state.status = 'failed'
+      })
+      .addCase(banUser.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(banUser.fulfilled, (state, action) => {
+        state.status = 'idle'
+        const { _id, status } = action.payload
+        const index = state.users.findIndex((user) => user._id === _id)
+        if (index > -1) state.users[index].status = status
+      })
+      .addCase(banUser.rejected, (state) => {
         state.status = 'failed'
       })
   },
