@@ -12,7 +12,7 @@
     "node": ">=16.15.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rm -r dist && tsc",
     "start": "node --no-experimental-fetch dist/server.js",
     "dev": "nodemon src/server.ts",
     "prod": "pm2 start dist/server.js",
