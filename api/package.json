@@ -19,8 +19,8 @@
     "watch-ts": "tsc -w",
     "test": "jest --forceExit --detectOpenHandles --coverage --verbose false",
     "watch-test": "npm run test -- --watchAll",
-    "lint": "eslint '**/*.{js,ts}'",
-    "lint:fix": "eslint --fix '**/*.{js,ts}'"
+    "lint": "eslint 'src/**/*.{js,ts}'",
+    "lint:fix": "eslint --fix 'src/**/*.{js,ts}'"
   },
   "dependencies": {
     "@types/jsonwebtoken": "^8.3.7",
