@@ -12,14 +12,14 @@
     "node": ">=16.15.0"
   },
   "scripts": {
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
     "build": "tsc",
-    "start": "node --no-experimental-fetch dist/server.js",
+    "test": "jest --forceExit --detectOpenHandles --coverage --verbose false",
     "dev": "nodemon src/server.ts",
+    "start": "node --no-experimental-fetch dist/server.js",
     "prod": "pm2 start dist/server.js",
     "watch-ts": "tsc -w",
-    "test": "jest --forceExit --detectOpenHandles --coverage --verbose false",
-    "watch-test": "npm run test -- --watchAll",
-    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix"
+    "watch-test": "npm run test -- --watchAll"
   },
   "dependencies": {
     "@types/jsonwebtoken": "^8.3.7",
